@@ -1,0 +1,4141 @@
+*PPD-Adobe: "4.3"
+*FormatVersion: "4.3"
+
+*%
+*% HID Card Printer PPD for Common UNIX Printing System (CUPS).
+*%
+*% Copyright 2008 - 2022 HID Global, Inc, All Rights Reserved.
+*%
+
+*FileVersion: "1.0.0.4"
+*PCFileName: "DTC4500e.ppd"
+*ModelName: "DTC4500e"
+*ShortNickName: "DTC4500e"
+*NickName: "DTC4500e Card Printer"
+*Manufacturer: "HID"
+*Product: "(Card Printer)"
+*cupsModelNumber: "5"
+*LanguageVersion: English
+*LanguageEncoding: ISOLatin1
+*PSVersion: "(3010.000) 550"
+*LanguageLevel: "2"
+*ColorDevice: True
+*DefaultColorSpace: RGB
+*FileSystem: False
+*Throughput: "3"
+*LandscapeOrientation: Minus90
+*TTRasterizer: Type42
+*VariablePaperSize: False
+*cupsVersion: 1.4
+*cupsManualCopies: False
+*cupsFilter: "application/vnd.cups-raster 50 rastertofargo-3.3.4"
+*cupsLanguages: "de es fr it"
+
+*% Changeable only through the command line or by application interfaces.
+*Copies: 1
+*MagTrack1: ""
+*MagTrack2: ""
+*MagTrack3: ""
+*FPanelFrontFilename: ""
+*FPanelBackFilename: ""
+*FPanelInvertImage: ""
+*ExclusionAreaFrontFilename: ""
+*ExclusionAreaBackFilename: ""
+*ExclusionKFrontFilename: ""
+*ExclusionKBackFilename: ""
+
+*XmlFilename: "/usr/share/fargo/DTC4500e/DTC4500e.xml"
+*ColorProfileFilename: "/usr/share/cups/profiles/DTC4500eCLR.icm"
+*ColorProfileFilenameL: "/usr/share/cups/profiles/DTC4500eCLR_L.icm"
+
+*%==========================================================
+
+*OpenGroup: CardOptions/Card
+
+*OpenUI *PageSize/Card Size: PickOne
+*OrderDependency: 10 AnySetup *PageSize
+*DefaultPageSize: CR80
+*PageSize CR80/CR80: "<</PageSize[152 242]/ImagingBBox null>>setpagedevice"
+*PageSize CR79/CR79: "<</PageSize[148 238]/ImagingBBox null>>setpagedevice"
+*CloseUI: *PageSize
+
+*OpenUI *CardThickness/Card Thickness: PickOne
+*OrderDependency: 10 AnySetup *CardThickness
+*DefaultCardThickness: 30
+*CardThickness 10/10: "setpagedevice"
+*CardThickness 20/20: "setpagedevice"
+*CardThickness 30/30: "setpagedevice"
+*CardThickness 40/40: "setpagedevice"
+*CloseUI: *CardThickness
+
+*OpenUI *RotateFront180/Rotate Front 180 Degrees: Boolean
+*OrderDependency: 10 AnySetup *RotateFront180
+*DefaultRotateFront180: False
+*RotateFront180 True/Yes: "setpagedevice"
+*RotateFront180 False/No: "setpagedevice"
+*CloseUI: *RotateFront180
+
+*OpenUI *RotateBack180/Rotate Back 180 Degrees: Boolean
+*OrderDependency: 10 AnySetup *RotateBack180
+*DefaultRotateBack180: False
+*RotateBack180 True/Yes: "setpagedevice"
+*RotateBack180 False/No: "setpagedevice"
+*CloseUI: *RotateBack180
+
+*OpenUI *PageRegion: PickOne
+*OrderDependency: 10 AnySetup *PageRegion
+*DefaultPageRegion: CR80
+*PageRegion CR80/CR80: "<</PageSize[152 242]/ImagingBBox null >>setpagedevice"
+*PageRegion CR79/CR79: "<</PageSize[148 238]/ImagingBBox null >>setpagedevice"
+*CloseUI: *PageRegion
+
+*DefaultImageableArea: CR80
+*ImageableArea CR80/CR80: "0 0 152 242"
+*ImageableArea CR79/CR79: "0 0 148 238"
+
+*DefaultPaperDimension: CR80
+*PaperDimension CR80/CR80: "152 242"
+*PaperDimension CR79/CR79: "148 238"
+
+*RequiresPageRegion All: True
+
+*OpenUI *Resolution/Resolution: PickOne
+*OrderDependency: 10 AnySetup *Resolution
+*DefaultResolution: 300dpi
+*Resolution 300dpi/300 DPI: "<</HWResolution[300 300]/cupsBitsPerColor 8/cupsRowCount 0/cupsRowFeed 0/cupsRowStep 0>>setpagedevice"
+*CloseUI: *Resolution
+
+*OpenUI *InputHopper/Input Hopper Selection: PickOne
+*OrderDependency: 10 AnySetup *InputHopper
+*DefaultInputHopper: FirstAvailable
+*InputHopper FirstAvailable/First Available: "setpagedevice"
+*InputHopper Hopper1/Top: "setpagedevice"
+*InputHopper Hopper2/Bottom: "setpagedevice"
+*CloseUI: *InputHopper
+
+*CloseGroup: CardOptions
+
+*%==========================================================
+
+*OpenGroup: General/Print Options
+
+*OpenUI *Ribbon/Ribbon Type: PickOne
+*OrderDependency: 10 AnySetup *Ribbon
+*DefaultRibbon: YMCKO
+*Ribbon YMCKO/YMCKO: "setpagedevice"
+*Ribbon YMCKO_Half/YMCKO Half Panel: "setpagedevice"
+*Ribbon YMCKOK/YMCKOK: "setpagedevice"
+*Ribbon YMCKK/YMCKK: "setpagedevice"
+*Ribbon YMCFKO/YMCFKO: "setpagedevice"
+*Ribbon YMCFKOK/YMCFKOK: "setpagedevice"
+*Ribbon KStandard/Standard Resin: "setpagedevice"
+*Ribbon KPremium/Premium Resin: "setpagedevice"
+*Ribbon MonoColor/Colored Resin: "setpagedevice"
+*Ribbon Metalic/Metallic Resin: "setpagedevice"
+*Ribbon KO/Premium Resin/Overlay: "setpagedevice"
+*Ribbon BO/Dye-Sub Black/Overlay: "setpagedevice"
+*Ribbon None/None - Re-Writable: "setpagedevice"
+*CloseUI: *Ribbon
+
+*OpenUI *PrintBothSides/Print Both Sides: Boolean
+*OrderDependency: 10 AnySetup *PrintBothSides
+*DefaultPrintBothSides: False
+*PrintBothSides True/Yes: "setpagedevice"
+*PrintBothSides False/No: "setpagedevice"
+*CloseUI: *PrintBothSides
+
+*OpenUI *SplitRibbon/Split 1 Set of Ribbon Panels: Boolean
+*OrderDependency: 10 AnySetup *SplitRibbon
+*DefaultSplitRibbon: False
+*SplitRibbon True/Yes: "setpagedevice"
+*SplitRibbon False/No: "setpagedevice"
+*CloseUI: *SplitRibbon
+
+*OpenUI *PrintBackOnFront/Print Back Image on Front of Card: Boolean
+*OrderDependency: 10 AnySetup *PrintBackOnFront
+*DefaultPrintBackOnFront: False
+*PrintBackOnFront True/Yes: "setpagedevice"
+*PrintBackOnFront False/No: "setpagedevice"
+*CloseUI: *PrintBackOnFront
+
+*OpenUI *PrintBackOnly/Print Back Side Only: Boolean
+*OrderDependency: 10 AnySetup *PrintBackOnly
+*DefaultPrintBackOnly: False
+*PrintBackOnly True/Yes: "setpagedevice"
+*PrintBackOnly False/No: "setpagedevice"
+*CloseUI: *PrintBackOnly
+
+*OpenUI *DisablePrinting/Disable Printing (Feed Card Only): Boolean
+*OrderDependency: 10 AnySetup *DisablePrinting
+*DefaultDisablePrinting: False
+*DisablePrinting True/Yes: "setpagedevice"
+*DisablePrinting False/No: "setpagedevice"
+*CloseUI: *DisablePrinting
+
+*OpenUI *InvertFPanelImage/Invert F-Panel Image: Boolean
+*OrderDependency: 10 AnySetup *InvertFPanelImage
+*DefaultInvertFPanelImage: False
+*InvertFPanelImage True/Yes: "setpagedevice"
+*InvertFPanelImage False/No: "setpagedevice"
+*CloseUI: *InvertFPanelImage
+
+*OpenUI *WriteOnly/Write Only (No erase pass): Boolean
+*OrderDependency: 10 AnySetup *WriteOnly
+*DefaultWriteOnly: False
+*WriteOnly True/Yes: "setpagedevice"
+*WriteOnly False/No: "setpagedevice"
+*CloseUI: *WriteOnly
+
+*OpenUI *EncryptJobEnable/Encrypt Job Data: Boolean
+*OrderDependency: 10 AnySetup *EncryptJobEnable
+*DefaultEncryptJobEnable: False
+*EncryptJobEnable True/Yes: "setpagedevice"
+*EncryptJobEnable False/No: "setpagedevice"
+*CloseUI: *EncryptJobEnable
+
+*CloseGroup: General
+
+*%==========================================================
+
+*OpenGroup: ImageColor/Image Color Options
+
+*OpenUI *ColorModel/Color Mode: PickOne
+*OrderDependency: 10 AnySetup *ColorModel
+*DefaultColorModel: RGBW
+*ColorModel RGBW/Color RGBK: "<</cupsColorSpace 17/cupsColorOrder 0/cupsCompression 0>>setpagedevice"
+*ColorModel RGB/Color RGB: "<</cupsColorSpace 1/cupsColorOrder 0/cupsCompression 0>>setpagedevice"
+*CloseUI: *ColorModel
+
+*OpenUI *ColorMatching/Color Matching: PickOne
+*OrderDependency: 10 AnySetup *ColorMatching
+*DefaultColorMatching: None
+*ColorMatching None/No Color Management: "setpagedevice"
+*ColorMatching ICC1/Default Color Management: "setpagedevice"
+*ColorMatching ICC2/Legacy Color Management: "setpagedevice"
+*CloseUI: *ColorMatching
+
+*OpenUI *ResinDither/Resin Dither: PickOne
+*OrderDependency: 10 AnySetup *ResinDither
+*DefaultResinDither: Graphics
+*ResinDither graphics/Optimize for Graphics: "setpagedevice"
+*ResinDither photos/Optimize for Photos: "setpagedevice"
+*CloseUI: *ResinDither
+
+*OpenUI *DyeSubIntensity/Dye-Sub Intensity (YMC):PickOne
+*OrderDependency: 10 AnySetup *DyeSubIntensity
+*DefaultDyeSubIntensity: 0
+*DyeSubIntensity -50/-50: "setpagedevice"
+*DyeSubIntensity -49/-49: "setpagedevice"
+*DyeSubIntensity -48/-48: "setpagedevice"
+*DyeSubIntensity -47/-47: "setpagedevice"
+*DyeSubIntensity -46/-46: "setpagedevice"
+*DyeSubIntensity -45/-45: "setpagedevice"
+*DyeSubIntensity -44/-44: "setpagedevice"
+*DyeSubIntensity -43/-43: "setpagedevice"
+*DyeSubIntensity -42/-42: "setpagedevice"
+*DyeSubIntensity -41/-41: "setpagedevice"
+*DyeSubIntensity -40/-40: "setpagedevice"
+*DyeSubIntensity -39/-39: "setpagedevice"
+*DyeSubIntensity -38/-38: "setpagedevice"
+*DyeSubIntensity -37/-37: "setpagedevice"
+*DyeSubIntensity -36/-36: "setpagedevice"
+*DyeSubIntensity -35/-35: "setpagedevice"
+*DyeSubIntensity -34/-34: "setpagedevice"
+*DyeSubIntensity -33/-33: "setpagedevice"
+*DyeSubIntensity -32/-32: "setpagedevice"
+*DyeSubIntensity -31/-31: "setpagedevice"
+*DyeSubIntensity -30/-30: "setpagedevice"
+*DyeSubIntensity -29/-29: "setpagedevice"
+*DyeSubIntensity -28/-28: "setpagedevice"
+*DyeSubIntensity -27/-27: "setpagedevice"
+*DyeSubIntensity -26/-26: "setpagedevice"
+*DyeSubIntensity -25/-25: "setpagedevice"
+*DyeSubIntensity -24/-24: "setpagedevice"
+*DyeSubIntensity -23/-23: "setpagedevice"
+*DyeSubIntensity -22/-22: "setpagedevice"
+*DyeSubIntensity -21/-21: "setpagedevice"
+*DyeSubIntensity -20/-20: "setpagedevice"
+*DyeSubIntensity -19/-19: "setpagedevice"
+*DyeSubIntensity -18/-18: "setpagedevice"
+*DyeSubIntensity -17/-17: "setpagedevice"
+*DyeSubIntensity -16/-16: "setpagedevice"
+*DyeSubIntensity -15/-15: "setpagedevice"
+*DyeSubIntensity -14/-14: "setpagedevice"
+*DyeSubIntensity -13/-13: "setpagedevice"
+*DyeSubIntensity -12/-12: "setpagedevice"
+*DyeSubIntensity -11/-11: "setpagedevice"
+*DyeSubIntensity -10/-10: "setpagedevice"
+*DyeSubIntensity -9/-9: "setpagedevice"
+*DyeSubIntensity -8/-8: "setpagedevice"
+*DyeSubIntensity -7/-7: "setpagedevice"
+*DyeSubIntensity -6/-6: "setpagedevice"
+*DyeSubIntensity -5/-5: "setpagedevice"
+*DyeSubIntensity -4/-4: "setpagedevice"
+*DyeSubIntensity -3/-3: "setpagedevice"
+*DyeSubIntensity -2/-2: "setpagedevice"
+*DyeSubIntensity -1/-1: "setpagedevice"
+*DyeSubIntensity 0/0: "setpagedevice"
+*DyeSubIntensity 1/1: "setpagedevice"
+*DyeSubIntensity 2/2: "setpagedevice"
+*DyeSubIntensity 3/3: "setpagedevice"
+*DyeSubIntensity 4/4: "setpagedevice"
+*DyeSubIntensity 5/5: "setpagedevice"
+*DyeSubIntensity 6/6: "setpagedevice"
+*DyeSubIntensity 7/7: "setpagedevice"
+*DyeSubIntensity 8/8: "setpagedevice"
+*DyeSubIntensity 9/9: "setpagedevice"
+*DyeSubIntensity 10/10: "setpagedevice"
+*DyeSubIntensity 11/11: "setpagedevice"
+*DyeSubIntensity 12/12: "setpagedevice"
+*DyeSubIntensity 13/13: "setpagedevice"
+*DyeSubIntensity 14/14: "setpagedevice"
+*DyeSubIntensity 15/15: "setpagedevice"
+*DyeSubIntensity 16/16: "setpagedevice"
+*DyeSubIntensity 17/17: "setpagedevice"
+*DyeSubIntensity 18/18: "setpagedevice"
+*DyeSubIntensity 19/19: "setpagedevice"
+*DyeSubIntensity 20/20: "setpagedevice"
+*DyeSubIntensity 21/21: "setpagedevice"
+*DyeSubIntensity 22/22: "setpagedevice"
+*DyeSubIntensity 23/23: "setpagedevice"
+*DyeSubIntensity 24/24: "setpagedevice"
+*DyeSubIntensity 25/25: "setpagedevice"
+*DyeSubIntensity 26/26: "setpagedevice"
+*DyeSubIntensity 27/27: "setpagedevice"
+*DyeSubIntensity 28/28: "setpagedevice"
+*DyeSubIntensity 29/29: "setpagedevice"
+*DyeSubIntensity 30/30: "setpagedevice"
+*DyeSubIntensity 31/31: "setpagedevice"
+*DyeSubIntensity 32/32: "setpagedevice"
+*DyeSubIntensity 33/33: "setpagedevice"
+*DyeSubIntensity 34/34: "setpagedevice"
+*DyeSubIntensity 35/35: "setpagedevice"
+*DyeSubIntensity 36/36: "setpagedevice"
+*DyeSubIntensity 37/37: "setpagedevice"
+*DyeSubIntensity 38/38: "setpagedevice"
+*DyeSubIntensity 39/39: "setpagedevice"
+*DyeSubIntensity 40/40: "setpagedevice"
+*DyeSubIntensity 41/41: "setpagedevice"
+*DyeSubIntensity 42/42: "setpagedevice"
+*DyeSubIntensity 43/43: "setpagedevice"
+*DyeSubIntensity 44/44: "setpagedevice"
+*DyeSubIntensity 45/45: "setpagedevice"
+*DyeSubIntensity 46/46: "setpagedevice"
+*DyeSubIntensity 47/47: "setpagedevice"
+*DyeSubIntensity 48/48: "setpagedevice"
+*DyeSubIntensity 49/49: "setpagedevice"
+*DyeSubIntensity 50/50: "setpagedevice"
+*CloseUI: *DyeSubIntensity
+
+*OpenUI *ResinHeatFront/Resin Heat Front (K):PickOne
+*OrderDependency: 10 AnySetup *ResinHeatFront
+*DefaultResinHeatFront: 0
+*ResinHeatFront -50/-50: "setpagedevice"
+*ResinHeatFront -49/-49: "setpagedevice"
+*ResinHeatFront -48/-48: "setpagedevice"
+*ResinHeatFront -47/-47: "setpagedevice"
+*ResinHeatFront -46/-46: "setpagedevice"
+*ResinHeatFront -45/-45: "setpagedevice"
+*ResinHeatFront -44/-44: "setpagedevice"
+*ResinHeatFront -43/-43: "setpagedevice"
+*ResinHeatFront -42/-42: "setpagedevice"
+*ResinHeatFront -41/-41: "setpagedevice"
+*ResinHeatFront -40/-40: "setpagedevice"
+*ResinHeatFront -39/-39: "setpagedevice"
+*ResinHeatFront -38/-38: "setpagedevice"
+*ResinHeatFront -37/-37: "setpagedevice"
+*ResinHeatFront -36/-36: "setpagedevice"
+*ResinHeatFront -35/-35: "setpagedevice"
+*ResinHeatFront -34/-34: "setpagedevice"
+*ResinHeatFront -33/-33: "setpagedevice"
+*ResinHeatFront -32/-32: "setpagedevice"
+*ResinHeatFront -31/-31: "setpagedevice"
+*ResinHeatFront -30/-30: "setpagedevice"
+*ResinHeatFront -29/-29: "setpagedevice"
+*ResinHeatFront -28/-28: "setpagedevice"
+*ResinHeatFront -27/-27: "setpagedevice"
+*ResinHeatFront -26/-26: "setpagedevice"
+*ResinHeatFront -25/-25: "setpagedevice"
+*ResinHeatFront -24/-24: "setpagedevice"
+*ResinHeatFront -23/-23: "setpagedevice"
+*ResinHeatFront -22/-22: "setpagedevice"
+*ResinHeatFront -21/-21: "setpagedevice"
+*ResinHeatFront -20/-20: "setpagedevice"
+*ResinHeatFront -19/-19: "setpagedevice"
+*ResinHeatFront -18/-18: "setpagedevice"
+*ResinHeatFront -17/-17: "setpagedevice"
+*ResinHeatFront -16/-16: "setpagedevice"
+*ResinHeatFront -15/-15: "setpagedevice"
+*ResinHeatFront -14/-14: "setpagedevice"
+*ResinHeatFront -13/-13: "setpagedevice"
+*ResinHeatFront -12/-12: "setpagedevice"
+*ResinHeatFront -11/-11: "setpagedevice"
+*ResinHeatFront -10/-10: "setpagedevice"
+*ResinHeatFront -9/-9: "setpagedevice"
+*ResinHeatFront -8/-8: "setpagedevice"
+*ResinHeatFront -7/-7: "setpagedevice"
+*ResinHeatFront -6/-6: "setpagedevice"
+*ResinHeatFront -5/-5: "setpagedevice"
+*ResinHeatFront -4/-4: "setpagedevice"
+*ResinHeatFront -3/-3: "setpagedevice"
+*ResinHeatFront -2/-2: "setpagedevice"
+*ResinHeatFront -1/-1: "setpagedevice"
+*ResinHeatFront 0/0: "setpagedevice"
+*ResinHeatFront 1/1: "setpagedevice"
+*ResinHeatFront 2/2: "setpagedevice"
+*ResinHeatFront 3/3: "setpagedevice"
+*ResinHeatFront 4/4: "setpagedevice"
+*ResinHeatFront 5/5: "setpagedevice"
+*ResinHeatFront 6/6: "setpagedevice"
+*ResinHeatFront 7/7: "setpagedevice"
+*ResinHeatFront 8/8: "setpagedevice"
+*ResinHeatFront 9/9: "setpagedevice"
+*ResinHeatFront 10/10: "setpagedevice"
+*ResinHeatFront 11/11: "setpagedevice"
+*ResinHeatFront 12/12: "setpagedevice"
+*ResinHeatFront 13/13: "setpagedevice"
+*ResinHeatFront 14/14: "setpagedevice"
+*ResinHeatFront 15/15: "setpagedevice"
+*ResinHeatFront 16/16: "setpagedevice"
+*ResinHeatFront 17/17: "setpagedevice"
+*ResinHeatFront 18/18: "setpagedevice"
+*ResinHeatFront 19/19: "setpagedevice"
+*ResinHeatFront 20/20: "setpagedevice"
+*ResinHeatFront 21/21: "setpagedevice"
+*ResinHeatFront 22/22: "setpagedevice"
+*ResinHeatFront 23/23: "setpagedevice"
+*ResinHeatFront 24/24: "setpagedevice"
+*ResinHeatFront 25/25: "setpagedevice"
+*ResinHeatFront 26/26: "setpagedevice"
+*ResinHeatFront 27/27: "setpagedevice"
+*ResinHeatFront 28/28: "setpagedevice"
+*ResinHeatFront 29/29: "setpagedevice"
+*ResinHeatFront 30/30: "setpagedevice"
+*ResinHeatFront 31/31: "setpagedevice"
+*ResinHeatFront 32/32: "setpagedevice"
+*ResinHeatFront 33/33: "setpagedevice"
+*ResinHeatFront 34/34: "setpagedevice"
+*ResinHeatFront 35/35: "setpagedevice"
+*ResinHeatFront 36/36: "setpagedevice"
+*ResinHeatFront 37/37: "setpagedevice"
+*ResinHeatFront 38/38: "setpagedevice"
+*ResinHeatFront 39/39: "setpagedevice"
+*ResinHeatFront 40/40: "setpagedevice"
+*ResinHeatFront 41/41: "setpagedevice"
+*ResinHeatFront 42/42: "setpagedevice"
+*ResinHeatFront 43/43: "setpagedevice"
+*ResinHeatFront 44/44: "setpagedevice"
+*ResinHeatFront 45/45: "setpagedevice"
+*ResinHeatFront 46/46: "setpagedevice"
+*ResinHeatFront 47/47: "setpagedevice"
+*ResinHeatFront 48/48: "setpagedevice"
+*ResinHeatFront 49/49: "setpagedevice"
+*ResinHeatFront 50/50: "setpagedevice"
+*CloseUI: *ResinHeatFront
+
+*OpenUI *ResinHeatBack/Resin Heat Back (K):PickOne
+*OrderDependency: 10 AnySetup *ResinHeatBack
+*DefaultResinHeatBack: 0
+*ResinHeatBack -50/-50: "setpagedevice"
+*ResinHeatBack -49/-49: "setpagedevice"
+*ResinHeatBack -48/-48: "setpagedevice"
+*ResinHeatBack -47/-47: "setpagedevice"
+*ResinHeatBack -46/-46: "setpagedevice"
+*ResinHeatBack -45/-45: "setpagedevice"
+*ResinHeatBack -44/-44: "setpagedevice"
+*ResinHeatBack -43/-43: "setpagedevice"
+*ResinHeatBack -42/-42: "setpagedevice"
+*ResinHeatBack -41/-41: "setpagedevice"
+*ResinHeatBack -40/-40: "setpagedevice"
+*ResinHeatBack -39/-39: "setpagedevice"
+*ResinHeatBack -38/-38: "setpagedevice"
+*ResinHeatBack -37/-37: "setpagedevice"
+*ResinHeatBack -36/-36: "setpagedevice"
+*ResinHeatBack -35/-35: "setpagedevice"
+*ResinHeatBack -34/-34: "setpagedevice"
+*ResinHeatBack -33/-33: "setpagedevice"
+*ResinHeatBack -32/-32: "setpagedevice"
+*ResinHeatBack -31/-31: "setpagedevice"
+*ResinHeatBack -30/-30: "setpagedevice"
+*ResinHeatBack -29/-29: "setpagedevice"
+*ResinHeatBack -28/-28: "setpagedevice"
+*ResinHeatBack -27/-27: "setpagedevice"
+*ResinHeatBack -26/-26: "setpagedevice"
+*ResinHeatBack -25/-25: "setpagedevice"
+*ResinHeatBack -24/-24: "setpagedevice"
+*ResinHeatBack -23/-23: "setpagedevice"
+*ResinHeatBack -22/-22: "setpagedevice"
+*ResinHeatBack -21/-21: "setpagedevice"
+*ResinHeatBack -20/-20: "setpagedevice"
+*ResinHeatBack -19/-19: "setpagedevice"
+*ResinHeatBack -18/-18: "setpagedevice"
+*ResinHeatBack -17/-17: "setpagedevice"
+*ResinHeatBack -16/-16: "setpagedevice"
+*ResinHeatBack -15/-15: "setpagedevice"
+*ResinHeatBack -14/-14: "setpagedevice"
+*ResinHeatBack -13/-13: "setpagedevice"
+*ResinHeatBack -12/-12: "setpagedevice"
+*ResinHeatBack -11/-11: "setpagedevice"
+*ResinHeatBack -10/-10: "setpagedevice"
+*ResinHeatBack -9/-9: "setpagedevice"
+*ResinHeatBack -8/-8: "setpagedevice"
+*ResinHeatBack -7/-7: "setpagedevice"
+*ResinHeatBack -6/-6: "setpagedevice"
+*ResinHeatBack -5/-5: "setpagedevice"
+*ResinHeatBack -4/-4: "setpagedevice"
+*ResinHeatBack -3/-3: "setpagedevice"
+*ResinHeatBack -2/-2: "setpagedevice"
+*ResinHeatBack -1/-1: "setpagedevice"
+*ResinHeatBack 0/0: "setpagedevice"
+*ResinHeatBack 1/1: "setpagedevice"
+*ResinHeatBack 2/2: "setpagedevice"
+*ResinHeatBack 3/3: "setpagedevice"
+*ResinHeatBack 4/4: "setpagedevice"
+*ResinHeatBack 5/5: "setpagedevice"
+*ResinHeatBack 6/6: "setpagedevice"
+*ResinHeatBack 7/7: "setpagedevice"
+*ResinHeatBack 8/8: "setpagedevice"
+*ResinHeatBack 9/9: "setpagedevice"
+*ResinHeatBack 10/10: "setpagedevice"
+*ResinHeatBack 11/11: "setpagedevice"
+*ResinHeatBack 12/12: "setpagedevice"
+*ResinHeatBack 13/13: "setpagedevice"
+*ResinHeatBack 14/14: "setpagedevice"
+*ResinHeatBack 15/15: "setpagedevice"
+*ResinHeatBack 16/16: "setpagedevice"
+*ResinHeatBack 17/17: "setpagedevice"
+*ResinHeatBack 18/18: "setpagedevice"
+*ResinHeatBack 19/19: "setpagedevice"
+*ResinHeatBack 20/20: "setpagedevice"
+*ResinHeatBack 21/21: "setpagedevice"
+*ResinHeatBack 22/22: "setpagedevice"
+*ResinHeatBack 23/23: "setpagedevice"
+*ResinHeatBack 24/24: "setpagedevice"
+*ResinHeatBack 25/25: "setpagedevice"
+*ResinHeatBack 26/26: "setpagedevice"
+*ResinHeatBack 27/27: "setpagedevice"
+*ResinHeatBack 28/28: "setpagedevice"
+*ResinHeatBack 29/29: "setpagedevice"
+*ResinHeatBack 30/30: "setpagedevice"
+*ResinHeatBack 31/31: "setpagedevice"
+*ResinHeatBack 32/32: "setpagedevice"
+*ResinHeatBack 33/33: "setpagedevice"
+*ResinHeatBack 34/34: "setpagedevice"
+*ResinHeatBack 35/35: "setpagedevice"
+*ResinHeatBack 36/36: "setpagedevice"
+*ResinHeatBack 37/37: "setpagedevice"
+*ResinHeatBack 38/38: "setpagedevice"
+*ResinHeatBack 39/39: "setpagedevice"
+*ResinHeatBack 40/40: "setpagedevice"
+*ResinHeatBack 41/41: "setpagedevice"
+*ResinHeatBack 42/42: "setpagedevice"
+*ResinHeatBack 43/43: "setpagedevice"
+*ResinHeatBack 44/44: "setpagedevice"
+*ResinHeatBack 45/45: "setpagedevice"
+*ResinHeatBack 46/46: "setpagedevice"
+*ResinHeatBack 47/47: "setpagedevice"
+*ResinHeatBack 48/48: "setpagedevice"
+*ResinHeatBack 49/49: "setpagedevice"
+*ResinHeatBack 50/50: "setpagedevice"
+*CloseUI: *ResinHeatBack
+
+*OpenUI *OverlayHeat/Overlay Heat: PickOne
+*OrderDependency: 10 AnySetup *OverlayHeat
+*DefaultOverlayHeat: 0
+*OverlayHeat -50/-50: "setpagedevice"
+*OverlayHeat -49/-49: "setpagedevice"
+*OverlayHeat -48/-48: "setpagedevice"
+*OverlayHeat -47/-47: "setpagedevice"
+*OverlayHeat -46/-46: "setpagedevice"
+*OverlayHeat -45/-45: "setpagedevice"
+*OverlayHeat -44/-44: "setpagedevice"
+*OverlayHeat -43/-43: "setpagedevice"
+*OverlayHeat -42/-42: "setpagedevice"
+*OverlayHeat -41/-41: "setpagedevice"
+*OverlayHeat -40/-40: "setpagedevice"
+*OverlayHeat -39/-39: "setpagedevice"
+*OverlayHeat -38/-38: "setpagedevice"
+*OverlayHeat -37/-37: "setpagedevice"
+*OverlayHeat -36/-36: "setpagedevice"
+*OverlayHeat -35/-35: "setpagedevice"
+*OverlayHeat -34/-34: "setpagedevice"
+*OverlayHeat -33/-33: "setpagedevice"
+*OverlayHeat -32/-32: "setpagedevice"
+*OverlayHeat -31/-31: "setpagedevice"
+*OverlayHeat -30/-30: "setpagedevice"
+*OverlayHeat -29/-29: "setpagedevice"
+*OverlayHeat -28/-28: "setpagedevice"
+*OverlayHeat -27/-27: "setpagedevice"
+*OverlayHeat -26/-26: "setpagedevice"
+*OverlayHeat -25/-25: "setpagedevice"
+*OverlayHeat -24/-24: "setpagedevice"
+*OverlayHeat -23/-23: "setpagedevice"
+*OverlayHeat -22/-22: "setpagedevice"
+*OverlayHeat -21/-21: "setpagedevice"
+*OverlayHeat -20/-20: "setpagedevice"
+*OverlayHeat -19/-19: "setpagedevice"
+*OverlayHeat -18/-18: "setpagedevice"
+*OverlayHeat -17/-17: "setpagedevice"
+*OverlayHeat -16/-16: "setpagedevice"
+*OverlayHeat -15/-15: "setpagedevice"
+*OverlayHeat -14/-14: "setpagedevice"
+*OverlayHeat -13/-13: "setpagedevice"
+*OverlayHeat -12/-12: "setpagedevice"
+*OverlayHeat -11/-11: "setpagedevice"
+*OverlayHeat -10/-10: "setpagedevice"
+*OverlayHeat -9/-9: "setpagedevice"
+*OverlayHeat -8/-8: "setpagedevice"
+*OverlayHeat -7/-7: "setpagedevice"
+*OverlayHeat -6/-6: "setpagedevice"
+*OverlayHeat -5/-5: "setpagedevice"
+*OverlayHeat -4/-4: "setpagedevice"
+*OverlayHeat -3/-3: "setpagedevice"
+*OverlayHeat -2/-2: "setpagedevice"
+*OverlayHeat -1/-1: "setpagedevice"
+*OverlayHeat 0/0: "setpagedevice"
+*OverlayHeat 1/1: "setpagedevice"
+*OverlayHeat 2/2: "setpagedevice"
+*OverlayHeat 3/3: "setpagedevice"
+*OverlayHeat 4/4: "setpagedevice"
+*OverlayHeat 5/5: "setpagedevice"
+*OverlayHeat 6/6: "setpagedevice"
+*OverlayHeat 7/7: "setpagedevice"
+*OverlayHeat 8/8: "setpagedevice"
+*OverlayHeat 9/9: "setpagedevice"
+*OverlayHeat 10/10: "setpagedevice"
+*OverlayHeat 11/11: "setpagedevice"
+*OverlayHeat 12/12: "setpagedevice"
+*OverlayHeat 13/13: "setpagedevice"
+*OverlayHeat 14/14: "setpagedevice"
+*OverlayHeat 15/15: "setpagedevice"
+*OverlayHeat 16/16: "setpagedevice"
+*OverlayHeat 17/17: "setpagedevice"
+*OverlayHeat 18/18: "setpagedevice"
+*OverlayHeat 19/19: "setpagedevice"
+*OverlayHeat 20/20: "setpagedevice"
+*OverlayHeat 21/21: "setpagedevice"
+*OverlayHeat 22/22: "setpagedevice"
+*OverlayHeat 23/23: "setpagedevice"
+*OverlayHeat 24/24: "setpagedevice"
+*OverlayHeat 25/25: "setpagedevice"
+*OverlayHeat 26/26: "setpagedevice"
+*OverlayHeat 27/27: "setpagedevice"
+*OverlayHeat 28/28: "setpagedevice"
+*OverlayHeat 29/29: "setpagedevice"
+*OverlayHeat 30/30: "setpagedevice"
+*OverlayHeat 31/31: "setpagedevice"
+*OverlayHeat 32/32: "setpagedevice"
+*OverlayHeat 33/33: "setpagedevice"
+*OverlayHeat 34/34: "setpagedevice"
+*OverlayHeat 35/35: "setpagedevice"
+*OverlayHeat 36/36: "setpagedevice"
+*OverlayHeat 37/37: "setpagedevice"
+*OverlayHeat 38/38: "setpagedevice"
+*OverlayHeat 39/39: "setpagedevice"
+*OverlayHeat 40/40: "setpagedevice"
+*OverlayHeat 41/41: "setpagedevice"
+*OverlayHeat 42/42: "setpagedevice"
+*OverlayHeat 43/43: "setpagedevice"
+*OverlayHeat 44/44: "setpagedevice"
+*OverlayHeat 45/45: "setpagedevice"
+*OverlayHeat 46/46: "setpagedevice"
+*OverlayHeat 47/47: "setpagedevice"
+*OverlayHeat 48/48: "setpagedevice"
+*OverlayHeat 49/49: "setpagedevice"
+*OverlayHeat 50/50: "setpagedevice"
+*CloseUI: *OverlayHeat
+
+*OpenUI *EraseIntensity/Erase Intensity: PickOne
+*OrderDependency: 10 AnySetup *EraseIntensity
+*DefaultEraseIntensity: 0
+*EraseIntensity -50/-50: "setpagedevice"
+*EraseIntensity -49/-49: "setpagedevice"
+*EraseIntensity -48/-48: "setpagedevice"
+*EraseIntensity -47/-47: "setpagedevice"
+*EraseIntensity -46/-46: "setpagedevice"
+*EraseIntensity -45/-45: "setpagedevice"
+*EraseIntensity -44/-44: "setpagedevice"
+*EraseIntensity -43/-43: "setpagedevice"
+*EraseIntensity -42/-42: "setpagedevice"
+*EraseIntensity -41/-41: "setpagedevice"
+*EraseIntensity -40/-40: "setpagedevice"
+*EraseIntensity -39/-39: "setpagedevice"
+*EraseIntensity -38/-38: "setpagedevice"
+*EraseIntensity -37/-37: "setpagedevice"
+*EraseIntensity -36/-36: "setpagedevice"
+*EraseIntensity -35/-35: "setpagedevice"
+*EraseIntensity -34/-34: "setpagedevice"
+*EraseIntensity -33/-33: "setpagedevice"
+*EraseIntensity -32/-32: "setpagedevice"
+*EraseIntensity -31/-31: "setpagedevice"
+*EraseIntensity -30/-30: "setpagedevice"
+*EraseIntensity -29/-29: "setpagedevice"
+*EraseIntensity -28/-28: "setpagedevice"
+*EraseIntensity -27/-27: "setpagedevice"
+*EraseIntensity -26/-26: "setpagedevice"
+*EraseIntensity -25/-25: "setpagedevice"
+*EraseIntensity -24/-24: "setpagedevice"
+*EraseIntensity -23/-23: "setpagedevice"
+*EraseIntensity -22/-22: "setpagedevice"
+*EraseIntensity -21/-21: "setpagedevice"
+*EraseIntensity -20/-20: "setpagedevice"
+*EraseIntensity -19/-19: "setpagedevice"
+*EraseIntensity -18/-18: "setpagedevice"
+*EraseIntensity -17/-17: "setpagedevice"
+*EraseIntensity -16/-16: "setpagedevice"
+*EraseIntensity -15/-15: "setpagedevice"
+*EraseIntensity -14/-14: "setpagedevice"
+*EraseIntensity -13/-13: "setpagedevice"
+*EraseIntensity -12/-12: "setpagedevice"
+*EraseIntensity -11/-11: "setpagedevice"
+*EraseIntensity -10/-10: "setpagedevice"
+*EraseIntensity -9/-9: "setpagedevice"
+*EraseIntensity -8/-8: "setpagedevice"
+*EraseIntensity -7/-7: "setpagedevice"
+*EraseIntensity -6/-6: "setpagedevice"
+*EraseIntensity -5/-5: "setpagedevice"
+*EraseIntensity -4/-4: "setpagedevice"
+*EraseIntensity -3/-3: "setpagedevice"
+*EraseIntensity -2/-2: "setpagedevice"
+*EraseIntensity -1/-1: "setpagedevice"
+*EraseIntensity 0/0: "setpagedevice"
+*EraseIntensity 1/1: "setpagedevice"
+*EraseIntensity 2/2: "setpagedevice"
+*EraseIntensity 3/3: "setpagedevice"
+*EraseIntensity 4/4: "setpagedevice"
+*EraseIntensity 5/5: "setpagedevice"
+*EraseIntensity 6/6: "setpagedevice"
+*EraseIntensity 7/7: "setpagedevice"
+*EraseIntensity 8/8: "setpagedevice"
+*EraseIntensity 9/9: "setpagedevice"
+*EraseIntensity 10/10: "setpagedevice"
+*EraseIntensity 11/11: "setpagedevice"
+*EraseIntensity 12/12: "setpagedevice"
+*EraseIntensity 13/13: "setpagedevice"
+*EraseIntensity 14/14: "setpagedevice"
+*EraseIntensity 15/15: "setpagedevice"
+*EraseIntensity 16/16: "setpagedevice"
+*EraseIntensity 17/17: "setpagedevice"
+*EraseIntensity 18/18: "setpagedevice"
+*EraseIntensity 19/19: "setpagedevice"
+*EraseIntensity 20/20: "setpagedevice"
+*EraseIntensity 21/21: "setpagedevice"
+*EraseIntensity 22/22: "setpagedevice"
+*EraseIntensity 23/23: "setpagedevice"
+*EraseIntensity 24/24: "setpagedevice"
+*EraseIntensity 25/25: "setpagedevice"
+*EraseIntensity 26/26: "setpagedevice"
+*EraseIntensity 27/27: "setpagedevice"
+*EraseIntensity 28/28: "setpagedevice"
+*EraseIntensity 29/29: "setpagedevice"
+*EraseIntensity 30/30: "setpagedevice"
+*EraseIntensity 31/31: "setpagedevice"
+*EraseIntensity 32/32: "setpagedevice"
+*EraseIntensity 33/33: "setpagedevice"
+*EraseIntensity 34/34: "setpagedevice"
+*EraseIntensity 35/35: "setpagedevice"
+*EraseIntensity 36/36: "setpagedevice"
+*EraseIntensity 37/37: "setpagedevice"
+*EraseIntensity 38/38: "setpagedevice"
+*EraseIntensity 39/39: "setpagedevice"
+*EraseIntensity 40/40: "setpagedevice"
+*EraseIntensity 41/41: "setpagedevice"
+*EraseIntensity 42/42: "setpagedevice"
+*EraseIntensity 43/43: "setpagedevice"
+*EraseIntensity 44/44: "setpagedevice"
+*EraseIntensity 45/45: "setpagedevice"
+*EraseIntensity 46/46: "setpagedevice"
+*EraseIntensity 47/47: "setpagedevice"
+*EraseIntensity 48/48: "setpagedevice"
+*EraseIntensity 49/49: "setpagedevice"
+*EraseIntensity 50/50: "setpagedevice"
+*CloseUI: *EraseIntensity
+
+*CloseGroup: ImageColor
+
+*%==========================================================
+
+*%OpenGroup: ImagePosition/Image Transfer and Flattener Options
+*OpenGroup: ImagePosition/Image Position Options
+
+*OpenUI *ImageVOffset/Vertical Offset:PickOne
+*OrderDependency: 10 AnySetup *ImageVOffset
+*DefaultImageVOffset: 0
+*ImageVOffset -100/-100: "setpagedevice"
+*ImageVOffset -99/-99: "setpagedevice"
+*ImageVOffset -98/-98: "setpagedevice"
+*ImageVOffset -97/-97: "setpagedevice"
+*ImageVOffset -96/-96: "setpagedevice"
+*ImageVOffset -95/-95: "setpagedevice"
+*ImageVOffset -94/-94: "setpagedevice"
+*ImageVOffset -93/-93: "setpagedevice"
+*ImageVOffset -92/-92: "setpagedevice"
+*ImageVOffset -91/-91: "setpagedevice"
+*ImageVOffset -90/-90: "setpagedevice"
+*ImageVOffset -89/-89: "setpagedevice"
+*ImageVOffset -88/-88: "setpagedevice"
+*ImageVOffset -87/-87: "setpagedevice"
+*ImageVOffset -86/-86: "setpagedevice"
+*ImageVOffset -85/-85: "setpagedevice"
+*ImageVOffset -84/-84: "setpagedevice"
+*ImageVOffset -83/-83: "setpagedevice"
+*ImageVOffset -82/-82: "setpagedevice"
+*ImageVOffset -81/-81: "setpagedevice"
+*ImageVOffset -80/-80: "setpagedevice"
+*ImageVOffset -79/-79: "setpagedevice"
+*ImageVOffset -78/-78: "setpagedevice"
+*ImageVOffset -77/-77: "setpagedevice"
+*ImageVOffset -76/-76: "setpagedevice"
+*ImageVOffset -75/-75: "setpagedevice"
+*ImageVOffset -74/-74: "setpagedevice"
+*ImageVOffset -73/-73: "setpagedevice"
+*ImageVOffset -72/-72: "setpagedevice"
+*ImageVOffset -71/-71: "setpagedevice"
+*ImageVOffset -70/-70: "setpagedevice"
+*ImageVOffset -69/-69: "setpagedevice"
+*ImageVOffset -68/-68: "setpagedevice"
+*ImageVOffset -67/-67: "setpagedevice"
+*ImageVOffset -66/-66: "setpagedevice"
+*ImageVOffset -65/-65: "setpagedevice"
+*ImageVOffset -64/-64: "setpagedevice"
+*ImageVOffset -63/-63: "setpagedevice"
+*ImageVOffset -62/-62: "setpagedevice"
+*ImageVOffset -61/-61: "setpagedevice"
+*ImageVOffset -60/-60: "setpagedevice"
+*ImageVOffset -59/-59: "setpagedevice"
+*ImageVOffset -58/-58: "setpagedevice"
+*ImageVOffset -57/-57: "setpagedevice"
+*ImageVOffset -56/-56: "setpagedevice"
+*ImageVOffset -55/-55: "setpagedevice"
+*ImageVOffset -54/-54: "setpagedevice"
+*ImageVOffset -53/-53: "setpagedevice"
+*ImageVOffset -52/-52: "setpagedevice"
+*ImageVOffset -51/-51: "setpagedevice"
+*ImageVOffset -50/-50: "setpagedevice"
+*ImageVOffset -49/-49: "setpagedevice"
+*ImageVOffset -48/-48: "setpagedevice"
+*ImageVOffset -47/-47: "setpagedevice"
+*ImageVOffset -46/-46: "setpagedevice"
+*ImageVOffset -45/-45: "setpagedevice"
+*ImageVOffset -44/-44: "setpagedevice"
+*ImageVOffset -43/-43: "setpagedevice"
+*ImageVOffset -42/-42: "setpagedevice"
+*ImageVOffset -41/-41: "setpagedevice"
+*ImageVOffset -40/-40: "setpagedevice"
+*ImageVOffset -39/-39: "setpagedevice"
+*ImageVOffset -38/-38: "setpagedevice"
+*ImageVOffset -37/-37: "setpagedevice"
+*ImageVOffset -36/-36: "setpagedevice"
+*ImageVOffset -35/-35: "setpagedevice"
+*ImageVOffset -34/-34: "setpagedevice"
+*ImageVOffset -33/-33: "setpagedevice"
+*ImageVOffset -32/-32: "setpagedevice"
+*ImageVOffset -31/-31: "setpagedevice"
+*ImageVOffset -30/-30: "setpagedevice"
+*ImageVOffset -29/-29: "setpagedevice"
+*ImageVOffset -28/-28: "setpagedevice"
+*ImageVOffset -27/-27: "setpagedevice"
+*ImageVOffset -26/-26: "setpagedevice"
+*ImageVOffset -25/-25: "setpagedevice"
+*ImageVOffset -24/-24: "setpagedevice"
+*ImageVOffset -23/-23: "setpagedevice"
+*ImageVOffset -22/-22: "setpagedevice"
+*ImageVOffset -21/-21: "setpagedevice"
+*ImageVOffset -20/-20: "setpagedevice"
+*ImageVOffset -19/-19: "setpagedevice"
+*ImageVOffset -18/-18: "setpagedevice"
+*ImageVOffset -17/-17: "setpagedevice"
+*ImageVOffset -16/-16: "setpagedevice"
+*ImageVOffset -15/-15: "setpagedevice"
+*ImageVOffset -14/-14: "setpagedevice"
+*ImageVOffset -13/-13: "setpagedevice"
+*ImageVOffset -12/-12: "setpagedevice"
+*ImageVOffset -11/-11: "setpagedevice"
+*ImageVOffset -10/-10: "setpagedevice"
+*ImageVOffset -9/-9: "setpagedevice"
+*ImageVOffset -8/-8: "setpagedevice"
+*ImageVOffset -7/-7: "setpagedevice"
+*ImageVOffset -6/-6: "setpagedevice"
+*ImageVOffset -5/-5: "setpagedevice"
+*ImageVOffset -4/-4: "setpagedevice"
+*ImageVOffset -3/-3: "setpagedevice"
+*ImageVOffset -2/-2: "setpagedevice"
+*ImageVOffset -1/-1: "setpagedevice"
+*ImageVOffset 0/0: "setpagedevice"
+*ImageVOffset 1/1: "setpagedevice"
+*ImageVOffset 2/2: "setpagedevice"
+*ImageVOffset 3/3: "setpagedevice"
+*ImageVOffset 4/4: "setpagedevice"
+*ImageVOffset 5/5: "setpagedevice"
+*ImageVOffset 6/6: "setpagedevice"
+*ImageVOffset 7/7: "setpagedevice"
+*ImageVOffset 8/8: "setpagedevice"
+*ImageVOffset 9/9: "setpagedevice"
+*ImageVOffset 10/10: "setpagedevice"
+*ImageVOffset 11/11: "setpagedevice"
+*ImageVOffset 12/12: "setpagedevice"
+*ImageVOffset 13/13: "setpagedevice"
+*ImageVOffset 14/14: "setpagedevice"
+*ImageVOffset 15/15: "setpagedevice"
+*ImageVOffset 16/16: "setpagedevice"
+*ImageVOffset 17/17: "setpagedevice"
+*ImageVOffset 18/18: "setpagedevice"
+*ImageVOffset 19/19: "setpagedevice"
+*ImageVOffset 20/20: "setpagedevice"
+*ImageVOffset 21/21: "setpagedevice"
+*ImageVOffset 22/22: "setpagedevice"
+*ImageVOffset 23/23: "setpagedevice"
+*ImageVOffset 24/24: "setpagedevice"
+*ImageVOffset 25/25: "setpagedevice"
+*ImageVOffset 26/26: "setpagedevice"
+*ImageVOffset 27/27: "setpagedevice"
+*ImageVOffset 28/28: "setpagedevice"
+*ImageVOffset 29/29: "setpagedevice"
+*ImageVOffset 30/30: "setpagedevice"
+*ImageVOffset 31/31: "setpagedevice"
+*ImageVOffset 32/32: "setpagedevice"
+*ImageVOffset 33/33: "setpagedevice"
+*ImageVOffset 34/34: "setpagedevice"
+*ImageVOffset 35/35: "setpagedevice"
+*ImageVOffset 36/36: "setpagedevice"
+*ImageVOffset 37/37: "setpagedevice"
+*ImageVOffset 38/38: "setpagedevice"
+*ImageVOffset 39/39: "setpagedevice"
+*ImageVOffset 40/40: "setpagedevice"
+*ImageVOffset 41/41: "setpagedevice"
+*ImageVOffset 42/42: "setpagedevice"
+*ImageVOffset 43/43: "setpagedevice"
+*ImageVOffset 44/44: "setpagedevice"
+*ImageVOffset 45/45: "setpagedevice"
+*ImageVOffset 46/46: "setpagedevice"
+*ImageVOffset 47/47: "setpagedevice"
+*ImageVOffset 48/48: "setpagedevice"
+*ImageVOffset 49/49: "setpagedevice"
+*ImageVOffset 50/50: "setpagedevice"
+*ImageVOffset 51/51: "setpagedevice"
+*ImageVOffset 52/52: "setpagedevice"
+*ImageVOffset 53/53: "setpagedevice"
+*ImageVOffset 54/54: "setpagedevice"
+*ImageVOffset 55/55: "setpagedevice"
+*ImageVOffset 56/56: "setpagedevice"
+*ImageVOffset 57/57: "setpagedevice"
+*ImageVOffset 58/58: "setpagedevice"
+*ImageVOffset 59/59: "setpagedevice"
+*ImageVOffset 60/60: "setpagedevice"
+*ImageVOffset 61/61: "setpagedevice"
+*ImageVOffset 62/62: "setpagedevice"
+*ImageVOffset 63/63: "setpagedevice"
+*ImageVOffset 64/64: "setpagedevice"
+*ImageVOffset 65/65: "setpagedevice"
+*ImageVOffset 66/66: "setpagedevice"
+*ImageVOffset 67/67: "setpagedevice"
+*ImageVOffset 68/68: "setpagedevice"
+*ImageVOffset 69/69: "setpagedevice"
+*ImageVOffset 70/70: "setpagedevice"
+*ImageVOffset 71/71: "setpagedevice"
+*ImageVOffset 72/72: "setpagedevice"
+*ImageVOffset 73/73: "setpagedevice"
+*ImageVOffset 74/74: "setpagedevice"
+*ImageVOffset 75/75: "setpagedevice"
+*ImageVOffset 76/76: "setpagedevice"
+*ImageVOffset 77/77: "setpagedevice"
+*ImageVOffset 78/78: "setpagedevice"
+*ImageVOffset 79/79: "setpagedevice"
+*ImageVOffset 80/80: "setpagedevice"
+*ImageVOffset 81/81: "setpagedevice"
+*ImageVOffset 82/82: "setpagedevice"
+*ImageVOffset 83/83: "setpagedevice"
+*ImageVOffset 84/84: "setpagedevice"
+*ImageVOffset 85/85: "setpagedevice"
+*ImageVOffset 86/86: "setpagedevice"
+*ImageVOffset 87/87: "setpagedevice"
+*ImageVOffset 88/88: "setpagedevice"
+*ImageVOffset 89/89: "setpagedevice"
+*ImageVOffset 90/90: "setpagedevice"
+*ImageVOffset 91/91: "setpagedevice"
+*ImageVOffset 92/92: "setpagedevice"
+*ImageVOffset 93/93: "setpagedevice"
+*ImageVOffset 94/94: "setpagedevice"
+*ImageVOffset 95/95: "setpagedevice"
+*ImageVOffset 96/96: "setpagedevice"
+*ImageVOffset 97/97: "setpagedevice"
+*ImageVOffset 98/98: "setpagedevice"
+*ImageVOffset 99/99: "setpagedevice"
+*ImageVOffset 100/100: "setpagedevice"
+*CloseUI: *ImageVOffset
+
+*OpenUI *ImageHOffset/Horizontal Offset:PickOne
+*OrderDependency: 10 AnySetup *ImageHOffset
+*DefaultImageHOffset: 0
+*ImageHOffset -100/-100: "setpagedevice"
+*ImageHOffset -99/-99: "setpagedevice"
+*ImageHOffset -98/-98: "setpagedevice"
+*ImageHOffset -97/-97: "setpagedevice"
+*ImageHOffset -96/-96: "setpagedevice"
+*ImageHOffset -95/-95: "setpagedevice"
+*ImageHOffset -94/-94: "setpagedevice"
+*ImageHOffset -93/-93: "setpagedevice"
+*ImageHOffset -92/-92: "setpagedevice"
+*ImageHOffset -91/-91: "setpagedevice"
+*ImageHOffset -90/-90: "setpagedevice"
+*ImageHOffset -89/-89: "setpagedevice"
+*ImageHOffset -88/-88: "setpagedevice"
+*ImageHOffset -87/-87: "setpagedevice"
+*ImageHOffset -86/-86: "setpagedevice"
+*ImageHOffset -85/-85: "setpagedevice"
+*ImageHOffset -84/-84: "setpagedevice"
+*ImageHOffset -83/-83: "setpagedevice"
+*ImageHOffset -82/-82: "setpagedevice"
+*ImageHOffset -81/-81: "setpagedevice"
+*ImageHOffset -80/-80: "setpagedevice"
+*ImageHOffset -79/-79: "setpagedevice"
+*ImageHOffset -78/-78: "setpagedevice"
+*ImageHOffset -77/-77: "setpagedevice"
+*ImageHOffset -76/-76: "setpagedevice"
+*ImageHOffset -75/-75: "setpagedevice"
+*ImageHOffset -74/-74: "setpagedevice"
+*ImageHOffset -73/-73: "setpagedevice"
+*ImageHOffset -72/-72: "setpagedevice"
+*ImageHOffset -71/-71: "setpagedevice"
+*ImageHOffset -70/-70: "setpagedevice"
+*ImageHOffset -69/-69: "setpagedevice"
+*ImageHOffset -68/-68: "setpagedevice"
+*ImageHOffset -67/-67: "setpagedevice"
+*ImageHOffset -66/-66: "setpagedevice"
+*ImageHOffset -65/-65: "setpagedevice"
+*ImageHOffset -64/-64: "setpagedevice"
+*ImageHOffset -63/-63: "setpagedevice"
+*ImageHOffset -62/-62: "setpagedevice"
+*ImageHOffset -61/-61: "setpagedevice"
+*ImageHOffset -60/-60: "setpagedevice"
+*ImageHOffset -59/-59: "setpagedevice"
+*ImageHOffset -58/-58: "setpagedevice"
+*ImageHOffset -57/-57: "setpagedevice"
+*ImageHOffset -56/-56: "setpagedevice"
+*ImageHOffset -55/-55: "setpagedevice"
+*ImageHOffset -54/-54: "setpagedevice"
+*ImageHOffset -53/-53: "setpagedevice"
+*ImageHOffset -52/-52: "setpagedevice"
+*ImageHOffset -51/-51: "setpagedevice"
+*ImageHOffset -50/-50: "setpagedevice"
+*ImageHOffset -49/-49: "setpagedevice"
+*ImageHOffset -48/-48: "setpagedevice"
+*ImageHOffset -47/-47: "setpagedevice"
+*ImageHOffset -46/-46: "setpagedevice"
+*ImageHOffset -45/-45: "setpagedevice"
+*ImageHOffset -44/-44: "setpagedevice"
+*ImageHOffset -43/-43: "setpagedevice"
+*ImageHOffset -42/-42: "setpagedevice"
+*ImageHOffset -41/-41: "setpagedevice"
+*ImageHOffset -40/-40: "setpagedevice"
+*ImageHOffset -39/-39: "setpagedevice"
+*ImageHOffset -38/-38: "setpagedevice"
+*ImageHOffset -37/-37: "setpagedevice"
+*ImageHOffset -36/-36: "setpagedevice"
+*ImageHOffset -35/-35: "setpagedevice"
+*ImageHOffset -34/-34: "setpagedevice"
+*ImageHOffset -33/-33: "setpagedevice"
+*ImageHOffset -32/-32: "setpagedevice"
+*ImageHOffset -31/-31: "setpagedevice"
+*ImageHOffset -30/-30: "setpagedevice"
+*ImageHOffset -29/-29: "setpagedevice"
+*ImageHOffset -28/-28: "setpagedevice"
+*ImageHOffset -27/-27: "setpagedevice"
+*ImageHOffset -26/-26: "setpagedevice"
+*ImageHOffset -25/-25: "setpagedevice"
+*ImageHOffset -24/-24: "setpagedevice"
+*ImageHOffset -23/-23: "setpagedevice"
+*ImageHOffset -22/-22: "setpagedevice"
+*ImageHOffset -21/-21: "setpagedevice"
+*ImageHOffset -20/-20: "setpagedevice"
+*ImageHOffset -19/-19: "setpagedevice"
+*ImageHOffset -18/-18: "setpagedevice"
+*ImageHOffset -17/-17: "setpagedevice"
+*ImageHOffset -16/-16: "setpagedevice"
+*ImageHOffset -15/-15: "setpagedevice"
+*ImageHOffset -14/-14: "setpagedevice"
+*ImageHOffset -13/-13: "setpagedevice"
+*ImageHOffset -12/-12: "setpagedevice"
+*ImageHOffset -11/-11: "setpagedevice"
+*ImageHOffset -10/-10: "setpagedevice"
+*ImageHOffset -9/-9: "setpagedevice"
+*ImageHOffset -8/-8: "setpagedevice"
+*ImageHOffset -7/-7: "setpagedevice"
+*ImageHOffset -6/-6: "setpagedevice"
+*ImageHOffset -5/-5: "setpagedevice"
+*ImageHOffset -4/-4: "setpagedevice"
+*ImageHOffset -3/-3: "setpagedevice"
+*ImageHOffset -2/-2: "setpagedevice"
+*ImageHOffset -1/-1: "setpagedevice"
+*ImageHOffset 0/0: "setpagedevice"
+*ImageHOffset 1/1: "setpagedevice"
+*ImageHOffset 2/2: "setpagedevice"
+*ImageHOffset 3/3: "setpagedevice"
+*ImageHOffset 4/4: "setpagedevice"
+*ImageHOffset 5/5: "setpagedevice"
+*ImageHOffset 6/6: "setpagedevice"
+*ImageHOffset 7/7: "setpagedevice"
+*ImageHOffset 8/8: "setpagedevice"
+*ImageHOffset 9/9: "setpagedevice"
+*ImageHOffset 10/10: "setpagedevice"
+*ImageHOffset 11/11: "setpagedevice"
+*ImageHOffset 12/12: "setpagedevice"
+*ImageHOffset 13/13: "setpagedevice"
+*ImageHOffset 14/14: "setpagedevice"
+*ImageHOffset 15/15: "setpagedevice"
+*ImageHOffset 16/16: "setpagedevice"
+*ImageHOffset 17/17: "setpagedevice"
+*ImageHOffset 18/18: "setpagedevice"
+*ImageHOffset 19/19: "setpagedevice"
+*ImageHOffset 20/20: "setpagedevice"
+*ImageHOffset 21/21: "setpagedevice"
+*ImageHOffset 22/22: "setpagedevice"
+*ImageHOffset 23/23: "setpagedevice"
+*ImageHOffset 24/24: "setpagedevice"
+*ImageHOffset 25/25: "setpagedevice"
+*ImageHOffset 26/26: "setpagedevice"
+*ImageHOffset 27/27: "setpagedevice"
+*ImageHOffset 28/28: "setpagedevice"
+*ImageHOffset 29/29: "setpagedevice"
+*ImageHOffset 30/30: "setpagedevice"
+*ImageHOffset 31/31: "setpagedevice"
+*ImageHOffset 32/32: "setpagedevice"
+*ImageHOffset 33/33: "setpagedevice"
+*ImageHOffset 34/34: "setpagedevice"
+*ImageHOffset 35/35: "setpagedevice"
+*ImageHOffset 36/36: "setpagedevice"
+*ImageHOffset 37/37: "setpagedevice"
+*ImageHOffset 38/38: "setpagedevice"
+*ImageHOffset 39/39: "setpagedevice"
+*ImageHOffset 40/40: "setpagedevice"
+*ImageHOffset 41/41: "setpagedevice"
+*ImageHOffset 42/42: "setpagedevice"
+*ImageHOffset 43/43: "setpagedevice"
+*ImageHOffset 44/44: "setpagedevice"
+*ImageHOffset 45/45: "setpagedevice"
+*ImageHOffset 46/46: "setpagedevice"
+*ImageHOffset 47/47: "setpagedevice"
+*ImageHOffset 48/48: "setpagedevice"
+*ImageHOffset 49/49: "setpagedevice"
+*ImageHOffset 50/50: "setpagedevice"
+*ImageHOffset 51/51: "setpagedevice"
+*ImageHOffset 52/52: "setpagedevice"
+*ImageHOffset 53/53: "setpagedevice"
+*ImageHOffset 54/54: "setpagedevice"
+*ImageHOffset 55/55: "setpagedevice"
+*ImageHOffset 56/56: "setpagedevice"
+*ImageHOffset 57/57: "setpagedevice"
+*ImageHOffset 58/58: "setpagedevice"
+*ImageHOffset 59/59: "setpagedevice"
+*ImageHOffset 60/60: "setpagedevice"
+*ImageHOffset 61/61: "setpagedevice"
+*ImageHOffset 62/62: "setpagedevice"
+*ImageHOffset 63/63: "setpagedevice"
+*ImageHOffset 64/64: "setpagedevice"
+*ImageHOffset 65/65: "setpagedevice"
+*ImageHOffset 66/66: "setpagedevice"
+*ImageHOffset 67/67: "setpagedevice"
+*ImageHOffset 68/68: "setpagedevice"
+*ImageHOffset 69/69: "setpagedevice"
+*ImageHOffset 70/70: "setpagedevice"
+*ImageHOffset 71/71: "setpagedevice"
+*ImageHOffset 72/72: "setpagedevice"
+*ImageHOffset 73/73: "setpagedevice"
+*ImageHOffset 74/74: "setpagedevice"
+*ImageHOffset 75/75: "setpagedevice"
+*ImageHOffset 76/76: "setpagedevice"
+*ImageHOffset 77/77: "setpagedevice"
+*ImageHOffset 78/78: "setpagedevice"
+*ImageHOffset 79/79: "setpagedevice"
+*ImageHOffset 80/80: "setpagedevice"
+*ImageHOffset 81/81: "setpagedevice"
+*ImageHOffset 82/82: "setpagedevice"
+*ImageHOffset 83/83: "setpagedevice"
+*ImageHOffset 84/84: "setpagedevice"
+*ImageHOffset 85/85: "setpagedevice"
+*ImageHOffset 86/86: "setpagedevice"
+*ImageHOffset 87/87: "setpagedevice"
+*ImageHOffset 88/88: "setpagedevice"
+*ImageHOffset 89/89: "setpagedevice"
+*ImageHOffset 90/90: "setpagedevice"
+*ImageHOffset 91/91: "setpagedevice"
+*ImageHOffset 92/92: "setpagedevice"
+*ImageHOffset 93/93: "setpagedevice"
+*ImageHOffset 94/94: "setpagedevice"
+*ImageHOffset 95/95: "setpagedevice"
+*ImageHOffset 96/96: "setpagedevice"
+*ImageHOffset 97/97: "setpagedevice"
+*ImageHOffset 98/98: "setpagedevice"
+*ImageHOffset 99/99: "setpagedevice"
+*ImageHOffset 100/100: "setpagedevice"
+*CloseUI: *ImageHOffset
+
+*CloseGroup: ImagePosition
+
+*%==========================================================
+
+*OpenGroup: OverlayOptions/Overlay Print Area Options
+
+*OpenUI *PrintAreaFrontOption/Front Overlay/Print Area: PickOne
+*OrderDependency: 10 AnySetup *PrintAreaFrontOption
+*DefaultPrintAreaFrontOption: fullcard
+*PrintAreaFrontOption fullcard/Full Card: "setpagedevice"
+*% PrintAreaFrontOption defined/Defined Area(s): "setpagedevice"
+*% PrintAreaFrontOption undefined/Undefined Area(s): "setpagedevice"
+*PrintAreaFrontOption omitMagStripe/Omit Mag Stripe Area: "setpagedevice"
+*PrintAreaFrontOption omitSmartChip/Omit Smart Chip Area: "setpagedevice"
+*PrintAreaFrontOption omitSignature/Omit Signature Area: "setpagedevice"
+*CloseUI: *PrintAreaFrontOption
+
+*% This attribute allows any value to be entered from the command line
+*PrintAreaFrontOption: fullcard
+
+*OpenUI *PrintAreaBackOption/Back Overlay/Print Area: PickOne
+*OrderDependency: 10 AnySetup *PrintAreaBackOption
+*DefaultPrintAreaBackOption: fullcard
+*PrintAreaBackOption fullcard/Full Card: "setpagedevice"
+*% PrintAreaBackOption defined/Defined Area(s): "setpagedevice"
+*% PrintAreaBackOption undefined/Undefined Area(s): "setpagedevice"
+*PrintAreaBackOption omitMagStripe/Omit Mag Stripe Area: "setpagedevice"
+*PrintAreaBackOption omitSmartChip/Omit Smart Chip Area: "setpagedevice"
+*PrintAreaBackOption omitSignature/Omit Signature Area: "setpagedevice"
+*CloseUI: *PrintAreaBackOption
+
+*% This attribute allows any value to be entered from the command line
+*PrintAreaBackOption: fullcard
+
+*OpenUI *PrintAreaFrontApply/Front Apply Area(s): PickOne
+*OrderDependency: 10 AnySetup *PrintAreaFrontApply
+*DefaultPrintAreaFrontApply: PrintAndOverlay
+*PrintAreaFrontApply PrintAndOverlay/Print and Overlay: "setpagedevice"
+*PrintAreaFrontApply OverlayOnly/Overlay Only: "setpagedevice"
+*PrintAreaFrontApply PrintOnly/Print Only (No Overlay): "setpagedevice"
+*CloseUI: *PrintAreaFrontApply
+
+*OpenUI *PrintAreaBackApply/Back Apply Area(s): PickOne
+*OrderDependency: 10 AnySetup *PrintAreaBackApply
+*DefaultPrintAreaBackApply: PrintAndOverlay
+*PrintAreaBackApply PrintAndOverlay/Print and Overlay: "setpagedevice"
+*PrintAreaBackApply OverlayOnly/Overlay Only: "setpagedevice"
+*PrintAreaBackApply PrintOnly/Print Only (No Overlay): "setpagedevice"
+*CloseUI: *PrintAreaBackApply
+
+*OpenUI *VisualSecurityArea/Visual Security Solution: PickOne
+*OrderDependency: 10 AnySetup *VisualSecurityArea
+*DefaultVisualSecurityArea: None
+*VisualSecurityArea None/No Visual Security: "setpagedevice"
+*VisualSecurityArea UpperLeft/Upper Left: "setpagedevice"
+*VisualSecurityArea UpperRight/Upper Right: "setpagedevice"
+*VisualSecurityArea LowerLeft/Lower Left: "setpagedevice"
+*VisualSecurityArea LowerRight/Lower Right: "setpagedevice"
+*CloseUI: *VisualSecurityArea
+
+*OpenUI *VisualSecurityType/Visual Security Type: PickOne
+*OrderDependency: 10 AnySetup *VisualSecurityType
+*DefaultVisualSecurityType: VeriMark
+*VisualSecurityType VeriMark/VeriMark: "setpagedevice"
+*VisualSecurityType HoloMark/HoloMark: "setpagedevice"
+*CloseUI: *VisualSecurityType
+
+*CloseGroup: OverlayOptions
+
+*%==========================================================
+
+*OpenGroup: KPanelOptions/K-Panel Options
+
+*OpenUI *YMCunderKFront/Front YMC Under K: Boolean
+*OrderDependency: 10 AnySetup *YMCunderKFront
+*DefaultYMCunderKFront: False
+*YMCunderKFront True/Yes: "setpagedevice"
+*YMCunderKFront False/No: "setpagedevice"
+*CloseUI: *YMCunderKFront
+
+*OpenUI *YMCunderKBack/Back YMC Under K: Boolean
+*OrderDependency: 10 AnySetup *YMCunderKBack
+*DefaultYMCunderKBack: False
+*YMCunderKBack True/Yes: "setpagedevice"
+*YMCunderKBack False/No: "setpagedevice"
+*CloseUI: *YMCunderKBack
+
+*OpenUI *KPanelApplyFront/Front K-Panel Area: PickOne
+*OrderDependency: 10 AnySetup *KPanelApplyFront
+*DefaultKPanelApplyFront: none
+*KPanelApplyFront none/None: "setpagedevice"
+*KPanelApplyFront fullcard/Full Card: "setpagedevice"
+*% KPanelApplyFront defined/Defined Area(s): "setpagedevice"
+*% KPanelApplyFront undefined/Undefined Area(s): "setpagedevice"
+*CloseUI: *KPanelApplyFront
+
+*% This attribute allows any value to be entered from the command line
+*KPanelApplyFront: none
+
+*OpenUI *KPanelApplyBack/Back K-Panel Area: PickOne
+*OrderDependency: 10 AnySetup *KPanelApplyBack
+*DefaultKPanelApplyBack: none
+*KPanelApplyBack none/None: "setpagedevice"
+*KPanelApplyBack fullcard/Full Card: "setpagedevice"
+*% KPanelApplyBack defined/Defined Area(s): "setpagedevice"
+*% KPanelApplyBack undefined/Undefined Area(s): "setpagedevice"
+*CloseUI: *KPanelApplyBack
+
+*% This attribute allows any value to be entered from the command line
+*KPanelApplyBack: none
+
+*OpenUI *KPanelResinThreshold/Resin Threshold: PickOne
+*OrderDependency: 10 AnySetup *KPanelResinThreshold
+*DefaultKPanelResinThreshold: 2
+*KPanelResinThreshold 252/1%: "setpagedevice"
+*KPanelResinThreshold 249/2%: "setpagedevice"
+*KPanelResinThreshold 247/3%: "setpagedevice"
+*KPanelResinThreshold 244/4%: "setpagedevice"
+*KPanelResinThreshold 242/5%: "setpagedevice"
+*KPanelResinThreshold 239/6%: "setpagedevice"
+*KPanelResinThreshold 237/7%: "setpagedevice"
+*KPanelResinThreshold 234/8%: "setpagedevice"
+*KPanelResinThreshold 232/9%: "setpagedevice"
+*KPanelResinThreshold 229/10%: "setpagedevice"
+*KPanelResinThreshold 226/11%: "setpagedevice"
+*KPanelResinThreshold 224/12%: "setpagedevice"
+*KPanelResinThreshold 221/13%: "setpagedevice"
+*KPanelResinThreshold 219/14%: "setpagedevice"
+*KPanelResinThreshold 216/15%: "setpagedevice"
+*KPanelResinThreshold 214/16%: "setpagedevice"
+*KPanelResinThreshold 211/17%: "setpagedevice"
+*KPanelResinThreshold 209/18%: "setpagedevice"
+*KPanelResinThreshold 206/19%: "setpagedevice"
+*KPanelResinThreshold 204/20%: "setpagedevice"
+*KPanelResinThreshold 201/21%: "setpagedevice"
+*KPanelResinThreshold 198/22%: "setpagedevice"
+*KPanelResinThreshold 196/23%: "setpagedevice"
+*KPanelResinThreshold 193/24%: "setpagedevice"
+*KPanelResinThreshold 191/25%: "setpagedevice"
+*KPanelResinThreshold 188/26%: "setpagedevice"
+*KPanelResinThreshold 186/27%: "setpagedevice"
+*KPanelResinThreshold 183/28%: "setpagedevice"
+*KPanelResinThreshold 181/29%: "setpagedevice"
+*KPanelResinThreshold 178/30%: "setpagedevice"
+*KPanelResinThreshold 175/31%: "setpagedevice"
+*KPanelResinThreshold 173/32%: "setpagedevice"
+*KPanelResinThreshold 170/33%: "setpagedevice"
+*KPanelResinThreshold 168/34%: "setpagedevice"
+*KPanelResinThreshold 165/35%: "setpagedevice"
+*KPanelResinThreshold 163/36%: "setpagedevice"
+*KPanelResinThreshold 160/37%: "setpagedevice"
+*KPanelResinThreshold 158/38%: "setpagedevice"
+*KPanelResinThreshold 155/39%: "setpagedevice"
+*KPanelResinThreshold 153/40%: "setpagedevice"
+*KPanelResinThreshold 150/41%: "setpagedevice"
+*KPanelResinThreshold 147/42%: "setpagedevice"
+*KPanelResinThreshold 145/43%: "setpagedevice"
+*KPanelResinThreshold 142/44%: "setpagedevice"
+*KPanelResinThreshold 140/45%: "setpagedevice"
+*KPanelResinThreshold 137/46%: "setpagedevice"
+*KPanelResinThreshold 135/47%: "setpagedevice"
+*KPanelResinThreshold 132/48%: "setpagedevice"
+*KPanelResinThreshold 130/49%: "setpagedevice"
+*KPanelResinThreshold 127/50%: "setpagedevice"
+*KPanelResinThreshold 124/51%: "setpagedevice"
+*KPanelResinThreshold 122/52%: "setpagedevice"
+*KPanelResinThreshold 119/53%: "setpagedevice"
+*KPanelResinThreshold 117/54%: "setpagedevice"
+*KPanelResinThreshold 114/55%: "setpagedevice"
+*KPanelResinThreshold 112/56%: "setpagedevice"
+*KPanelResinThreshold 109/57%: "setpagedevice"
+*KPanelResinThreshold 107/58%: "setpagedevice"
+*KPanelResinThreshold 104/59%: "setpagedevice"
+*KPanelResinThreshold 102/60%: "setpagedevice"
+*KPanelResinThreshold 99/61%: "setpagedevice"
+*KPanelResinThreshold 96/62%: "setpagedevice"
+*KPanelResinThreshold 94/63%: "setpagedevice"
+*KPanelResinThreshold 91/64%: "setpagedevice"
+*KPanelResinThreshold 89/65%: "setpagedevice"
+*KPanelResinThreshold 86/66%: "setpagedevice"
+*KPanelResinThreshold 84/67%: "setpagedevice"
+*KPanelResinThreshold 81/68%: "setpagedevice"
+*KPanelResinThreshold 79/69%: "setpagedevice"
+*KPanelResinThreshold 76/70%: "setpagedevice"
+*KPanelResinThreshold 73/71%: "setpagedevice"
+*KPanelResinThreshold 71/72%: "setpagedevice"
+*KPanelResinThreshold 68/73%: "setpagedevice"
+*KPanelResinThreshold 66/74%: "setpagedevice"
+*KPanelResinThreshold 63/75%: "setpagedevice"
+*KPanelResinThreshold 61/76%: "setpagedevice"
+*KPanelResinThreshold 58/77%: "setpagedevice"
+*KPanelResinThreshold 56/78%: "setpagedevice"
+*KPanelResinThreshold 53/79%: "setpagedevice"
+*KPanelResinThreshold 51/80%: "setpagedevice"
+*KPanelResinThreshold 48/81%: "setpagedevice"
+*KPanelResinThreshold 45/82%: "setpagedevice"
+*KPanelResinThreshold 43/83%: "setpagedevice"
+*KPanelResinThreshold 40/84%: "setpagedevice"
+*KPanelResinThreshold 38/85%: "setpagedevice"
+*KPanelResinThreshold 35/86%: "setpagedevice"
+*KPanelResinThreshold 33/87%: "setpagedevice"
+*KPanelResinThreshold 30/88%: "setpagedevice"
+*KPanelResinThreshold 28/89%: "setpagedevice"
+*KPanelResinThreshold 25/90%: "setpagedevice"
+*KPanelResinThreshold 22/91%: "setpagedevice"
+*KPanelResinThreshold 20/92%: "setpagedevice"
+*KPanelResinThreshold 17/93%: "setpagedevice"
+*KPanelResinThreshold 15/94%: "setpagedevice"
+*KPanelResinThreshold 12/95%: "setpagedevice"
+*KPanelResinThreshold 10/96%: "setpagedevice"
+*KPanelResinThreshold 7/97%: "setpagedevice"
+*KPanelResinThreshold 5/98%: "setpagedevice"
+*KPanelResinThreshold 2/99%: "setpagedevice"
+*CloseUI: *KPanelResinThreshold
+
+*CloseGroup: KPanelOptions
+
+*%==========================================================
+
+*OpenGroup: LaminationOptions/Lamination Options
+
+*OpenUI *LamPosition/Horizontal Offset: PickOne
+*OrderDependency: 10 AnySetup *LamPosition
+*DefaultLamPosition: 0
+*LamPosition -100/-100: "setpagedevice"
+*LamPosition -99/-99: "setpagedevice"
+*LamPosition -98/-98: "setpagedevice"
+*LamPosition -97/-97: "setpagedevice"
+*LamPosition -96/-96: "setpagedevice"
+*LamPosition -95/-95: "setpagedevice"
+*LamPosition -94/-94: "setpagedevice"
+*LamPosition -93/-93: "setpagedevice"
+*LamPosition -92/-92: "setpagedevice"
+*LamPosition -91/-91: "setpagedevice"
+*LamPosition -90/-90: "setpagedevice"
+*LamPosition -89/-89: "setpagedevice"
+*LamPosition -88/-88: "setpagedevice"
+*LamPosition -87/-87: "setpagedevice"
+*LamPosition -86/-86: "setpagedevice"
+*LamPosition -85/-85: "setpagedevice"
+*LamPosition -84/-84: "setpagedevice"
+*LamPosition -83/-83: "setpagedevice"
+*LamPosition -82/-82: "setpagedevice"
+*LamPosition -81/-81: "setpagedevice"
+*LamPosition -80/-80: "setpagedevice"
+*LamPosition -79/-79: "setpagedevice"
+*LamPosition -78/-78: "setpagedevice"
+*LamPosition -77/-77: "setpagedevice"
+*LamPosition -76/-76: "setpagedevice"
+*LamPosition -75/-75: "setpagedevice"
+*LamPosition -74/-74: "setpagedevice"
+*LamPosition -73/-73: "setpagedevice"
+*LamPosition -72/-72: "setpagedevice"
+*LamPosition -71/-71: "setpagedevice"
+*LamPosition -70/-70: "setpagedevice"
+*LamPosition -69/-69: "setpagedevice"
+*LamPosition -68/-68: "setpagedevice"
+*LamPosition -67/-67: "setpagedevice"
+*LamPosition -66/-66: "setpagedevice"
+*LamPosition -65/-65: "setpagedevice"
+*LamPosition -64/-64: "setpagedevice"
+*LamPosition -63/-63: "setpagedevice"
+*LamPosition -62/-62: "setpagedevice"
+*LamPosition -61/-61: "setpagedevice"
+*LamPosition -60/-60: "setpagedevice"
+*LamPosition -59/-59: "setpagedevice"
+*LamPosition -58/-58: "setpagedevice"
+*LamPosition -57/-57: "setpagedevice"
+*LamPosition -56/-56: "setpagedevice"
+*LamPosition -55/-55: "setpagedevice"
+*LamPosition -54/-54: "setpagedevice"
+*LamPosition -53/-53: "setpagedevice"
+*LamPosition -52/-52: "setpagedevice"
+*LamPosition -51/-51: "setpagedevice"
+*LamPosition -50/-50: "setpagedevice"
+*LamPosition -49/-49: "setpagedevice"
+*LamPosition -48/-48: "setpagedevice"
+*LamPosition -47/-47: "setpagedevice"
+*LamPosition -46/-46: "setpagedevice"
+*LamPosition -45/-45: "setpagedevice"
+*LamPosition -44/-44: "setpagedevice"
+*LamPosition -43/-43: "setpagedevice"
+*LamPosition -42/-42: "setpagedevice"
+*LamPosition -41/-41: "setpagedevice"
+*LamPosition -40/-40: "setpagedevice"
+*LamPosition -39/-39: "setpagedevice"
+*LamPosition -38/-38: "setpagedevice"
+*LamPosition -37/-37: "setpagedevice"
+*LamPosition -36/-36: "setpagedevice"
+*LamPosition -35/-35: "setpagedevice"
+*LamPosition -34/-34: "setpagedevice"
+*LamPosition -33/-33: "setpagedevice"
+*LamPosition -32/-32: "setpagedevice"
+*LamPosition -31/-31: "setpagedevice"
+*LamPosition -30/-30: "setpagedevice"
+*LamPosition -29/-29: "setpagedevice"
+*LamPosition -28/-28: "setpagedevice"
+*LamPosition -27/-27: "setpagedevice"
+*LamPosition -26/-26: "setpagedevice"
+*LamPosition -25/-25: "setpagedevice"
+*LamPosition -24/-24: "setpagedevice"
+*LamPosition -23/-23: "setpagedevice"
+*LamPosition -22/-22: "setpagedevice"
+*LamPosition -21/-21: "setpagedevice"
+*LamPosition -20/-20: "setpagedevice"
+*LamPosition -19/-19: "setpagedevice"
+*LamPosition -18/-18: "setpagedevice"
+*LamPosition -17/-17: "setpagedevice"
+*LamPosition -16/-16: "setpagedevice"
+*LamPosition -15/-15: "setpagedevice"
+*LamPosition -14/-14: "setpagedevice"
+*LamPosition -13/-13: "setpagedevice"
+*LamPosition -12/-12: "setpagedevice"
+*LamPosition -11/-11: "setpagedevice"
+*LamPosition -10/-10: "setpagedevice"
+*LamPosition -9/-9: "setpagedevice"
+*LamPosition -8/-8: "setpagedevice"
+*LamPosition -7/-7: "setpagedevice"
+*LamPosition -6/-6: "setpagedevice"
+*LamPosition -5/-5: "setpagedevice"
+*LamPosition -4/-4: "setpagedevice"
+*LamPosition -3/-3: "setpagedevice"
+*LamPosition -2/-2: "setpagedevice"
+*LamPosition -1/-1: "setpagedevice"
+*LamPosition 0/0: "setpagedevice"
+*LamPosition 1/1: "setpagedevice"
+*LamPosition 2/2: "setpagedevice"
+*LamPosition 3/3: "setpagedevice"
+*LamPosition 4/4: "setpagedevice"
+*LamPosition 5/5: "setpagedevice"
+*LamPosition 6/6: "setpagedevice"
+*LamPosition 7/7: "setpagedevice"
+*LamPosition 8/8: "setpagedevice"
+*LamPosition 9/9: "setpagedevice"
+*LamPosition 10/10: "setpagedevice"
+*LamPosition 11/11: "setpagedevice"
+*LamPosition 12/12: "setpagedevice"
+*LamPosition 13/13: "setpagedevice"
+*LamPosition 14/14: "setpagedevice"
+*LamPosition 15/15: "setpagedevice"
+*LamPosition 16/16: "setpagedevice"
+*LamPosition 17/17: "setpagedevice"
+*LamPosition 18/18: "setpagedevice"
+*LamPosition 19/19: "setpagedevice"
+*LamPosition 20/20: "setpagedevice"
+*LamPosition 21/21: "setpagedevice"
+*LamPosition 22/22: "setpagedevice"
+*LamPosition 23/23: "setpagedevice"
+*LamPosition 24/24: "setpagedevice"
+*LamPosition 25/25: "setpagedevice"
+*LamPosition 26/26: "setpagedevice"
+*LamPosition 27/27: "setpagedevice"
+*LamPosition 28/28: "setpagedevice"
+*LamPosition 29/29: "setpagedevice"
+*LamPosition 30/30: "setpagedevice"
+*LamPosition 31/31: "setpagedevice"
+*LamPosition 32/32: "setpagedevice"
+*LamPosition 33/33: "setpagedevice"
+*LamPosition 34/34: "setpagedevice"
+*LamPosition 35/35: "setpagedevice"
+*LamPosition 36/36: "setpagedevice"
+*LamPosition 37/37: "setpagedevice"
+*LamPosition 38/38: "setpagedevice"
+*LamPosition 39/39: "setpagedevice"
+*LamPosition 40/40: "setpagedevice"
+*LamPosition 41/41: "setpagedevice"
+*LamPosition 42/42: "setpagedevice"
+*LamPosition 43/43: "setpagedevice"
+*LamPosition 44/44: "setpagedevice"
+*LamPosition 45/45: "setpagedevice"
+*LamPosition 46/46: "setpagedevice"
+*LamPosition 47/47: "setpagedevice"
+*LamPosition 48/48: "setpagedevice"
+*LamPosition 49/49: "setpagedevice"
+*LamPosition 50/50: "setpagedevice"
+*LamPosition 51/51: "setpagedevice"
+*LamPosition 52/52: "setpagedevice"
+*LamPosition 53/53: "setpagedevice"
+*LamPosition 54/54: "setpagedevice"
+*LamPosition 55/55: "setpagedevice"
+*LamPosition 56/56: "setpagedevice"
+*LamPosition 57/57: "setpagedevice"
+*LamPosition 58/58: "setpagedevice"
+*LamPosition 59/59: "setpagedevice"
+*LamPosition 60/60: "setpagedevice"
+*LamPosition 61/61: "setpagedevice"
+*LamPosition 62/62: "setpagedevice"
+*LamPosition 63/63: "setpagedevice"
+*LamPosition 64/64: "setpagedevice"
+*LamPosition 65/65: "setpagedevice"
+*LamPosition 66/66: "setpagedevice"
+*LamPosition 67/67: "setpagedevice"
+*LamPosition 68/68: "setpagedevice"
+*LamPosition 69/69: "setpagedevice"
+*LamPosition 70/70: "setpagedevice"
+*LamPosition 71/71: "setpagedevice"
+*LamPosition 72/72: "setpagedevice"
+*LamPosition 73/73: "setpagedevice"
+*LamPosition 74/74: "setpagedevice"
+*LamPosition 75/75: "setpagedevice"
+*LamPosition 76/76: "setpagedevice"
+*LamPosition 77/77: "setpagedevice"
+*LamPosition 78/78: "setpagedevice"
+*LamPosition 79/79: "setpagedevice"
+*LamPosition 80/80: "setpagedevice"
+*LamPosition 81/81: "setpagedevice"
+*LamPosition 82/82: "setpagedevice"
+*LamPosition 83/83: "setpagedevice"
+*LamPosition 84/84: "setpagedevice"
+*LamPosition 85/85: "setpagedevice"
+*LamPosition 86/86: "setpagedevice"
+*LamPosition 87/87: "setpagedevice"
+*LamPosition 88/88: "setpagedevice"
+*LamPosition 89/89: "setpagedevice"
+*LamPosition 90/90: "setpagedevice"
+*LamPosition 91/91: "setpagedevice"
+*LamPosition 92/92: "setpagedevice"
+*LamPosition 93/93: "setpagedevice"
+*LamPosition 94/94: "setpagedevice"
+*LamPosition 95/95: "setpagedevice"
+*LamPosition 96/96: "setpagedevice"
+*LamPosition 97/97: "setpagedevice"
+*LamPosition 98/98: "setpagedevice"
+*LamPosition 99/99: "setpagedevice"
+*LamPosition 100/100: "setpagedevice"
+*CloseUI: *LamPosition
+
+*OpenUI *LamSpeed/Dwell Time (sec/in): PickOne
+*OrderDependency: 10 AnySetup *LamSpeed
+*DefaultLamSpeed: 20
+*LamSpeed 8/0.8: "setpagedevice"
+*LamSpeed 9/0.9: "setpagedevice"
+*LamSpeed 10/1.0: "setpagedevice"
+*LamSpeed 11/1.1: "setpagedevice"
+*LamSpeed 12/1.2: "setpagedevice"
+*LamSpeed 13/1.3: "setpagedevice"
+*LamSpeed 14/1.4: "setpagedevice"
+*LamSpeed 15/1.5: "setpagedevice"
+*LamSpeed 16/1.6: "setpagedevice"
+*LamSpeed 17/1.7: "setpagedevice"
+*LamSpeed 18/1.8: "setpagedevice"
+*LamSpeed 19/1.9: "setpagedevice"
+*LamSpeed 20/2.0: "setpagedevice"
+*LamSpeed 21/2.1: "setpagedevice"
+*LamSpeed 22/2.2: "setpagedevice"
+*LamSpeed 23/2.3: "setpagedevice"
+*LamSpeed 24/2.4: "setpagedevice"
+*LamSpeed 25/2.5: "setpagedevice"
+*LamSpeed 26/2.6: "setpagedevice"
+*LamSpeed 27/2.7: "setpagedevice"
+*LamSpeed 28/2.8: "setpagedevice"
+*LamSpeed 29/2.9: "setpagedevice"
+*LamSpeed 30/3.0: "setpagedevice"
+*LamSpeed 31/3.1: "setpagedevice"
+*LamSpeed 32/3.2: "setpagedevice"
+*LamSpeed 33/3.3: "setpagedevice"
+*LamSpeed 34/3.4: "setpagedevice"
+*LamSpeed 35/3.5: "setpagedevice"
+*LamSpeed 36/3.6: "setpagedevice"
+*LamSpeed 37/3.7: "setpagedevice"
+*LamSpeed 38/3.8: "setpagedevice"
+*LamSpeed 39/3.9: "setpagedevice"
+*LamSpeed 40/4.0: "setpagedevice"
+*LamSpeed 41/4.1: "setpagedevice"
+*LamSpeed 42/4.2: "setpagedevice"
+*LamSpeed 43/4.3: "setpagedevice"
+*LamSpeed 44/4.4: "setpagedevice"
+*LamSpeed 45/4.5: "setpagedevice"
+*LamSpeed 46/4.6: "setpagedevice"
+*LamSpeed 47/4.7: "setpagedevice"
+*LamSpeed 48/4.8: "setpagedevice"
+*LamSpeed 49/4.9: "setpagedevice"
+*LamSpeed 50/5.0: "setpagedevice"
+*LamSpeed 51/5.1: "setpagedevice"
+*LamSpeed 52/5.2: "setpagedevice"
+*LamSpeed 53/5.3: "setpagedevice"
+*LamSpeed 54/5.4: "setpagedevice"
+*LamSpeed 55/5.5: "setpagedevice"
+*CloseUI: *LamSpeed
+
+*OpenUI *LamSide/Lamination Side: PickOne
+*OrderDependency: 10 AnySetup *LamSide
+*DefaultLamSide: None
+*LamSide None/None: "setpagedevice"
+*LamSide FrontSide/Front: "setpagedevice"
+*LamSide BackSide/Back: "setpagedevice"
+*LamSide BothSides/Both: "setpagedevice"
+*LamSide OppositeSides/Opposite: "setpagedevice"
+*CloseUI: *LamSide
+
+*OpenUI *LamType1/Cartridge 1: PickOne
+*OrderDependency: 10 AnySetup *LamType1
+*DefaultLamType1: None
+*LamType1 None/None: "setpagedevice"
+*LamType1 ClearFilm/Clear Film: "setpagedevice"
+*LamType1 RegisteredFilm/Registered Film: "setpagedevice"
+*LamType1 PolyGuard_06/0.6 Polyguard: "setpagedevice"
+*LamType1 PolyGuard_10/1.0 Polyguard: "setpagedevice"
+*LamType1 PolyGuardAltPatch/Polyguard Alternating Patch: "setpagedevice"
+*LamType1 HolographicFilm/Holographic Film: "setpagedevice"
+*CloseUI: *LamType1
+
+*OpenUI *LamTransferTemp1/Transfer Temp (Celsius): PickOne
+*OrderDependency: 10 AnySetup *LamTransferTemp1
+*DefaultLamTransferTemp1: 1300
+*LamTransferTemp1 500/50: "setpagedevice"
+*LamTransferTemp1 510/51: "setpagedevice"
+*LamTransferTemp1 520/52: "setpagedevice"
+*LamTransferTemp1 530/53: "setpagedevice"
+*LamTransferTemp1 540/54: "setpagedevice"
+*LamTransferTemp1 550/55: "setpagedevice"
+*LamTransferTemp1 560/56: "setpagedevice"
+*LamTransferTemp1 570/57: "setpagedevice"
+*LamTransferTemp1 580/58: "setpagedevice"
+*LamTransferTemp1 590/59: "setpagedevice"
+*LamTransferTemp1 600/60: "setpagedevice"
+*LamTransferTemp1 610/61: "setpagedevice"
+*LamTransferTemp1 620/62: "setpagedevice"
+*LamTransferTemp1 630/63: "setpagedevice"
+*LamTransferTemp1 640/64: "setpagedevice"
+*LamTransferTemp1 650/65: "setpagedevice"
+*LamTransferTemp1 660/66: "setpagedevice"
+*LamTransferTemp1 670/67: "setpagedevice"
+*LamTransferTemp1 680/68: "setpagedevice"
+*LamTransferTemp1 690/69: "setpagedevice"
+*LamTransferTemp1 700/70: "setpagedevice"
+*LamTransferTemp1 710/71: "setpagedevice"
+*LamTransferTemp1 720/72: "setpagedevice"
+*LamTransferTemp1 730/73: "setpagedevice"
+*LamTransferTemp1 740/74: "setpagedevice"
+*LamTransferTemp1 750/75: "setpagedevice"
+*LamTransferTemp1 760/76: "setpagedevice"
+*LamTransferTemp1 770/77: "setpagedevice"
+*LamTransferTemp1 780/78: "setpagedevice"
+*LamTransferTemp1 790/79: "setpagedevice"
+*LamTransferTemp1 800/80: "setpagedevice"
+*LamTransferTemp1 810/81: "setpagedevice"
+*LamTransferTemp1 820/82: "setpagedevice"
+*LamTransferTemp1 830/83: "setpagedevice"
+*LamTransferTemp1 840/84: "setpagedevice"
+*LamTransferTemp1 850/85: "setpagedevice"
+*LamTransferTemp1 860/86: "setpagedevice"
+*LamTransferTemp1 870/87: "setpagedevice"
+*LamTransferTemp1 880/88: "setpagedevice"
+*LamTransferTemp1 890/89: "setpagedevice"
+*LamTransferTemp1 900/90: "setpagedevice"
+*LamTransferTemp1 910/91: "setpagedevice"
+*LamTransferTemp1 920/92: "setpagedevice"
+*LamTransferTemp1 930/93: "setpagedevice"
+*LamTransferTemp1 940/94: "setpagedevice"
+*LamTransferTemp1 950/95: "setpagedevice"
+*LamTransferTemp1 960/96: "setpagedevice"
+*LamTransferTemp1 970/97: "setpagedevice"
+*LamTransferTemp1 980/98: "setpagedevice"
+*LamTransferTemp1 990/99: "setpagedevice"
+*LamTransferTemp1 1000/100: "setpagedevice"
+*LamTransferTemp1 1010/101: "setpagedevice"
+*LamTransferTemp1 1020/102: "setpagedevice"
+*LamTransferTemp1 1030/103: "setpagedevice"
+*LamTransferTemp1 1040/104: "setpagedevice"
+*LamTransferTemp1 1050/105: "setpagedevice"
+*LamTransferTemp1 1060/106: "setpagedevice"
+*LamTransferTemp1 1070/107: "setpagedevice"
+*LamTransferTemp1 1080/108: "setpagedevice"
+*LamTransferTemp1 1090/109: "setpagedevice"
+*LamTransferTemp1 1100/110: "setpagedevice"
+*LamTransferTemp1 1110/111: "setpagedevice"
+*LamTransferTemp1 1120/112: "setpagedevice"
+*LamTransferTemp1 1130/113: "setpagedevice"
+*LamTransferTemp1 1140/114: "setpagedevice"
+*LamTransferTemp1 1150/115: "setpagedevice"
+*LamTransferTemp1 1160/116: "setpagedevice"
+*LamTransferTemp1 1170/117: "setpagedevice"
+*LamTransferTemp1 1180/118: "setpagedevice"
+*LamTransferTemp1 1190/119: "setpagedevice"
+*LamTransferTemp1 1200/120: "setpagedevice"
+*LamTransferTemp1 1210/121: "setpagedevice"
+*LamTransferTemp1 1220/122: "setpagedevice"
+*LamTransferTemp1 1230/123: "setpagedevice"
+*LamTransferTemp1 1240/124: "setpagedevice"
+*LamTransferTemp1 1250/125: "setpagedevice"
+*LamTransferTemp1 1260/126: "setpagedevice"
+*LamTransferTemp1 1270/127: "setpagedevice"
+*LamTransferTemp1 1280/128: "setpagedevice"
+*LamTransferTemp1 1290/129: "setpagedevice"
+*LamTransferTemp1 1300/130: "setpagedevice"
+*LamTransferTemp1 1310/131: "setpagedevice"
+*LamTransferTemp1 1320/132: "setpagedevice"
+*LamTransferTemp1 1330/133: "setpagedevice"
+*LamTransferTemp1 1340/134: "setpagedevice"
+*LamTransferTemp1 1350/135: "setpagedevice"
+*LamTransferTemp1 1360/136: "setpagedevice"
+*LamTransferTemp1 1370/137: "setpagedevice"
+*LamTransferTemp1 1380/138: "setpagedevice"
+*LamTransferTemp1 1390/139: "setpagedevice"
+*LamTransferTemp1 1400/140: "setpagedevice"
+*LamTransferTemp1 1410/141: "setpagedevice"
+*LamTransferTemp1 1420/142: "setpagedevice"
+*LamTransferTemp1 1430/143: "setpagedevice"
+*LamTransferTemp1 1440/144: "setpagedevice"
+*LamTransferTemp1 1450/145: "setpagedevice"
+*LamTransferTemp1 1460/146: "setpagedevice"
+*LamTransferTemp1 1470/147: "setpagedevice"
+*LamTransferTemp1 1480/148: "setpagedevice"
+*LamTransferTemp1 1490/149: "setpagedevice"
+*LamTransferTemp1 1500/150: "setpagedevice"
+*LamTransferTemp1 1510/151: "setpagedevice"
+*LamTransferTemp1 1520/152: "setpagedevice"
+*LamTransferTemp1 1530/153: "setpagedevice"
+*LamTransferTemp1 1540/154: "setpagedevice"
+*LamTransferTemp1 1550/155: "setpagedevice"
+*LamTransferTemp1 1560/156: "setpagedevice"
+*LamTransferTemp1 1570/157: "setpagedevice"
+*LamTransferTemp1 1580/158: "setpagedevice"
+*LamTransferTemp1 1590/159: "setpagedevice"
+*LamTransferTemp1 1600/160: "setpagedevice"
+*LamTransferTemp1 1610/161: "setpagedevice"
+*LamTransferTemp1 1620/162: "setpagedevice"
+*LamTransferTemp1 1630/163: "setpagedevice"
+*LamTransferTemp1 1640/164: "setpagedevice"
+*LamTransferTemp1 1650/165: "setpagedevice"
+*LamTransferTemp1 1660/166: "setpagedevice"
+*LamTransferTemp1 1670/167: "setpagedevice"
+*LamTransferTemp1 1680/168: "setpagedevice"
+*LamTransferTemp1 1690/169: "setpagedevice"
+*LamTransferTemp1 1700/170: "setpagedevice"
+*CloseUI: *LamTransferTemp1
+
+*OpenUI *LamType2/Cartridge 2: PickOne
+*OrderDependency: 10 AnySetup *LamType2
+*DefaultLamType2: None
+*LamType2 None/None: "setpagedevice"
+*LamType2 ClearFilm/Clear Film: "setpagedevice"
+*LamType2 RegisteredFilm/Registered Film: "setpagedevice"
+*LamType2 PolyGuard_06/0.6 Polyguard: "setpagedevice"
+*LamType2 PolyGuard_10/1.0 Polyguard: "setpagedevice"
+*LamType2 PolyGuardAltPatch/Polyguard Alternating Patch: "setpagedevice"
+*LamType2 HolographicFilm/Holographic Film: "setpagedevice"
+*CloseUI: *LamType2
+
+*OpenUI *LamTransferTemp2/Transfer Temp (Celsius): PickOne
+*OrderDependency: 10 AnySetup *LamTransferTemp2
+*DefaultLamTransferTemp2: 1500
+*LamTransferTemp2 500/50: "setpagedevice"
+*LamTransferTemp2 510/51: "setpagedevice"
+*LamTransferTemp2 520/52: "setpagedevice"
+*LamTransferTemp2 530/53: "setpagedevice"
+*LamTransferTemp2 540/54: "setpagedevice"
+*LamTransferTemp2 550/55: "setpagedevice"
+*LamTransferTemp2 560/56: "setpagedevice"
+*LamTransferTemp2 570/57: "setpagedevice"
+*LamTransferTemp2 580/58: "setpagedevice"
+*LamTransferTemp2 590/59: "setpagedevice"
+*LamTransferTemp2 600/60: "setpagedevice"
+*LamTransferTemp2 610/61: "setpagedevice"
+*LamTransferTemp2 620/62: "setpagedevice"
+*LamTransferTemp2 630/63: "setpagedevice"
+*LamTransferTemp2 640/64: "setpagedevice"
+*LamTransferTemp2 650/65: "setpagedevice"
+*LamTransferTemp2 660/66: "setpagedevice"
+*LamTransferTemp2 670/67: "setpagedevice"
+*LamTransferTemp2 680/68: "setpagedevice"
+*LamTransferTemp2 690/69: "setpagedevice"
+*LamTransferTemp2 700/70: "setpagedevice"
+*LamTransferTemp2 710/71: "setpagedevice"
+*LamTransferTemp2 720/72: "setpagedevice"
+*LamTransferTemp2 730/73: "setpagedevice"
+*LamTransferTemp2 740/74: "setpagedevice"
+*LamTransferTemp2 750/75: "setpagedevice"
+*LamTransferTemp2 760/76: "setpagedevice"
+*LamTransferTemp2 770/77: "setpagedevice"
+*LamTransferTemp2 780/78: "setpagedevice"
+*LamTransferTemp2 790/79: "setpagedevice"
+*LamTransferTemp2 800/80: "setpagedevice"
+*LamTransferTemp2 810/81: "setpagedevice"
+*LamTransferTemp2 820/82: "setpagedevice"
+*LamTransferTemp2 830/83: "setpagedevice"
+*LamTransferTemp2 840/84: "setpagedevice"
+*LamTransferTemp2 850/85: "setpagedevice"
+*LamTransferTemp2 860/86: "setpagedevice"
+*LamTransferTemp2 870/87: "setpagedevice"
+*LamTransferTemp2 880/88: "setpagedevice"
+*LamTransferTemp2 890/89: "setpagedevice"
+*LamTransferTemp2 900/90: "setpagedevice"
+*LamTransferTemp2 910/91: "setpagedevice"
+*LamTransferTemp2 920/92: "setpagedevice"
+*LamTransferTemp2 930/93: "setpagedevice"
+*LamTransferTemp2 940/94: "setpagedevice"
+*LamTransferTemp2 950/95: "setpagedevice"
+*LamTransferTemp2 960/96: "setpagedevice"
+*LamTransferTemp2 970/97: "setpagedevice"
+*LamTransferTemp2 980/98: "setpagedevice"
+*LamTransferTemp2 990/99: "setpagedevice"
+*LamTransferTemp2 1000/100: "setpagedevice"
+*LamTransferTemp2 1010/101: "setpagedevice"
+*LamTransferTemp2 1020/102: "setpagedevice"
+*LamTransferTemp2 1030/103: "setpagedevice"
+*LamTransferTemp2 1040/104: "setpagedevice"
+*LamTransferTemp2 1050/105: "setpagedevice"
+*LamTransferTemp2 1060/106: "setpagedevice"
+*LamTransferTemp2 1070/107: "setpagedevice"
+*LamTransferTemp2 1080/108: "setpagedevice"
+*LamTransferTemp2 1090/109: "setpagedevice"
+*LamTransferTemp2 1100/110: "setpagedevice"
+*LamTransferTemp2 1110/111: "setpagedevice"
+*LamTransferTemp2 1120/112: "setpagedevice"
+*LamTransferTemp2 1130/113: "setpagedevice"
+*LamTransferTemp2 1140/114: "setpagedevice"
+*LamTransferTemp2 1150/115: "setpagedevice"
+*LamTransferTemp2 1160/116: "setpagedevice"
+*LamTransferTemp2 1170/117: "setpagedevice"
+*LamTransferTemp2 1180/118: "setpagedevice"
+*LamTransferTemp2 1190/119: "setpagedevice"
+*LamTransferTemp2 1200/120: "setpagedevice"
+*LamTransferTemp2 1210/121: "setpagedevice"
+*LamTransferTemp2 1220/122: "setpagedevice"
+*LamTransferTemp2 1230/123: "setpagedevice"
+*LamTransferTemp2 1240/124: "setpagedevice"
+*LamTransferTemp2 1250/125: "setpagedevice"
+*LamTransferTemp2 1260/126: "setpagedevice"
+*LamTransferTemp2 1270/127: "setpagedevice"
+*LamTransferTemp2 1280/128: "setpagedevice"
+*LamTransferTemp2 1290/129: "setpagedevice"
+*LamTransferTemp2 1300/130: "setpagedevice"
+*LamTransferTemp2 1310/131: "setpagedevice"
+*LamTransferTemp2 1320/132: "setpagedevice"
+*LamTransferTemp2 1330/133: "setpagedevice"
+*LamTransferTemp2 1340/134: "setpagedevice"
+*LamTransferTemp2 1350/135: "setpagedevice"
+*LamTransferTemp2 1360/136: "setpagedevice"
+*LamTransferTemp2 1370/137: "setpagedevice"
+*LamTransferTemp2 1380/138: "setpagedevice"
+*LamTransferTemp2 1390/139: "setpagedevice"
+*LamTransferTemp2 1400/140: "setpagedevice"
+*LamTransferTemp2 1410/141: "setpagedevice"
+*LamTransferTemp2 1420/142: "setpagedevice"
+*LamTransferTemp2 1430/143: "setpagedevice"
+*LamTransferTemp2 1440/144: "setpagedevice"
+*LamTransferTemp2 1450/145: "setpagedevice"
+*LamTransferTemp2 1460/146: "setpagedevice"
+*LamTransferTemp2 1470/147: "setpagedevice"
+*LamTransferTemp2 1480/148: "setpagedevice"
+*LamTransferTemp2 1490/149: "setpagedevice"
+*LamTransferTemp2 1500/150: "setpagedevice"
+*LamTransferTemp2 1510/151: "setpagedevice"
+*LamTransferTemp2 1520/152: "setpagedevice"
+*LamTransferTemp2 1530/153: "setpagedevice"
+*LamTransferTemp2 1540/154: "setpagedevice"
+*LamTransferTemp2 1550/155: "setpagedevice"
+*LamTransferTemp2 1560/156: "setpagedevice"
+*LamTransferTemp2 1570/157: "setpagedevice"
+*LamTransferTemp2 1580/158: "setpagedevice"
+*LamTransferTemp2 1590/159: "setpagedevice"
+*LamTransferTemp2 1600/160: "setpagedevice"
+*LamTransferTemp2 1610/161: "setpagedevice"
+*LamTransferTemp2 1620/162: "setpagedevice"
+*LamTransferTemp2 1630/163: "setpagedevice"
+*LamTransferTemp2 1640/164: "setpagedevice"
+*LamTransferTemp2 1650/165: "setpagedevice"
+*LamTransferTemp2 1660/166: "setpagedevice"
+*LamTransferTemp2 1670/167: "setpagedevice"
+*LamTransferTemp2 1680/168: "setpagedevice"
+*LamTransferTemp2 1690/169: "setpagedevice"
+*LamTransferTemp2 1700/170: "setpagedevice"
+*CloseUI: *LamTransferTemp2
+
+*CloseGroup: LaminationOptions
+
+*%==========================================================
+
+*OpenGroup: MagneticEncoding/Global Magnetic Encoding Options
+
+*OpenUI *Coercivity/Coercivity: PickOne
+*OrderDependency: 20 AnySetup *Coercivity
+*DefaultCoercivity: 2750
+*Coercivity 4000/Super (4000 Oe): "setpagedevice"
+*Coercivity 2750/High (2750 Oe): "setpagedevice"
+*Coercivity 600/Medium (600 Oe): "setpagedevice"
+*Coercivity 300/Low (300 Oe): "setpagedevice"
+*CloseUI: *Coercivity
+
+*OpenUI *ShiftDataLeft/Shift Left Data: Boolean
+*OrderDependency: 30 AnySetup *ShiftDataLeft
+*DefaultShiftDataLeft: False
+*ShiftDataLeft True/Yes: "setpagedevice"
+*ShiftDataLeft False/No: "setpagedevice"
+*CloseUI: *ShiftDataLeft
+
+*CloseGroup: MagneticEncoding
+
+*%----------------------------------------------------------
+*OpenGroup: MagneticTrackEncodingOptions/Magnetic Track Encoding Options
+
+*OpenUI *Mag1TrackMode/Track 1 Encoding Mode: PickOne
+*OrderDependency: 10 AnySetup *Mag1TrackMode
+*DefaultMag1TrackMode: ISO
+*Mag1TrackMode ISO/ISO: "setpagedevice"
+*Mag1TrackMode other/Other: "setpagedevice"
+*Mag1TrackMode JIS/JISII: "setpagedevice"
+*Mag1TrackMode Raw/Raw: "setpagedevice"
+*CloseUI: *Mag1TrackMode
+
+*OpenUI *Mag1LRCGeneration/LRC Generation: PickOne
+*OrderDependency: 10 AnySetup *Mag1LRCGeneration
+*DefaultMag1LRCGeneration: Even
+*Mag1LRCGeneration None/None: "setpagedevice"
+*Mag1LRCGeneration Even/Even Parity: "setpagedevice"
+*Mag1LRCGeneration Odd/Odd Parity: "setpagedevice"
+*CloseUI: *Mag1LRCGeneration
+
+*OpenUI *Mag1CharSize/Character Size: PickOne
+*OrderDependency: 10 AnySetup *Mag1CharSize
+*DefaultMag1CharSize: 7
+*Mag1CharSize 4/4 Bits: "setpagedevice"
+*Mag1CharSize 5/5 Bits: "setpagedevice"
+*Mag1CharSize 7/7 Bits: "setpagedevice"
+*Mag1CharSize 8/8 Bits: "setpagedevice"
+*CloseUI: *Mag1CharSize
+
+*OpenUI *Mag1Parity/Parity: PickOne
+*OrderDependency: 10 AnySetup *Mag1Parity
+*DefaultMag1Parity: Odd
+*Mag1Parity None/None: "setpagedevice"
+*Mag1Parity Even/Even Parity: "setpagedevice"
+*Mag1Parity Odd/Odd Parity: "setpagedevice"
+*CloseUI: *Mag1Parity
+
+*OpenUI *Mag1ASCIIOffset/ASCII Offset: PickOne
+*OrderDependency: 10 AnySetup *Mag1ASCIIOffset
+*DefaultMag1ASCIIOffset: Space
+*Mag1ASCIIOffset Null/Null: "setpagedevice"
+*Mag1ASCIIOffset Space/Space: "setpagedevice"
+*Mag1ASCIIOffset Zero/Zero: "setpagedevice"
+*CloseUI: *Mag1ASCIIOffset
+
+*OpenUI *Mag1BitDensity/Bit Density: PickOne
+*OrderDependency: 10 AnySetup *Mag1BitDensity
+*DefaultMag1BitDensity: 210
+*Mag1BitDensity 75/75: "setpagedevice"
+*Mag1BitDensity 128/128: "setpagedevice"
+*Mag1BitDensity 210/210: "setpagedevice"
+*CloseUI: *Mag1BitDensity
+
+*OpenUI *Mag1ReverseCharBits/Reverse Char Bits Order: Boolean
+*OrderDependency: 10 AnySetup *Mag1ReverseCharBits
+*DefaultMag1ReverseCharBits: False
+*Mag1ReverseCharBits True/Yes: "setpagedevice"
+*Mag1ReverseCharBits False/No: "setpagedevice"
+*CloseUI: *Mag1ReverseCharBits
+
+*OpenUI *Mag1AddLeadingZeros/Add Leading Zeros: Boolean
+*OrderDependency: 10 AnySetup *Mag1AddLeadingZeros
+*DefaultMag1AddLeadingZeros: False
+*Mag1AddLeadingZeros True/Yes: "setpagedevice"
+*Mag1AddLeadingZeros False/No: "setpagedevice"
+*CloseUI: *Mag1AddLeadingZeros
+
+*OpenUI *Mag2TrackMode/Track 2 Encoding Mode: PickOne
+*OrderDependency: 10 AnySetup *Mag2TrackMode
+*DefaultMag2TrackMode: ISO
+*Mag2TrackMode ISO/ISO: "setpagedevice"
+*Mag2TrackMode other/Other: "setpagedevice"
+*Mag2TrackMode JIS/JISII: "setpagedevice"
+*Mag2TrackMode Raw/Raw: "setpagedevice"
+*CloseUI: *Mag2TrackMode
+
+*OpenUI *Mag2LRCGeneration/LRC Generation: PickOne
+*OrderDependency: 10 AnySetup *Mag2LRCGeneration
+*DefaultMag2LRCGeneration: Even
+*Mag2LRCGeneration None/None: "setpagedevice"
+*Mag2LRCGeneration Even/Even Parity: "setpagedevice"
+*Mag2LRCGeneration Odd/Odd Parity: "setpagedevice"
+*CloseUI: *Mag2LRCGeneration
+
+*OpenUI *Mag2CharSize/Character Size: PickOne
+*OrderDependency: 10 AnySetup *Mag2CharSize
+*DefaultMag2CharSize: 5
+*Mag2CharSize 4/4 Bits: "setpagedevice"
+*Mag2CharSize 5/5 Bits: "setpagedevice"
+*Mag2CharSize 7/7 Bits: "setpagedevice"
+*Mag2CharSize 8/8 Bits: "setpagedevice"
+*CloseUI: *Mag2CharSize
+
+*OpenUI *Mag2Parity/Parity: PickOne
+*OrderDependency: 10 AnySetup *Mag2Parity
+*DefaultMag2Parity: Odd
+*Mag2Parity None/None: "setpagedevice"
+*Mag2Parity Even/Even Parity: "setpagedevice"
+*Mag2Parity Odd/Odd Parity: "setpagedevice"
+*CloseUI: *Mag2Parity
+
+*OpenUI *Mag2ASCIIOffset/ASCII Offset: PickOne
+*OrderDependency: 10 AnySetup *Mag2ASCIIOffset
+*DefaultMag2ASCIIOffset: Zero
+*Mag2ASCIIOffset Null/Null: "setpagedevice"
+*Mag2ASCIIOffset Space/Space: "setpagedevice"
+*Mag2ASCIIOffset Zero/Zero: "setpagedevice"
+*CloseUI: *Mag2ASCIIOffset
+
+*OpenUI *Mag2BitDensity/Bit Density: PickOne
+*OrderDependency: 10 AnySetup *Mag2BitDensity
+*DefaultMag2BitDensity: 75
+*Mag2BitDensity 75/75: "setpagedevice"
+*Mag2BitDensity 128/128: "setpagedevice"
+*Mag2BitDensity 210/210: "setpagedevice"
+*CloseUI: *Mag2BitDensity
+
+*OpenUI *Mag2ReverseCharBits/Reverse Char Bits Order: Boolean
+*OrderDependency: 10 AnySetup *Mag2ReverseCharBits
+*DefaultMag2ReverseCharBits: False
+*Mag2ReverseCharBits True/Yes: "setpagedevice"
+*Mag2ReverseCharBits False/No: "setpagedevice"
+*CloseUI: *Mag2ReverseCharBits
+
+*OpenUI *Mag2AddLeadingZeros/Add Leading Zeros: Boolean
+*OrderDependency: 10 AnySetup *Mag2AddLeadingZeros
+*DefaultMag2AddLeadingZeros: False
+*Mag2AddLeadingZeros True/Yes: "setpagedevice"
+*Mag2AddLeadingZeros False/No: "setpagedevice"
+*CloseUI: *Mag2AddLeadingZeros
+
+*OpenUI *Mag3TrackMode/Track 3 Encoding Mode: PickOne
+*OrderDependency: 10 AnySetup *Mag3TrackMode
+*DefaultMag3TrackMode: ISO
+*Mag3TrackMode ISO/ISO: "setpagedevice"
+*Mag3TrackMode other/Other: "setpagedevice"
+*Mag3TrackMode JIS/JISII: "setpagedevice"
+*Mag3TrackMode Raw/Raw: "setpagedevice"
+*CloseUI: *Mag3TrackMode
+
+*OpenUI *Mag3LRCGeneration/LRC Generation: PickOne
+*OrderDependency: 10 AnySetup *Mag3LRCGeneration
+*DefaultMag3LRCGeneration: Even
+*Mag3LRCGeneration None/None: "setpagedevice"
+*Mag3LRCGeneration Even/Even Parity: "setpagedevice"
+*Mag3LRCGeneration Odd/Odd Parity: "setpagedevice"
+*CloseUI: *Mag3LRCGeneration
+
+*OpenUI *Mag3CharSize/Character Size: PickOne
+*OrderDependency: 10 AnySetup *Mag3CharSize
+*DefaultMag3CharSize: 5
+*Mag3CharSize 4/4 Bits: "setpagedevice"
+*Mag3CharSize 5/5 Bits: "setpagedevice"
+*Mag3CharSize 7/7 Bits: "setpagedevice"
+*Mag3CharSize 8/8 Bits: "setpagedevice"
+*CloseUI: *Mag3CharSize
+
+*OpenUI *Mag3Parity/Parity: PickOne
+*OrderDependency: 10 AnySetup *Mag3Parity
+*DefaultMag3Parity: Odd
+*Mag3Parity None/None: "setpagedevice"
+*Mag3Parity Even/Even Parity: "setpagedevice"
+*Mag3Parity Odd/Odd Parity: "setpagedevice"
+*CloseUI: *Mag3Parity
+
+*OpenUI *Mag3ASCIIOffset/ASCII Offset: PickOne
+*OrderDependency: 10 AnySetup *Mag3ASCIIOffset
+*DefaultMag3ASCIIOffset: Zero
+*Mag3ASCIIOffset Null/Null: "setpagedevice"
+*Mag3ASCIIOffset Space/Space: "setpagedevice"
+*Mag3ASCIIOffset Zero/Zero: "setpagedevice"
+*CloseUI: *Mag3ASCIIOffset
+
+*OpenUI *Mag3BitDensity/Bit Density: PickOne
+*OrderDependency: 10 AnySetup *Mag3BitDensity
+*DefaultMag3BitDensity: 210
+*Mag3BitDensity 75/75: "setpagedevice"
+*Mag3BitDensity 128/128: "setpagedevice"
+*Mag3BitDensity 210/210: "setpagedevice"
+*CloseUI: *Mag3BitDensity
+
+*OpenUI *Mag3ReverseCharBits/Reverse Char Bits Order: Boolean
+*OrderDependency: 10 AnySetup *Mag3ReverseCharBits
+*DefaultMag3ReverseCharBits: False
+*Mag3ReverseCharBits True/Yes: "setpagedevice"
+*Mag3ReverseCharBits False/No: "setpagedevice"
+*CloseUI: *Mag3ReverseCharBits
+
+*OpenUI *Mag3AddLeadingZeros/Add Leading Zeros: Boolean
+*OrderDependency: 10 AnySetup *Mag3AddLeadingZeros
+*DefaultMag3AddLeadingZeros: False
+*Mag3AddLeadingZeros True/Yes: "setpagedevice"
+*Mag3AddLeadingZeros False/No: "setpagedevice"
+*CloseUI: *Mag3AddLeadingZeros
+
+*CloseGroup: MagneticTrackEncodingOptions
+
+*%==========================================================
+*% Exclusionary Areas
+
+*ExclusionAreaFrontEnable1: False
+*ExclusionAreaFrontXOrigin1: 0
+*ExclusionAreaFrontYOrigin1: 0
+*ExclusionAreaFrontXLength1: 0
+*ExclusionAreaFrontYLength1: 0
+*ExclusionAreaFrontEnable2: False
+*ExclusionAreaFrontXOrigin2: 0
+*ExclusionAreaFrontYOrigin2: 0
+*ExclusionAreaFrontXLength2: 0
+*ExclusionAreaFrontYLength2: 0
+*ExclusionAreaFrontEnable3: False
+*ExclusionAreaFrontXOrigin3: 0
+*ExclusionAreaFrontYOrigin3: 0
+*ExclusionAreaFrontXLength3: 0
+*ExclusionAreaFrontYLength3: 0
+*ExclusionAreaFrontEnable4: False
+*ExclusionAreaFrontXOrigin4: 0
+*ExclusionAreaFrontYOrigin4: 0
+*ExclusionAreaFrontXLength4: 0
+*ExclusionAreaFrontYLength4: 0
+*ExclusionAreaFrontEnable5: False
+*ExclusionAreaFrontXOrigin5: 0
+*ExclusionAreaFrontYOrigin5: 0
+*ExclusionAreaFrontXLength5: 0
+*ExclusionAreaFrontYLength5: 0
+*ExclusionAreaBackEnable1: False
+*ExclusionAreaBackXOrigin1: 0
+*ExclusionAreaBackYOrigin1: 0
+*ExclusionAreaBackXLength1: 0
+*ExclusionAreaBackYLength1: 0
+*ExclusionAreaBackEnable2: False
+*ExclusionAreaBackXOrigin2: 0
+*ExclusionAreaBackYOrigin2: 0
+*ExclusionAreaBackXLength2: 0
+*ExclusionAreaBackYLength2: 0
+*ExclusionAreaBackEnable3: False
+*ExclusionAreaBackXOrigin3: 0
+*ExclusionAreaBackYOrigin3: 0
+*ExclusionAreaBackXLength3: 0
+*ExclusionAreaBackYLength3: 0
+*ExclusionAreaBackEnable4: False
+*ExclusionAreaBackXOrigin4: 0
+*ExclusionAreaBackYOrigin4: 0
+*ExclusionAreaBackXLength4: 0
+*ExclusionAreaBackYLength4: 0
+*ExclusionAreaBackEnable5: False
+*ExclusionAreaBackXOrigin5: 0
+*ExclusionAreaBackYOrigin5: 0
+*ExclusionAreaBackXLength5: 0
+*ExclusionAreaBackYLength5: 0
+
+*ExclusionKFrontEnable1: False
+*ExclusionKFrontXOrigin1: 0
+*ExclusionKFrontYOrigin1: 0
+*ExclusionKFrontXLength1: 0
+*ExclusionKFrontYLength1: 0
+*ExclusionKFrontEnable2: False
+*ExclusionKFrontXOrigin2: 0
+*ExclusionKFrontYOrigin2: 0
+*ExclusionKFrontXLength2: 0
+*ExclusionKFrontYLength2: 0
+*ExclusionKFrontEnable3: False
+*ExclusionKFrontXOrigin3: 0
+*ExclusionKFrontYOrigin3: 0
+*ExclusionKFrontXLength3: 0
+*ExclusionKFrontYLength3: 0
+*ExclusionKFrontEnable4: False
+*ExclusionKFrontXOrigin4: 0
+*ExclusionKFrontYOrigin4: 0
+*ExclusionKFrontXLength4: 0
+*ExclusionKFrontYLength4: 0
+*ExclusionKFrontEnable5: False
+*ExclusionKFrontXOrigin5: 0
+*ExclusionKFrontYOrigin5: 0
+*ExclusionKFrontXLength5: 0
+*ExclusionKFrontYLength5: 0
+*ExclusionKBackEnable1: False
+*ExclusionKBackXOrigin1: 0
+*ExclusionKBackYOrigin1: 0
+*ExclusionKBackXLength1: 0
+*ExclusionKBackYLength1: 0
+*ExclusionKBackEnable2: False
+*ExclusionKBackXOrigin2: 0
+*ExclusionKBackYOrigin2: 0
+*ExclusionKBackXLength2: 0
+*ExclusionKBackYLength2: 0
+*ExclusionKBackEnable3: False
+*ExclusionKBackXOrigin3: 0
+*ExclusionKBackYOrigin3: 0
+*ExclusionKBackXLength3: 0
+*ExclusionKBackYLength3: 0
+*ExclusionKBackEnable4: False
+*ExclusionKBackXOrigin4: 0
+*ExclusionKBackYOrigin4: 0
+*ExclusionKBackXLength4: 0
+*ExclusionKBackYLength4: 0
+*ExclusionKBackEnable5: False
+*ExclusionKBackXOrigin5: 0
+*ExclusionKBackYOrigin5: 0
+*ExclusionKBackXLength5: 0
+*ExclusionKBackYLength5: 0
+
+*%==========================================================
+*% Predefined exclusionary Areas
+*CR80MagStripeISOXStart:  "420"
+*CR80MagStripeISOYStart:  "0"
+*CR80MagStripeISOXLength: "175"
+*CR80MagStripeISOYLength: "1008"
+*CR80MagStripeJISXStart:  "490"
+*CR80MagStripeJISYStart:  "0"
+*CR80MagStripeJISXLength: "85"
+*CR80MagStripeJISYLength: "1008"
+*CR79MagStripeISOXStart:  "420"
+*CR79MagStripeISOYStart:  "0"
+*CR79MagStripeISOXLength: "175"
+*CR79MagStripeISOYLength: "1008"
+*CR79MagStripeJISXStart:  "490"
+*CR79MagStripeJISYStart:  "0"
+*CR79MagStripeJISXLength: "85"
+*CR79MagStripeJISYLength: "1008"
+*CR80SignatureXStart:  "280"
+*CR80SignatureYStart:  "0"
+*CR80SignatureXLength: "130"
+*CR80SignatureYLength: "1008"
+*CR79SignatureXStart:  "245"
+*CR79SignatureYStart:  "0"
+*CR79SignatureXLength: "130"
+*CR79SignatureYLength: "1008"
+*CR80SmartChipXStart:  "290"
+*CR80SmartChipYStart:  "112"
+*CR80SmartChipXLength: "130"
+*CR80SmartChipYLength: "150"
+*CR79SmartChipXStart:  "245"
+*CR79SmartChipYStart:  "105"
+*CR79SmartChipXLength: "130"
+*CR79SmartChipYLength: "150"
+
+*VeriMarkULPortXStart:  "0"
+*VerimarkULPortYStart:  "0"
+*VeriMarkULPortXLength: "317"
+*VerimarkULPortYLength: "295"
+*VeriMarkURPortXStart:  "317"
+*VerimarkURPortYStart:  "0"
+*VeriMarkURPortXLength: "317"
+*VerimarkURPortYLength: "295"
+*VeriMarkLLPortXStart:  "0"
+*VerimarkLLPortYStart:  "759"
+*VeriMarkLLPortXLength: "317"
+*VerimarkLLPortYLength: "249"
+*VeriMarkLRPortXStart:  "317"
+*VerimarkLRPortYStart:  "759"
+*VeriMarkLRPortXLength: "317"
+*VerimarkLRPortYLength: "249"
+
+*VeriMarkULLandXStart:  "385"
+*VerimarkULLandYStart:  "0"
+*VeriMarkULLandXLength: "249"
+*VerimarkULLandYLength: "317"
+*VeriMarkURLandXStart:  "385"
+*VerimarkURLandYStart:  "691"
+*VeriMarkURLandXLength: "249"
+*VerimarkURLandYLength: "317"
+*VeriMarkLLLandXStart:  "0"
+*VerimarkLLLandYStart:  "0"
+*VeriMarkLLLandXLength: "249"
+*VerimarkLLLandYLength: "317"
+*VeriMarkLRLandXStart:  "0"
+*VerimarkLRLandYStart:  "691"
+*VeriMarkLRLandXLength: "249"
+*VerimarkLRLandYLength: "317"
+
+*HoloMarkULPortXStart:  "0"
+*HoloMarkULPortYStart:  "0"
+*HoloMarkULPortXLength: "272"
+*HoloMarkULPortYLength: "272"
+*HoloMarkURPortXStart:  "362"
+*HoloMarkURPortYStart:  "0"
+*HoloMarkURPortXLength: "272"
+*HoloMarkURPortYLength: "272"
+*HoloMarkLLPortXStart:  "0"
+*HoloMarkLLPortYStart:  "736"
+*HoloMarkLLPortXLength: "272"
+*HoloMarkLLPortYLength: "272"
+*HoloMarkLRPortXStart:  "362"
+*HoloMarkLRPortYStart:  "736"
+*HoloMarkLRPortXLength: "272"
+*HoloMarkLRPortYLength: "272"
+
+*HoloMarkULLandXStart:  "362"
+*HoloMarkULLandYStart:  "0"
+*HoloMarkULLandXLength: "272"
+*HoloMarkULLandYLength: "272"
+*HoloMarkURLandXStart:  "362"
+*HoloMarkURLandYStart:  "736"
+*HoloMarkURLandXLength: "272"
+*HoloMarkURLandYLength: "272"
+*HoloMarkLLLandXStart:  "0"
+*HoloMarkLLLandYStart:  "0"
+*HoloMarkLLLandXLength: "272"
+*HoloMarkLLLandYLength: "272"
+*HoloMarkLRLandXStart:  "0"
+*HoloMarkLRLandYStart:  "736"
+*HoloMarkLRLandXLength: "272"
+*HoloMarkLRLandYLength: "272"
+
+*%==========================================================
+*%Misc
+
+*BlackThreshold_R: "2"
+*BlackThreshold_G: "2"
+*BlackThreshold_B: "2"
+
+*WhiteLevel_R: "253"
+*WhiteLevel_G: "253"
+*WhiteLevel_B: "253"
+
+*Technology: "DirectToCard"
+
+
+*%--------------------------- Constraints Start --------------------------------
+
+*% SplitRibbon
+*UIConstraints: "*SplitRibbon *Ribbon KStandard"
+*UIConstraints: "*SplitRibbon *Ribbon MonoColor"
+*UIConstraints: "*SplitRibbon *Ribbon KO"
+*UIConstraints: "*SplitRibbon *Ribbon BO"
+*UIConstraints: "*SplitRibbon *Ribbon None"
+*UIConstraints: "*SplitRibbon *Ribbon KPremium"
+*UIConstraints: "*SplitRibbon *DisablePrinting true"
+*UIConstraints: "*SplitRibbon *PrintBackOnly true"
+*UIConstraints: "*SplitRibbon *PrintBothSides false"
+
+*% PrintBothSides
+*UIConstraints: "*PrintBothSides *DisablePrinting true"
+*UIConstraints: "*PrintBothSides *PrintBackOnly true"
+
+*% PrintBackOnFront
+*UIConstraints: "*PrintBackOnFront *PrintBothSides false"
+*UIConstraints: "*PrintBackOnFront *DisablePrinting true"
+
+*% PrintBackOnly
+*UIConstraints: "*PrintBackOnly *PrintBothSides true"
+*UIConstraints: "*PrintBackOnly *DisablePrinting true"
+*UIConstraints: "*PrintBackOnly *SplitRibbon true"
+*UIConstraints: "*PrintBackOnly *RotateImageFront true"
+
+*% RotateImageFront
+*UIConstraints: "*RotateImageFront *DisablePrinting true"
+
+*% RotateImageBack
+*UIConstraints: "*RotateImageBack *DisablePrinting true"
+
+*% WriteOnly
+*UIConstraints: "*WriteOnly *Ribbon YMCKO"
+*UIConstraints: "*WriteOnly *Ribbon YMCKO_Half"
+*UIConstraints: "*WriteOnly *Ribbon YMCKOK"
+*UIConstraints: "*WriteOnly *Ribbon YMCKOK_Half"
+*UIConstraints: "*WriteOnly *Ribbon YMCKOKO_Half"
+*UIConstraints: "*WriteOnly *Ribbon KStandard"
+*UIConstraints: "*WriteOnly *Ribbon KPremium"
+*UIConstraints: "*WriteOnly *Ribbon MonoColor"
+*UIConstraints: "*WriteOnly *Ribbon KO"
+*UIConstraints: "*WriteOnly *Ribbon BO"
+*UIConstraints: "*WriteOnly *DisablePrinting true"
+
+*UIConstraints: "*Mag1TrackMode ISO *Mag1LRCGeneration None"
+*UIConstraints: "*Mag1TrackMode ISO *Mag1LRCGeneration Odd"
+*UIConstraints: "*Mag1TrackMode ISO *Mag1CharSize 4"
+*UIConstraints: "*Mag1TrackMode ISO *Mag1CharSize 5"
+*UIConstraints: "*Mag1TrackMode ISO *Mag1Parity None"
+*UIConstraints: "*Mag1TrackMode ISO *Mag1ASCIIOffset Zero"
+*UIConstraints: "*Mag1TrackMode ISO *Mag1BitDensity 75"
+*UIConstraints: "*Mag1TrackMode ISO *Mag1BitDensity 128"
+*UIConstraints: "*Mag1TrackMode ISO *Mag1ReverseCharBits true"
+*UIConstraints: "*Mag1TrackMode ISO *Mag1AddLeadingZeros true"
+*UIConstraints: "*Mag1TrackMode ISO *ShiftDataLeft true"
+
+*UIConstraints: "*Mag2TrackMode ISO *Mag2LRCGeneration None"
+*UIConstraints: "*Mag2TrackMode ISO *Mag2LRCGeneration Odd"
+*UIConstraints: "*Mag2TrackMode ISO *Mag2CharSize 4"
+*UIConstraints: "*Mag2TrackMode ISO *Mag2CharSize 7"
+*UIConstraints: "*Mag2TrackMode ISO *Mag2CharSize 8"
+*UIConstraints: "*Mag2TrackMode ISO *Mag2Parity None"
+*UIConstraints: "*Mag2TrackMode ISO *Mag2Parity Even"
+*UIConstraints: "*Mag2TrackMode ISO *Mag2ASCIIOffset Null"
+*UIConstraints: "*Mag2TrackMode ISO *Mag2ASCIIOffset Space"
+*UIConstraints: "*Mag2TrackMode ISO *Mag2BitDensity 128"
+*UIConstraints: "*Mag2TrackMode ISO *Mag2BitDensity 210"
+*UIConstraints: "*Mag2TrackMode ISO *Mag2ReverseCharBits true"
+*UIConstraints: "*Mag2TrackMode ISO *Mag2AddLeadingZeros true"
+*UIConstraints: "*Mag2TrackMode ISO *ShiftDataLeft true"
+
+*UIConstraints: "*Mag3TrackMode ISO *Mag3LRCGeneration None"
+*UIConstraints: "*Mag3TrackMode ISO *Mag3LRCGeneration Odd"
+*UIConstraints: "*Mag3TrackMode ISO *Mag3CharSize 4"
+*UIConstraints: "*Mag3TrackMode ISO *Mag3CharSize 7"
+*UIConstraints: "*Mag3TrackMode ISO *Mag3CharSize 8"
+*UIConstraints: "*Mag3TrackMode ISO *Mag3Parity None"
+*UIConstraints: "*Mag3TrackMode ISO *Mag3Parity Even"
+*UIConstraints: "*Mag3TrackMode ISO *Mag3ASCIIOffset Null"
+*UIConstraints: "*Mag3TrackMode ISO *Mag3ASCIIOffset Space"
+*UIConstraints: "*Mag3TrackMode ISO *Mag3BitDensity 75"
+*UIConstraints: "*Mag3TrackMode ISO *Mag3BitDensity 128"
+*UIConstraints: "*Mag3TrackMode ISO *Mag3ReverseCharBits true"
+*UIConstraints: "*Mag3TrackMode ISO *Mag3AddLeadingZeros true"
+*UIConstraints: "*Mag3TrackMode ISO *ShiftDataLeft true"
+
+*UIConstraints: "*Mag1TrackMode JIS *Mag1LRCGeneration None"
+*UIConstraints: "*Mag1TrackMode JIS *Mag1LRCGeneration Odd"
+*UIConstraints: "*Mag1TrackMode JIS *Mag1Charsize 4"
+*UIConstraints: "*Mag1TrackMode JIS *Mag1Charsize 5"
+*UIConstraints: "*Mag1TrackMode JIS *Mag1Charsize 7"
+*UIConstraints: "*Mag1TrackMode JIS *Mag1Parity None"
+*UIConstraints: "*Mag1TrackMode JIS *Mag1Parity Odd"
+*UIConstraints: "*Mag1TrackMode JIS *Mag1ASCIIOffset Space"
+*UIConstraints: "*Mag1TrackMode JIS *Mag1ASCIIOffset Zero"
+*UIConstraints: "*Mag1TrackMode JIS *Mag1BitDensity 75"
+*UIConstraints: "*Mag1TrackMode JIS *Mag1BitDensity 128"
+*UIConstraints: "*Mag1TrackMode JIS *Mag1ReverseCharBits true"
+*UIConstraints: "*Mag1TrackMode JIS *Mag1AddLeadingZeros true"
+*UIConstraints: "*Mag1TrackMode JIS *ShiftDataLeft true"
+
+*UIConstraints: "*Mag2TrackMode JIS *Mag2LRCGeneration None"
+*UIConstraints: "*Mag2TrackMode JIS *Mag2LRCGeneration Odd"
+*UIConstraints: "*Mag2TrackMode JIS *Mag2Charsize 4"
+*UIConstraints: "*Mag2TrackMode JIS *Mag2Charsize 5"
+*UIConstraints: "*Mag2TrackMode JIS *Mag2Charsize 7"
+*UIConstraints: "*Mag2TrackMode JIS *Mag2Parity None"
+*UIConstraints: "*Mag2TrackMode JIS *Mag2Parity Odd"
+*UIConstraints: "*Mag2TrackMode JIS *Mag2ASCIIOffset Space"
+*UIConstraints: "*Mag2TrackMode JIS *Mag2ASCIIOffset Zero"
+*UIConstraints: "*Mag2TrackMode JIS *Mag2BitDensity 75"
+*UIConstraints: "*Mag2TrackMode JIS *Mag2BitDensity 128"
+*UIConstraints: "*Mag2TrackMode JIS *Mag2ReverseCharBits true"
+*UIConstraints: "*Mag2TrackMode JIS *Mag2AddLeadingZeros true"
+*UIConstraints: "*Mag2TrackMode JIS *ShiftDataLeft true"
+
+*UIConstraints: "*Mag3TrackMode JIS *Mag3LRCGeneration None"
+*UIConstraints: "*Mag3TrackMode JIS *Mag3LRCGeneration Odd"
+*UIConstraints: "*Mag3TrackMode JIS *Mag3Charsize 4"
+*UIConstraints: "*Mag3TrackMode JIS *Mag3Charsize 5"
+*UIConstraints: "*Mag3TrackMode JIS *Mag3Charsize 7"
+*UIConstraints: "*Mag3TrackMode JIS *Mag3Parity None"
+*UIConstraints: "*Mag3TrackMode JIS *Mag3Parity Odd"
+*UIConstraints: "*Mag3TrackMode JIS *Mag3ASCIIOffset Space"
+*UIConstraints: "*Mag3TrackMode JIS *Mag3ASCIIOffset Zero"
+*UIConstraints: "*Mag3TrackMode JIS *Mag3BitDensity 75"
+*UIConstraints: "*Mag3TrackMode JIS *Mag3BitDensity 128"
+*UIConstraints: "*Mag3TrackMode JIS *Mag3ReverseCharBits true"
+*UIConstraints: "*Mag3TrackMode JIS *Mag3AddLeadingZeros true"
+*UIConstraints: "*Mag3TrackMode JIS *ShiftDataLeft true"
+
+*UIConstraints: "*Mag1TrackMode Raw *Mag1LRCGeneration Even"
+*UIConstraints: "*Mag1TrackMode Raw *Mag1LRCGeneration Odd"
+*UIConstraints: "*Mag1TrackMode Raw *Mag1Charsize 5"
+*UIConstraints: "*Mag1TrackMode Raw *Mag1Charsize 7"
+*UIConstraints: "*Mag1TrackMode Raw *Mag1Parity Even"
+*UIConstraints: "*Mag1TrackMode Raw *Mag1Parity Odd"
+*UIConstraints: "*Mag1TrackMode Raw *Mag1ASCIIOffset Space"
+*UIConstraints: "*Mag1TrackMode Raw *Mag1ASCIIOffset Zero"
+*UIConstraints: "*Mag1TrackMode Raw *ShiftDataLeft true"
+
+*UIConstraints: "*Mag2TrackMode Raw *Mag2LRCGeneration Even"
+*UIConstraints: "*Mag2TrackMode Raw *Mag2LRCGeneration Odd"
+*UIConstraints: "*Mag2TrackMode Raw *Mag2Charsize 5"
+*UIConstraints: "*Mag2TrackMode Raw *Mag2Charsize 7"
+*UIConstraints: "*Mag2TrackMode Raw *Mag2Parity Even"
+*UIConstraints: "*Mag2TrackMode Raw *Mag2Parity Odd"
+*UIConstraints: "*Mag2TrackMode Raw *Mag2ASCIIOffset Space"
+*UIConstraints: "*Mag2TrackMode Raw *Mag2ASCIIOffset Zero"
+*UIConstraints: "*Mag2TrackMode Raw *ShiftDataLeft true"
+
+*UIConstraints: "*Mag3TrackMode Raw *Mag3LRCGeneration Even"
+*UIConstraints: "*Mag3TrackMode Raw *Mag3LRCGeneration Odd"
+*UIConstraints: "*Mag3TrackMode Raw *Mag3Charsize 5"
+*UIConstraints: "*Mag3TrackMode Raw *Mag3Charsize 7"
+*UIConstraints: "*Mag3TrackMode Raw *Mag3Parity Even"
+*UIConstraints: "*Mag3TrackMode Raw *Mag3Parity Odd"
+*UIConstraints: "*Mag3TrackMode Raw *Mag3ASCIIOffset Space"
+*UIConstraints: "*Mag3TrackMode Raw *Mag3ASCIIOffset Zero"
+*UIConstraints: "*Mag3TrackMode Raw *ShiftDataLeft true"
+
+*UIConstraints: "*Mag1TrackMode custom *Mag1ReverseCharBits true"
+*UIConstraints: "*Mag1TrackMode custom *Mag1AddLeadingZeros true"
+*UIConstraints: "*Mag1TrackMode custom *Mag1CharSize 4"
+*UIConstraints: "*Mag1TrackMode custom *Mag1CharSize 8"
+
+*UIConstraints: "*Mag2TrackMode custom *Mag2ReverseCharBits true"
+*UIConstraints: "*Mag2TrackMode custom *Mag2AddLeadingZeros true"
+*UIConstraints: "*Mag2TrackMode custom *Mag2CharSize 4"
+*UIConstraints: "*Mag2TrackMode custom *Mag2CharSize 8"
+
+*UIConstraints: "*Mag3TrackMode custom *Mag3ReverseCharBits true"
+*UIConstraints: "*Mag3TrackMode custom *Mag3AddLeadingZeros true  "
+*UIConstraints: "*Mag3TrackMode custom *Mag3CharSize 4"
+*UIConstraints: "*Mag3TrackMode custom *Mag3CharSize 8"
+
+*UIConstraints: "*VisualSecurityArea UpperLeft  *PrintAreaFrontApply OverlayOnly"
+*UIConstraints: "*VisualSecurityArea UpperLeft  *PrintAreaFrontApply PrintOnly"
+*UIConstraints: "*VisualSecurityArea UpperRight *PrintAreaFrontApply OverlayOnly"
+*UIConstraints: "*VisualSecurityArea UpperRight *PrintAreaFrontApply PrintOnly"
+*UIConstraints: "*VisualSecurityArea LowerLeft  *PrintAreaFrontApply OverlayOnly"
+*UIConstraints: "*VisualSecurityArea LowerLeft  *PrintAreaFrontApply PrintOnly"
+*UIConstraints: "*VisualSecurityArea LowerRight *PrintAreaFrontApply OverlayOnly"
+*UIConstraints: "*VisualSecurityArea LowerRight *PrintAreaFrontApply PrintOnly"
+
+*%--------------------------- Constraints End ----------------------------------
+
+
+*%==========================================================
+
+*%Language support
+*% German
+
+*de.Translation CardOptions/Kartenoptionen: ""
+*de.Translation PageSize/Kartengröße: ""
+*de.PageSize CR80/CR80: ""
+*de.PageSize CR79/CR79: ""
+
+*de.Translation CardThickness/Kartenstärke: ""
+*de.CardThickness 10/10: ""
+*de.CardThickness 20/20: ""
+*de.CardThickness 30/30: ""
+*de.CardThickness 40/40: ""
+
+*de.Translation General/Druckoptionen: ""
+
+*de.Translation StatusMonitor/Ermöglichen Status Monitor: ""
+*de.StatusMonitor true/Ja: ""
+*de.StatusMonitor false/Nein: ""
+
+*de.Translation RibbonAutoDetect/Automatische Farbanderkennung: ""
+*de.RibbonAutoDetect true/Ja: ""
+*de.RibbonAutoDetect false/Nein: ""
+
+*de.Translation Ribbon/Bandtyp: ""
+*de.Ribbon YMCKO/YMCKO: ""
+*de.Ribbon YMCKO_Half/YMCKO halbe Länge: ""
+*de.Ribbon YMCKOK/YMCKOK: ""
+*de.Ribbon YMCKOK_Half/YMCKOK halbe Länge: ""
+*de.Ribbon YMCKOKO_Half/YMCKOKO halbe Länge: ""
+
+*de.Ribbon KStandard/Standard Resin: ""
+*de.Ribbon KPremium/Premium Resin: ""
+*de.Ribbon MonoColor/Farbiges Resin: ""
+*de.Ribbon KO/KO - Premium Resin/Overlay: ""
+*de.Ribbon BO/BO - Dye-Sub Schwarz/Overlay: ""
+*de.Ribbon None/Keines - Wiederbeschreibbar: ""
+
+*de.Translation PrintBothSides/Beidseitig drucken: ""
+*de.PrintBothSides true/Ja: ""
+*de.PrintBothSides false/Nein: ""
+
+*de.Translation SplitRibbon/Band auf beide Seiten aufteilen: ""
+*de.SplitRibbon true/Ja: ""
+*de.SplitRibbon false/Nein: ""
+
+*de.Translation PrintBackOnFront/Hinterseite auf Vorderseiten drucken: ""
+*de.PrintBackOnFront true/Ja: ""
+*de.PrintBackOnFront false/Nein: ""
+
+*de.Translation PrintBackOnly/Nur Rückseite bedrucken: ""
+*de.PrintBackOnly true/Ja: ""
+*de.PrintBackOnly false/Nein: ""
+
+*de.Translation RotateImageFront/Vorderseite um 180 Grad drehen: ""
+*de.RotateImageFront true/Ja: ""
+*de.RotateImageFront false/Nein: ""
+
+*de.Translation RotateImageBack/Rückseite um 180 Grad drehen: ""
+*de.RotateImageBack true/Ja: ""
+*de.RotateImageBack false/Nein: ""
+
+*de.Translation DisablePrinting/Drucken deaktivieren: ""
+*de.DisablePrinting true/Ja: ""
+*de.DisablePrinting false/Nein: ""
+
+*de.Translation WriteOnly/Nur Schreiben (Kein Löschen): ""
+*de.WriteOnly true/Ja: ""
+*de.WriteOnly false/Nein: ""
+
+*de.Translation EncryptJobEnable/Verschlüsseln Auftragsdaten: ""
+*de.EncryptJobEnable true/Ja: ""
+*de.EncryptJobEnable false/Nein: ""
+
+*de.Translation ImageColor/Bildfarbe: ""
+
+*de.Translation ColorMatching/Farbabgleich: ""
+*de.ColorMatching None/Keiner: ""
+*de.ColorMatching System/Systemfarbmanagement: ""
+
+*de.Translation ResinDither/Resindithering: ""
+*de.ResinDither Graphics/Für Grafiken optimiert: ""
+*de.ResinDither Photos/Für Fotos optimiert: ""
+
+*de.Translation DyeSubIntensity/Farbintensität (YMC): ""
+*de.Translation ResinHeatFront/Resinwärme Vorderseite (K): ""
+*de.Translation ResinHeatBack/Resinwärme Rückseite (K): ""
+*de.Translation OverlayHeat/Overlaywärme: ""
+
+*de.Translation EraseIntensity/Löschintensität: ""
+*de.Translation SharpnessOffset/Schärfe: ""
+*de.Translation ContrastOffset/Kontrast: ""
+*de.Translation GammaOffset/Gamma: ""
+*de.Translation YellowBalance/Gelbabgleich: ""
+*de.Translation MagentaBalance/Magentaabgleich: ""
+*de.Translation CyanBalance/Cyanabgleich: ""
+
+*de.Translation ImagePosition/Bildposition: ""
+*de.Translation ImageVOffset/Vertikaler Offset: ""
+*de.Translation ImageHOffset/Horizontaler Offset: ""
+
+*de.Translation OverlayOptions/Overlay-/Druckbereichsoptionen: ""
+
+*de.Translation PrintAreaFrontOption/Overlay-/Druckbereich Voderseite: ""
+*de.PrintAreaFrontOption fullcard/Ganze Karte: ""
+*de.PrintAreaFrontOption omitMagStripe/Magnetstreifenbereich auslassen: ""
+*de.PrintAreaFrontOption omitSmartChip/Smartchipbereich auslassen: ""
+*de.PrintAreaFrontOption omitSignature/Unterschriftenbereich auslassen: ""
+
+*de.Translation PrintAreaBackOption/Overlay-/Druckbereich Rückseite: ""
+*de.PrintAreaBackOption fullcard/Ganze Karte: ""
+*de.PrintAreaBackOption omitMagStripe/Magnetstreifenbereich auslassen: ""
+*de.PrintAreaBackOption omitSmartChip/Smartchipbereich auslassen: ""
+*de.PrintAreaBackOption omitSignature/Unterschriftenbereich auslassen: ""
+
+*de.Translation PrintAreaFrontApply/Anwendung des Druckbereichs für die Vorderseite: ""
+*de.PrintAreaFrontApply PrintAndOverlay/Druck und Overlay: ""
+*de.PrintAreaFrontApply OverlayOnly/Nur Overlay: ""
+*de.PrintAreaFrontApply PrintOnly/Nur Druck (Kein Overlay): ""
+
+*de.Translation PrintAreaBackapply/Anwendung des Druckbereichs für die Rückseite: ""
+*de.PrintAreaBackapply PrintAndOverlay/Druck und Overlay: ""
+*de.PrintAreaBackapply OverlayOnly/Nur Overlay: ""
+*de.PrintAreaBackapply PrintOnly/Nur Druck (Kein Overlay): ""
+
+*de.Translation VisualSecurityArea/Visual Security Lösungen: ""
+*de.VisualSecurityArea None/Keine Visual Security: ""
+*de.VisualSecurityArea UpperLeft/Oben Links: ""
+*de.VisualSecurityArea UpperRight/Oben Rechts: ""
+*de.VisualSecurityArea LowerLeft/Unten Links: ""
+*de.VisualSecurityArea LowerRight/Unten Rechts: ""
+
+*de.Translation VisualSecurityType/Visual Security Typ: ""
+*de.VisualSecurityType VeriMark/VeriMark: ""
+*de.VisualSecurityType HoloMark/HoloMark: ""
+
+*de.Translation VisualSecurityOrientation/Visual Security Orientierung: ""
+*de.VisualSecurityOrientation Landscape/Querformat: ""
+*de.VisualSecurityOrientation Portrait/Hochformat: ""
+
+*de.Translation KPanelOptions/K-Panel Optionen: ""
+*de.Translation YMCunderKFront/Vorderseite YMC unter K drucken: ""
+*de.YMCunderKFront true/Ja: ""
+*de.YMCunderKFront false/Nein: ""
+
+*de.Translation YMCunderKBack/Rückseite YMC unter K drucken: ""
+*de.YMCunderKBack true/Ja: ""
+*de.YMCunderKBack false/Nein: ""
+
+*de.Translation KPanelFrontApply/Vorderseite K-Panel Bereich: ""
+*de.KPanelFrontApply none/Keiner: ""
+*de.KPanelFrontApply fullcard/Ganze Karte: ""
+
+*de.Translation KPanelBackApply/Rückseite K-Panel Bereich: ""
+*de.KPanelBackApply none/Keiner: ""
+*de.KPanelBackApply fullcard/Ganze Karte: ""
+
+*de.Translation MagneticEncoding/Globale Magnetcodierungsotionen: ""
+*de.Translation Coercivity/Koeritickraft: ""
+*de.Coercivity 4000/Super (4000 Oe): ""
+*de.Coercivity 2750/Hoch (2750 Oe): ""
+*de.Coercivity 600/Mittel (600 Oe): ""
+*de.Coercivity 300/Niedrig (300 Oe): ""
+
+*de.Translation ShiftDataLeft/Daten nach links verschieben: ""
+*de.ShiftDataLeft true/Ja: ""
+*de.ShiftDataLeft false/Nein: ""
+
+*de.Translation MagneticTrackEncodingOptions/Magneticspuroptionen: ""
+*de.Translation Mag1TrackMode/Spur 1 Codiermodus: ""
+*de.Mag1TrackMode ISO/ISO: ""
+*de.Mag1TrackMode custom/Benutzerdefiniert: ""
+*de.Mag1TrackMode JIS/JISII: ""
+*de.Mag1TrackMode Raw/Roh: ""
+
+*de.Translation Mag1LRCGeneration/LRC Generierung: ""
+*de.Mag1LRCGeneration None/Kein LRC: ""
+*de.Mag1LRCGeneration Even/Gerade Parität: ""
+*de.Mag1LRCGeneration Odd/Ungerade Parität: ""
+
+*de.Translation Mag1CharSize/Zeichengröße: ""
+*de.Mag1CharSize 4/4 Bits: ""
+*de.Mag1CharSize 5/5 Bits: ""
+*de.Mag1CharSize 7/7 Bits: ""
+*de.Mag1CharSize 8/8 Bits: ""
+
+*de.Translation Mag1Parity/Zeichenparität: ""
+*de.Mag1Parity None/Keine Parität: ""
+*de.Mag1Parity Even/Gerade Parität: ""
+*de.Mag1Parity Odd/Ungerade Parität: ""
+
+*de.Translation Mag1ASCIIOffset/ASCII Offset: ""
+*de.Mag1ASCIIOffset Null/Null: ""
+*de.Mag1ASCIIOffset Space/Leer: ""
+*de.Mag1ASCIIOffset Zero/Zero: ""
+
+*de.Translation Mag1BitDensity/Bitdichte: ""
+*de.Mag1BitDensity 75/75: ""
+*de.Mag1BitDensity 128/128: ""
+*de.Mag1BitDensity 210/210: ""
+
+*de.Translation Mag1ReverseCharBits/Umgekehrte Bit Reihenfolge: ""
+*de.Mag1ReverseCharBits true/Ja: ""
+*de.Mag1ReverseCharBits false/Nein: ""
+
+*de.Translation Mag1AddLeadingZeros/Führende Nullen hinzufügen: ""
+*de.Mag1AddLeadingZeros true/Ja: ""
+*de.Mag1AddLeadingZeros false/Nein: ""
+
+*de.Translation Mag1ReverseAllBits/Alle Bits umkehren: ""
+*de.Mag1ReverseAllBits true/Ja: ""
+*de.Mag1ReverseAllBits false/Nein: ""
+
+*de.Translation Mag2TrackMode/Spur 2 Codiermodus: ""
+*de.Mag2TrackMode ISO/ISO: ""
+*de.Mag2TrackMode custom/Benutzerdefiniert: ""
+*de.Mag2TrackMode JIS/JISII: ""
+*de.Mag2TrackMode Raw/Roh: ""
+
+*de.Translation Mag2LRCGeneration/LRC Generierung: ""
+*de.Mag2LRCGeneration None/Kein LRC: ""
+*de.Mag2LRCGeneration Even/Gerade Parität: ""
+*de.Mag2LRCGeneration Odd/Ungerade Parität: ""
+
+*de.Translation Mag2CharSize/Zeichengröße: ""
+*de.Mag2CharSize 4/4 Bits: ""
+*de.Mag2CharSize 5/5 Bits: ""
+*de.Mag2CharSize 7/7 Bits: ""
+*de.Mag2CharSize 8/8 Bits: ""
+
+*de.Translation Mag2Parity/Zeichenparität: ""
+*de.Mag2Parity None/Keine Parität: ""
+*de.Mag2Parity Even/Gerade Parität: ""
+*de.Mag2Parity Odd/Ungerade Parität: ""
+
+*de.Translation Mag2ASCIIOffset/ASCII Offset: ""
+*de.Mag2ASCIIOffset Null/Null: ""
+*de.Mag2ASCIIOffset Space/Leer: ""
+*de.Mag2ASCIIOffset Zero/Zero: ""
+
+*de.Translation Mag2BitDensity/Bitdichte: ""
+*de.Mag2BitDensity 75/75: ""
+*de.Mag2BitDensity 128/128: ""
+*de.Mag2BitDensity 210/210: ""
+
+*de.Translation Mag2ReverseCharBits/Umgekehrte Bit Reihenfolge: ""
+*de.Mag2ReverseCharBits true/Ja: ""
+*de.Mag2ReverseCharBits false/Nein: ""
+
+*de.Translation Mag2AddLeadingZeros/Führende Nullen hinzufügen: ""
+*de.Mag2AddLeadingZeros true/Ja: ""
+*de.Mag2AddLeadingZeros false/Nein: ""
+
+*de.Translation Mag2ReverseAllBits/Alle Bits umkehren: ""
+*de.Mag2ReverseAllBits true/Ja: ""
+*de.Mag2ReverseAllBits false/Nein: ""
+
+*de.Translation Mag3TrackMode/Spur 3 Codiermodus: ""
+*de.Mag3TrackMode ISO/ISO: ""
+*de.Mag3TrackMode custom/Benutzerdefiniert: ""
+*de.Mag3TrackMode JIS/JISII: ""
+*de.Mag3TrackMode Raw/Roh: ""
+
+*de.Translation Mag3LRCGeneration/LRC Generierung: ""
+*de.Mag3LRCGeneration None/Kein LRC: ""
+*de.Mag3LRCGeneration Even/Gerade Parität: ""
+*de.Mag3LRCGeneration Odd/Ungerade Parität: ""
+
+*de.Translation Mag3CharSize/Zeichengröße: ""
+*de.Mag3CharSize 4/4 Bits: ""
+*de.Mag3CharSize 5/5 Bits: ""
+*de.Mag3CharSize 7/7 Bits: ""
+*de.Mag3CharSize 8/8 Bits: ""
+
+*de.Translation Mag3Parity/Zeichenparität: ""
+*de.Mag3Parity None/Keine Parität: ""
+*de.Mag3Parity Even/Gerade Parität: ""
+*de.Mag3Parity Odd/Ungerade Parität: ""
+
+*de.Translation Mag3ASCIIOffset/ASCII Offset: ""
+*de.Mag3ASCIIOffset Null/Null: ""
+*de.Mag3ASCIIOffset Space/Leer: ""
+*de.Mag3ASCIIOffset Zero/Zero: ""
+
+*de.Translation Mag3BitDensity/Bitdichte: ""
+*de.Mag3BitDensity 75/75: ""
+*de.Mag3BitDensity 128/128: ""
+*de.Mag3BitDensity 210/210: ""
+
+*de.Translation Mag3ReverseCharBits/Umgekehrte Bit Reihenfolge: ""
+*de.Mag3ReverseCharBits true/Ja: ""
+*de.Mag3ReverseCharBits false/Nein: ""
+
+*de.Translation Mag3AddLeadingZeros/Führende Nullen hinzufügen: ""
+*de.Mag3AddLeadingZeros true/Ja: ""
+*de.Mag3AddLeadingZeros false/Nein: ""
+
+*de.Translation Mag3ReverseAllBits/Alle Bits umkehren: ""
+*de.Mag3ReverseAllBits true/Ja: ""
+*de.Mag3ReverseAllBits false/Nein: ""
+
+*% Spanish
+*%Language support
+*es.Translation CardOptions/Tipo de Tarjeta: ""
+*es.Translation PageSize/Tamaño de la Página: ""
+*es.PageSize CR80/CR80: ""
+*es.PageSize CR79/CR79: ""
+
+*es.Translation CardThickness/Grosor de la Tarjeta: ""
+*es.CardThickness 10/10: ""
+*es.CardThickness 20/20: ""
+*es.CardThickness 30/30: ""
+*es.CardThickness 40/40: ""
+
+*es.Translation General/Opciones de Impresión: ""
+*es.Translation StatusMonitor/Permitir a Estado del Monitor: ""
+*es.StatusMonitor true/Si: ""
+*es.StatusMonitor false/No: ""
+*es.Translation RibbonAutoDetect/Detectar Cinta Automáticamente: ""
+*es.RibbonAutoDetect true/Si: ""
+*es.RibbonAutoDetect false/No: ""
+
+*es.Translation Ribbon/Tipo de Ribbon: ""
+*es.Ribbon YMCKO/YMCKO: ""
+*es.Ribbon YMCKO_Half/YMCKO Panel Medio: ""
+*es.Ribbon YMCKOK/YMCKOK: ""
+*es.Ribbon YMCKOK_Half/YMCKOK Panel Medio: ""
+*es.Ribbon YMCKOKO_Half/YMCKOKO Panel Medio: ""
+
+*es.Ribbon KStandard/Resina normal: ""
+*es.Ribbon KPremium/Resina de primera: ""
+*es.Ribbon MonoColor/Resina de Color: ""
+*es.Ribbon KO/KO - Premium Resin/Panel Protector Transparente: ""
+*es.Ribbon BO/BO - Dye-Sub Black/Panel Protector Transparente: ""
+*es.Ribbon None/Ninguna-Re Escribible: ""
+
+*es.Translation PrintBothSides/Impresión por Ambos Lados: ""
+*es.PrintBothSides true/Si: ""
+*es.PrintBothSides false/No: ""
+
+*es.Translation SplitRibbon/Dividir Grupo de Paneles: ""
+*es.SplitRibbon true/Si: ""
+*es.SplitRibbon false/No: ""
+
+*es.Translation PrintBackOnFront/Imprimir Imagen Trasera en el Frente de la Tarjeta: ""
+*es.PrintBackOnFront true/Si: ""
+*es.PrintBackOnFront false/No: ""
+
+*es.Translation PrintBackOnly/Imprimir Parte Trasera de la Imagen: ""
+*es.PrintBackOnly true/Si: ""
+*es.PrintBackOnly false/No: ""
+
+*es.Translation RotateImageFront/Girar Frente 180 Grados: ""
+*es.RotateImageFront true/Si: ""
+*es.RotateImageFront false/No: ""
+
+*es.Translation RotateImageBack/Girar Parte Trasera 180 Grados: ""
+*es.RotateImageBack true/Si: ""
+*es.RotateImageBack false/No: ""
+
+*es.Translation DisablePrinting/Desactivar Impresión (Alimentar Tarjeta Unicamente): ""
+*es.DisablePrinting true/Si: ""
+*es.DisablePrinting false/No: ""
+
+*es.Translation WriteOnly/Unicamente Escritura: ""
+*es.WriteOnly true/Si: ""
+*es.WriteOnly false/No: ""
+
+*es.Translation EncryptJobEnable/Cifrar los datos de empleo: ""
+*es.EncryptJobEnable true/Si: ""
+*es.EncryptJobEnable false/No: ""
+
+*es.Translation ImageColor/Opciones en la Imagen de Color: ""
+
+*es.Translation ColorMatching/Equilibrio de Tonos: ""
+*es.ColorMatching None/Ninguna: ""
+*es.ColorMatching System/Administración de Tonos: ""
+
+*es.Translation ResinDither/Difuminación de Resina: ""
+*es.ResinDither Graphics/Optimizado para Gráficos: ""
+*es.ResinDither Photos/Optimizado para Fotografias: ""
+
+*es.Translation DyeSubIntensity/Intensidad de Sublimación en el Tono: ""
+*es.Translation ResinHeatFront/Temperatura de Resina Frontal (K): ""
+*es.Translation ResinHeatBack/Temperatura de Resina Trasera (K): ""
+*es.Translation OverlayHeat/Temperatura del Panel Protector Transparente: ""
+*es.Translation EraseIntensity/Resetear Intensidad: ""
+
+*es.Translation SharpnessOffset/Nitides: ""
+*es.Translation ContrastOffset/Constraste: ""
+*es.Translation GammaOffset/Claridad de la Imagen: ""
+*es.Translation YellowBalance/Balance del Panel Amarillo: ""
+*es.Translation MagentaBalance/Balance del Panel Rojo: ""
+*es.Translation CyanBalance/Balance del Panel Azul: ""
+
+*es.Translation ImagePosition/Opciones en la Posición de la Imagen: ""
+*es.Translation ImageVOffset/Ajuste Vertical de la Imagen: ""
+*es.Translation ImageHOffset/Ajuste Horizontal de la Imagen: ""
+
+*es.Translation OverlayOptions/Opciones de Impresión del Panel Protector: ""
+
+*es.Translation PrintAreaFrontOption/Panel Frontal Protector/Area de Impresión: ""
+*es.PrintAreaFrontOption fullcard/Tarjeta Total: ""
+*es.PrintAreaFrontOption omitMagStripe/Omitir Area del Codificador Magnético: ""
+*es.PrintAreaFrontOption omitSmartChip/Omitir Area del Lector Inteligente: ""
+*es.PrintAreaFrontOption omitSignature/Omitir Area de la Firma: ""
+
+*es.Translation PrintAreaBackOption/Area de Impresión/Panel Trasero: ""
+*es.PrintAreaBackOption fullcard/Tarjeta Total: ""
+*es.PrintAreaBackOption omitMagStripe/Omitir Area del Codificador Magnético: ""
+*es.PrintAreaBackOption omitSmartChip/Omitir Area del Lector Inteligente: ""
+*es.PrintAreaBackOption omitSignature/Omitir Area de la Firma: ""
+
+*es.Translation PrintAreaFrontApply/Area de Impresión Frontal: ""
+*es.PrintAreaFrontApply PrintAndOverlay/Impresión y Panel Protector: ""
+*es.PrintAreaFrontApply OverlayOnly/Solamente Panel Protector: ""
+*es.PrintAreaFrontApply PrintOnly/Solamente Impresión (Sin Panel Protector): ""
+
+*es.Translation PrintAreaBackapply/Area de Impresión Trasera: ""
+*es.PrintAreaBackapply PrintAndOverlay/Impresión y Panel Protector: ""
+*es.PrintAreaBackapply OverlayOnly/Solamente Panel Protector: ""
+*es.PrintAreaBackapply PrintOnly/Solamente Impresión (No Panel Protector): ""
+
+*es.Translation VisualSecurityArea/Soluciones de Seguridad Visual: ""
+*es.VisualSecurityArea None/Sin Seguridad Visual: ""
+*es.VisualSecurityArea UpperLeft/Izquierda Superior: ""
+*es.VisualSecurityArea UpperRight/Derecha Superior: ""
+*es.VisualSecurityArea LowerLeft/Izquierda Inferior: ""
+*es.VisualSecurityArea LowerRight/Derecha Inferior: ""
+
+*es.Translation VisualSecurityType/Tipo de Seguridad Visual: ""
+*es.VisualSecurityType VeriMark/Tarjetas VeriMark: ""
+*es.VisualSecurityType HoloMark/Tarjetas Holográficas: ""
+
+*es.Translation VisualSecurityOrientation/Colocación de Seguridad Visual: ""
+*es.VisualSecurityOrientation Landscape/Horizontal: ""
+*es.VisualSecurityOrientation Portrait/Vertical: ""
+
+*es.Translation KPanelOptions/Opciones del Panel Negro: ""
+*es.Translation YMCunderKFront/Frontal YMC Bajo el Panel Negro: ""
+*es.YMCunderKFront true/Si: ""
+*es.YMCunderKFront false/No: ""
+
+*es.Translation YMCunderKBack/Reverso YMC Bajo el Panel Negro: ""
+*es.YMCunderKBack true/Si: ""
+*es.YMCunderKBack false/No: ""
+
+*es.Translation KPanelFrontApply/Area Frontal Panel Negro: ""
+*es.KPanelFrontApply none/Ninguno: ""
+*es.KPanelFrontApply fullcard/En Toda la Tarjeta: ""
+
+*es.Translation KPanelBackApply/Area Trasera Panel Negro: ""
+*es.KPanelBackApply none/Ninguno: ""
+*es.KPanelBackApply fullcard/En Toda La Tarjeta: ""
+
+*es.Translation MagneticEncoding/Magnético Global Opciones: ""
+*es.Translation Coercivity/Coercividad: ""
+*es.Coercivity 4000/Super (4000 Oe): ""
+*es.Coercivity 2750/Alta (2750 Oe): ""
+*es.Coercivity 600/Media (600 Oe): ""
+*es.Coercivity 300/Baja (300 Oe): ""
+
+*es.Translation ShiftDataLeft/Mover Datos a la Izquierda: ""
+*es.ShiftDataLeft true/Si: ""
+*es.ShiftDataLeft false/No: ""
+
+*es.Translation MagneticTrackEncodingOptions/Magnético Opciones de Codificación: ""
+*es.Translation Mag1TrackMode/Codificación Campo 1: ""
+*es.Mag1TrackMode ISO/ISO: ""
+*es.Mag1TrackMode custom/Personalizada: ""
+*es.Mag1TrackMode JIS/JISII: ""
+*es.Mag1TrackMode Raw/sin Procesar: ""
+
+*es.Translation Mag1LRCGeneration/Proceso de Verificación LRC: ""
+*es.Mag1LRCGeneration None/Ninguno: ""
+*es.Mag1LRCGeneration Even/Paridad Par: ""
+*es.Mag1LRCGeneration Odd/Paridad Impar: ""
+
+*es.Translation Mag1CharSize/Tamaño de los Caracteres: ""
+*es.Mag1CharSize 4/4 Bits: ""
+*es.Mag1CharSize 5/5 Bits: ""
+*es.Mag1CharSize 7/7 Bits: ""
+*es.Mag1CharSize 8/8 Bits: ""
+
+*es.Translation Mag1Parity/Paridad: ""
+*es.Mag1Parity None/Ninguno: ""
+*es.Mag1Parity Even/Paridad Par: ""
+*es.Mag1Parity Odd/Paridad Impar: ""
+
+*es.Translation Mag1ASCIIOffset/Ajuste en el Código ASCII: ""
+*es.Mag1ASCIIOffset Null/Nulo: ""
+*es.Mag1ASCIIOffset Space/Spacio: ""
+*es.Mag1ASCIIOffset Zero/Cero: ""
+
+*es.Translation Mag1BitDensity/Densidad del Bit: ""
+*es.Mag1BitDensity 75/75: ""
+*es.Mag1BitDensity 128/128: ""
+*es.Mag1BitDensity 210/210: ""
+
+*es.Translation Mag1ReverseCharBits/Orden Inverso de Bits: ""
+*es.Mag1ReverseCharBits true/Si: ""
+*es.Mag1ReverseCharBits false/No: ""
+
+*es.Translation Mag1AddLeadingZeros/Agregar Ceros a la Izquierda: ""
+*es.Mag1AddLeadingZeros true/Si: ""
+*es.Mag1AddLeadingZeros false/No: ""
+
+*es.Translation Mag1ReverseAllBitsi/Invertir todas Bits: ""
+*es.Mag1ReverseAllBits true/Si: ""
+*es.Mag1ReverseAllBits false/No: ""
+
+*es.Translation Mag2TrackMode/Codificación Campo 2: ""
+*es.Mag2TrackMode ISO/ISO: ""
+*es.Mag2TrackMode custom/Personalizada: ""
+*es.Mag2TrackMode JIS/JISII: ""
+*es.Mag2TrackMode Raw/sin Procesar: ""
+
+*es.Translation Mag2LRCGeneration/Proceso de Verificación LRC: ""
+*es.Mag2LRCGeneration None/Ninguno: ""
+*es.Mag2LRCGeneration Even/Paridad Par: ""
+*es.Mag2LRCGeneration Odd/Paridad Impar: ""
+
+*es.Translation Mag2CharSize/Tamaño de los Caracteres: ""
+*es.Mag2CharSize 4/4 Bits: ""
+*es.Mag2CharSize 5/5 Bits: ""
+*es.Mag2CharSize 7/7 Bits: ""
+*es.Mag2CharSize 8/8 Bits: ""
+
+*es.Translation Mag2Parity/Paridad: ""
+*es.Mag2Parity None/Ninguno: ""
+*es.Mag2Parity Even/Paridad Par: ""
+*es.Mag2Parity Odd/Paridad Impar: ""
+
+*es.Translation Mag2ASCIIOffset/Ajuste en el Código ASCII: ""
+*es.Mag2ASCIIOffset Null/Nulo: ""
+*es.Mag2ASCIIOffset Space/Espacio: ""
+*es.Mag2ASCIIOffset Zero/Cero: ""
+
+*es.Translation Mag2BitDensity/Densidad del Bit: ""
+*es.Mag2BitDensity 75/75: ""
+*es.Mag2BitDensity 128/128: ""
+*es.Mag2BitDensity 210/210: ""
+
+*es.Translation Mag2ReverseCharBits/Orden Inverso de Bits: ""
+*es.Mag2ReverseCharBits true/Si: ""
+*es.Mag2ReverseCharBits false/No: ""
+
+*es.Translation Mag2AddLeadingZeros/Agregar Ceros a la Izquierda: ""
+*es.Mag2AddLeadingZeros true/Si: ""
+*es.Mag2AddLeadingZeros false/No: ""
+
+*es.Translation Mag2ReverseAllBitsi/Invertir todas Bits: ""
+*es.Mag2ReverseAllBits true/Si: ""
+*es.Mag2ReverseAllBits false/No: ""
+
+*es.Translation Mag3TrackMode/Codificación Campo 3: ""
+*es.Mag3TrackMode ISO/ISO: ""
+*es.Mag3TrackMode custom/Personalizada: ""
+*es.Mag3TrackMode JIS/JISII: ""
+*es.Mag3TrackMode Raw/sin procesar: ""
+
+*es.Translation Mag3LRCGeneration/Proceso de Verificación LRC: ""
+*es.Mag3LRCGeneration None/Ninguno: ""
+*es.Mag3LRCGeneration Even/Paridad Par: ""
+*es.Mag3LRCGeneration Odd/Paridad Impar: ""
+
+*es.Translation Mag3CharSize/Tamaño de los Caracteres: ""
+*es.Mag3CharSize 4/4 Bits: ""
+*es.Mag3CharSize 5/5 Bits: ""
+*es.Mag3CharSize 7/7 Bits: ""
+*es.Mag3CharSize 8/8 Bits: ""
+
+*es.Translation Mag3Parity/Paridad: ""
+*es.Mag3Parity None/Ninguno: ""
+*es.Mag3Parity Even/Paridad Par: ""
+*es.Mag3Parity Odd/Paridad Impar: ""
+
+*es.Translation Mag3ASCIIOffset/Ajuste en el Código ASCII: ""
+*es.Mag3ASCIIOffset Null/Nulo: ""
+*es.Mag3ASCIIOffset Space/Espacio: ""
+*es.Mag3ASCIIOffset Zero/Cero: ""
+
+*es.Translation Mag3BitDensity/Densidad del Bit: ""
+*es.Mag3BitDensity 75/75: ""
+*es.Mag3BitDensity 128/128: ""
+*es.Mag3BitDensity 210/210: ""
+
+*es.Translation Mag3ReverseCharBits/Orden Inverso de Bits: ""
+*es.Mag3ReverseCharBits true/Si: ""
+*es.Mag3ReverseCharBits false/No: ""
+
+*es.Translation Mag3AddLeadingZeros/Agregar Ceros a la Izquierda: ""
+*es.Mag3AddLeadingZeros true/Si: ""
+*es.Mag3AddLeadingZeros false/No: ""
+
+*es.Translation Mag3ReverseAllBitsi/Invertir todas Bits: ""
+*es.Mag3ReverseAllBits true/Si: ""
+*es.Mag3ReverseAllBits false/No: ""
+
+*% French
+*%Language support
+*fr.Translation CardOptions/Carte: ""
+*fr.Translation PageSize/Grandeur de la Carte: ""
+*fr.PageSize CR80/CR80: ""
+*fr.PageSize CR79/CR79: ""
+
+*fr.Translation CardThickness/Epaisseur de la Carte: ""
+*fr.CardThickness 10/10: ""
+*fr.CardThickness 20/20: ""
+*fr.CardThickness 30/30: ""
+*fr.CardThickness 40/40: ""
+
+*fr.Translation General/Options Générales: ""
+*fr.Translation StatusMonitor/Permettez le Moniteur de Statut: ""
+*fr.StatusMonitor true/Oui: ""
+*fr.StatusMonitor false/Non: ""
+*fr.Translation RibbonAutoDetect/Ordon de Detection Automatique: ""
+*fr.RibbonAutoDetect true/Oui: ""
+*fr.RibbonAutoDetect false/Non: ""
+
+*fr.Translation Ribbon/Type de Ruban: ""
+*fr.Ribbon YMCKO/YMCKO: ""
+*fr.Ribbon YMCKO_Half/YMCKO demi Panel: ""
+*fr.Ribbon YMCKOK/YMCKOK: ""
+*fr.Ribbon YMCKOK_Half/YMCKOK demi Panel: ""
+*fr.Ribbon YMCKOKO_Half/YMCKOKO demi Panel: ""
+
+*fr.Ribbon KStandard/Résine Standard: ""
+*fr.Ribbon KPremium/Résine a prime: ""
+*fr.Ribbon MonoColor/Résine en couleur: ""
+*fr.Ribbon KO/KO - Premium Resin/Transparent: ""
+*fr.Ribbon BO/BO - Dye-Sub Black/Transparent: ""
+*fr.Ribbon None/Aucun-Ecritable: ""
+
+*fr.Translation PrintBothSides/Imprimez Les deux Côtés: ""
+*fr.PrintBothSides true/Oui: ""
+*fr.PrintBothSides false/Non: ""
+
+*fr.Translation SplitRibbon/Detacher l'ensemble du Cordon Panels: ""
+*fr.SplitRibbon true/Oui: ""
+*fr.SplitRibbon false/Non: ""
+
+*fr.Translation PrintBackOnFront/Imprimer l'image en derriere au devant de la Carte: ""
+*fr.PrintBackOnFront true/Oui: ""
+*fr.PrintBackOnFront false/Non: ""
+
+*fr.Translation PrintBackOnly/Imprimer le cote en derriere seulement: ""
+*fr.PrintBackOnly true/Oui: ""
+*fr.PrintBackOnly false/Non: ""
+
+*fr.Translation RotateImageFront/Faites tourner 180 Degrés de Devant: ""
+*fr.RotateImageFront true/Oui: ""
+*fr.RotateImageFront false/Non: ""
+
+*fr.Translation RotateImageBack/Faites tourner En arrière 180 Degrés: ""
+*fr.RotateImageBack true/Oui: ""
+*fr.RotateImageBack false/Non: ""
+
+*fr.Translation DisablePrinting/Rendez infirmes l'Imprimerie (Envoie Seulement de Carte ): ""
+*fr.DisablePrinting true/Oui: ""
+*fr.DisablePrinting false/Non: ""
+
+*fr.Translation WriteOnly/Ecrivable Seulement (Sans nettoiyage): ""
+*fr.WriteOnly true/Oui: ""
+*fr.WriteOnly false/Non: ""
+
+*fr.Translation EncryptJobEnable/Crypter les données d'emploi: ""
+*fr.EncryptJobEnable true/Oui: ""
+*fr.EncryptJobEnable false/Non: ""
+
+*fr.Translation ImageColor/Options de Couleur d'Image: ""
+
+*fr.Translation ColorMatching/Correspondance des couleurs: ""
+*fr.ColorMatching None/Aucun: ""
+*fr.ColorMatching System/Administration de Couleur de Système : ""
+
+*fr.Translation ResinDither/Résine Dither: ""
+*fr.ResinDither Graphics/Optimisez pour la Visualisation graphique: ""
+*fr.ResinDither Photos/Optimisez pour les Photos: ""
+
+*fr.Translation DyeSubIntensity/Intensité de Colorant-Sub(YMC): ""
+*fr.Translation ResinHeatFront/Chaleur de Résine Devant(K): ""
+*fr.Translation ResinHeatBack/Chaleur de Résine En arrière(K): ""
+*fr.Translation OverlayHeat/La Chaleur de Superposition: ""
+*fr.Translation EraseIntensity/Effacez l'Intensité: ""
+
+*fr.Translation SharpnessOffset/Netteté: ""
+*fr.Translation ContrastOffset/Contraste: ""
+*fr.Translation GammaOffset/Gamma: ""
+*fr.Translation YellowBalance/Balance Jaune: ""
+*fr.Translation MagentaBalance/Balance de Magenta: ""
+*fr.Translation CyanBalance/Balance de Cyan: ""
+
+*fr.Translation ImagePosition/Options de Position d'Image: ""
+*fr.Translation ImageVOffset/Rejeton Vertical: ""
+*fr.Translation ImageHOffset/Rejeton Horizontal: ""
+
+*fr.Translation OverlayOptions/Options de Région de Caractères Recouvertes: ""
+
+*fr.Translation PrintAreaFrontOption/Zone d'impression Avant: ""
+*fr.PrintAreaFrontOption fullcard/Carte Complète: ""
+*fr.PrintAreaFrontOption omitMagStripe/Région de l'Omit Mag Stripe: ""
+*fr.PrintAreaFrontOption omitSmartChip/Région de l'Omit Chip Smart: ""
+*fr.PrintAreaFrontOption omitSignature/Région l'Omit Signature: ""
+
+*fr.Translation PrintAreaBackOption/Zone d'impression de Retour: ""
+*fr.PrintAreaBackOption fullcard/Carte Complète: ""
+*fr.PrintAreaBackOption omitMagStripe/Région de l'Omit Mag Stripe: ""
+*fr.PrintAreaBackOption omitSmartChip/Région de l'Omit Chip Smart: ""
+*fr.PrintAreaBackOption omitSignature/Région l'Omit Signature: ""
+
+*fr.Translation PrintAreaFrontApply/Le Devant de la Région Applicable: ""
+*fr.PrintAreaFrontApply PrintAndOverlay/Caractères et Transparent: ""
+*fr.PrintAreaFrontApply OverlayOnly/Transparent Seulement: ""
+*fr.PrintAreaFrontApply PrintOnly/Caractères Seulement: ""
+
+*fr.Translation PrintAreaBackapply/Le Derriere de la Région Applicable: ""
+*fr.PrintAreaBackapply PrintAndOverlay/Caractères et Transparent: ""
+*fr.PrintAreaBackapply OverlayOnly/Transparent Seulement: ""
+*fr.PrintAreaBackapply PrintOnly/Caractères Seulement: ""
+
+*fr.Translation VisualSecurityArea/Solution deSécurité Visuelle: ""
+*fr.VisualSecurityArea None/Aucune Sécurité Visuelle: ""
+*fr.VisualSecurityArea UpperLeft/Supérieur Gauche: ""
+*fr.VisualSecurityArea UpperRight/Supérieur Droit: ""
+*fr.VisualSecurityArea LowerLeft/Inferieur Gauche: ""
+*fr.VisualSecurityArea LowerRight/Inferieur Droit: ""
+
+*fr.Translation VisualSecurityType/Types de Sécurité Visuelle: ""
+*fr.VisualSecurityType VeriMark/VeriMark: ""
+*fr.VisualSecurityType HoloMark/HoloMark: ""
+
+*fr.Translation VisualSecurityOrientation/Orientation de Sécurité Visuelle: ""
+*fr.VisualSecurityOrientation Landscape/Paysage: ""
+*fr.VisualSecurityOrientation Portrait/Portrait: ""
+
+*fr.Translation KPanelOptions/L'Options du Panel K: ""
+*fr.Translation YMCunderKFront/Le Devant du YMC au dessus du K : ""
+*fr.YMCunderKFront true/Oui: ""
+*fr.YMCunderKFront false/Non: ""
+
+*fr.Translation YMCunderKBack/L'Arrière du YMC au dessus du K: ""
+*fr.YMCunderKBack true/Oui: ""
+*fr.YMCunderKBack false/Non: ""
+
+*fr.Translation KPanelFrontApply/Devant du Région de K-Panel: ""
+*fr.KPanelFrontApply none/Aucun: ""
+*fr.KPanelFrontApply fullcard/Complete Carte: ""
+
+*fr.Translation KPanelBackApply/L'Arrière du Région de K-Panel: ""
+*fr.KPanelBackApply none/Aucun: ""
+*fr.KPanelBackApply fullcard/Carte Complète: ""
+
+*fr.Translation MagneticEncoding/Options Encodantes Magnétiques Globales: ""
+*fr.Translation Coercivity/Coercitivité: ""
+*fr.Coercivity 4000/Formidable (400 Oe): ""
+*fr.Coercivity 2750/Haut (2750 Oe): ""
+*fr.Coercivity 600/Moyen (600 Oe): ""
+*fr.Coercivity 300/Bas (300 0e): ""
+
+*fr.Translation ShiftDataLeft/Changement des Données vers la Gauche: ""
+*fr.ShiftDataLeft true/Oui: ""
+*fr.ShiftDataLeft false/Non: ""
+
+*fr.Translation MagneticTrackEncodingOptions/Empreintes Magnétiques Encodant des Options: ""
+*fr.Translation Mag1TrackMode/Empreintes 1 du Mode Encodant: ""
+*fr.Mag1TrackMode ISO/ISO: ""
+*fr.Mag1TrackMode custom/Habitude: ""
+*fr.Mag1TrackMode JIS/JISII: ""
+*fr.Mag1TrackMode Raw/Matières premières: ""
+
+*fr.Translation Mag1LRCGeneration/Génération du LRC: ""
+*fr.Mag1LRCGeneration None/Aucun: ""
+*fr.Mag1LRCGeneration Even/Pair Parité: ""
+*fr.Mag1LRCGeneration Odd/Parité Impair: ""
+
+*fr.Translation Mag1CharSize/Taille des Caractéres: ""
+*fr.Mag1CharSize 4/4 Bits: ""
+*fr.Mag1CharSize 5/5 Bits: ""
+*fr.Mag1CharSize 7/7 Bits: ""
+*fr.Mag1CharSize 8/8 Bits: ""
+
+*fr.Translation Mag1Parity/Parité: ""
+*fr.Mag1Parity None/Aucun: ""
+*fr.Mag1Parity Even/Pair Parité: ""
+*fr.Mag1Parity Odd/Parité Impair: ""
+
+*fr.Translation Mag1ASCIIOffset/Rejeton d'ASCII: ""
+*fr.Mag1ASCIIOffset Null/Nulle: ""
+*fr.Mag1ASCIIOffset Space/Espace: ""
+*fr.Mag1ASCIIOffset Zero/Zéro: ""
+
+*fr.Translation Mag1BitDensity/Densité de morceaux : ""
+*fr.Mag1BitDensity 75/75: ""
+*fr.Mag1BitDensity 128/128: ""
+*fr.Mag1BitDensity 210/210: ""
+
+*fr.Translation Mag1ReverseCharBits/Reverser l'Ordre du Morceau : ""
+*fr.Mag1ReverseCharBits true/Oui: ""
+*fr.Mag1ReverseCharBits false/Non: ""
+
+*fr.Translation Mag1AddLeadingZeros/Ajoutez les Principaux Zéros: ""
+*fr.Mag1AddLeadingZeros true/Oui: ""
+*fr.Mag1AddLeadingZeros false/Non: ""
+
+*fr.Translation Mag1ReverseAllBits/Inverser tous les bits: ""
+*fr.Mag1ReverseAllBits true/Oui: ""
+*fr.Mag1ReverseAllBits false/Non: ""
+
+*fr.Translation Mag2TrackMode/Empreintes 2 du Mode Encodant: ""
+*fr.Mag2TrackMode ISO/ISO: ""
+*fr.Mag2TrackMode custom/Habitude: ""
+*fr.Mag2TrackMode JIS/JISII: ""
+*fr.Mag2TrackMode Raw/Matières premières: ""
+
+*fr.Translation Mag2LRCGeneration/Génération du LRC: ""
+*fr.Mag2LRCGeneration None/Aucun: ""
+*fr.Mag2LRCGeneration Even/Pair Parité: ""
+*fr.Mag2LRCGeneration Odd/Parité Impaire: ""
+
+*fr.Translation Mag2CharSize/Grandeur du Caractère: ""
+*fr.Mag2CharSize 4/4 Bits: ""
+*fr.Mag2CharSize 5/5 Bits: ""
+*fr.Mag2CharSize 7/7 Bits: ""
+*fr.Mag2CharSize 8/8 Bits: ""
+
+*fr.Translation Mag2Parity/Parité: ""
+*fr.Mag2Parity None/Aucun: ""
+*fr.Mag2Parity Even/Pair Parité: ""
+*fr.Mag2Parity Odd/Parité Impair: ""
+
+*fr.Translation Mag2ASCIIOffset/Rejeton d'ASCII: ""
+*fr.Mag2ASCIIOffset Null/Nulle: ""
+*fr.Mag2ASCIIOffset Space/Espace: ""
+*fr.Mag2ASCIIOffset Zero/Zéro: ""
+
+*fr.Translation Mag2BitDensity/Densité de morceaux: ""
+*fr.Mag2BitDensity 75/75: ""
+*fr.Mag2BitDensity 128/128: ""
+*fr.Mag2BitDensity 210/210: ""
+
+*fr.Translation Mag2ReverseCharBits/Reverser l'Ordre du Morceau : ""
+*fr.Mag2ReverseCharBits true/Oui: ""
+*fr.Mag2ReverseCharBits false/Non: ""
+
+*fr.Translation Mag2AddLeadingZeros/Ajoutez les Principaux Zéros: ""
+*fr.Mag2AddLeadingZeros true/Oui: ""
+*fr.Mag2AddLeadingZeros false/Non: ""
+
+*fr.Translation Mag2ReverseAllBits/Inverser tous les bits: ""
+*fr.Mag2ReverseAllBits true/Oui: ""
+*fr.Mag2ReverseAllBits false/Non: ""
+
+*fr.Translation Mag3TrackMode/Empreintes 3 du Mode Encodant: ""
+*fr.Mag3TrackMode ISO/ISO: ""
+*fr.Mag3TrackMode custom/Habitude: ""
+*fr.Mag3TrackMode JIS/JISII: ""
+*fr.Mag3TrackMode Raw/Matières premières: ""
+
+*fr.Translation Mag3LRCGeneration/Génération du LRC: ""
+*fr.Mag3LRCGeneration None/Aucun: ""
+*fr.Mag3LRCGeneration Even/Parité Impaire: ""
+*fr.Mag3LRCGeneration Odd/Pair Parité: ""
+
+*fr.Translation Mag3CharSize/Grandeur de Caractère: ""
+*fr.Mag3CharSize 4/4 Bits: ""
+*fr.Mag3CharSize 5/5 Bits: ""
+*fr.Mag3CharSize 7/7 Bits: ""
+*fr.Mag3CharSize 8/8 Bits: ""
+
+*fr.Translation Mag3Parity/Parité: ""
+*fr.Mag3Parity None/Aucun: ""
+*fr.Mag3Parity Even/Parité Impair: ""
+*fr.Mag3Parity Odd/Pair Parité: ""
+
+*fr.Translation Mag3ASCIIOffset/Rejeton d'ASCII: ""
+*fr.Mag3ASCIIOffset Null/Nulle: ""
+*fr.Mag3ASCIIOffset Space/Espace: ""
+*fr.Mag3ASCIIOffset Zero/Zéro: ""
+
+*fr.Translation Mag3BitDensity/Densité de morceaux: ""
+*fr.Mag3BitDensity 75/75: ""
+*fr.Mag3BitDensity 128/128: ""
+*fr.Mag3BitDensity 210/210: ""
+
+*fr.Translation Mag3ReverseCharBits/Reverser l'Ordre du Morceau: ""
+*fr.Mag3ReverseCharBits true/Oui: ""
+*fr.Mag3ReverseCharBits false/Non: ""
+
+*fr.Translation Mag3AddLeadingZeros/Ajoutez les Principaux Zéros: ""
+*fr.Mag3AddLeadingZeros true/Oui: ""
+*fr.Mag3AddLeadingZeros false/Non: ""
+
+*fr.Translation Mag3ReverseAllBits/Inverser tous les bits: ""
+*fr.Mag3ReverseAllBits true/Oui: ""
+*fr.Mag3ReverseAllBits false/Non: ""
+
+*%Language support
+*% Italian
+
+*it.Translation MagneticTrackEncodingOptions/Magnetici Opzioni di codifica traccia: ""
+
+*it.Translation CardOptions/Tessera: ""
+*it.Translation PageSize/Dimensioni Tessera: ""
+*it.PageSize CR80/CR80: ""
+*it.PageSize CR79/CR79: ""
+
+*it.Translation CardThickness/Spessore Tessera: ""
+
+*it.Translation General/Opzioni di Stampa: ""
+
+*it.Translation StatusMonitor/Monitor di Stato Abilitato: ""
+*it.StatusMonitor true/Si: ""
+*it.StatusMonitor false/No: ""
+
+*it.Translation RibbonAutoDetect/Auto Riconoscimento Nastro: ""
+*it.RibbonAutoDetect true/Si: ""
+*it.RibbonAutoDetect false/No: ""
+
+*it.Translation Ribbon/Tipo di Nastro: ""
+*it.Ribbon YMCKO/YMCKO: ""
+*it.Ribbon YMCKO_Half/YMCKO Mezzo Pannello: ""
+*it.Ribbon YMCKOK/YMCKOK: ""
+*it.Ribbon YMCKOK_Half/YMCKOK Mezzo Pannello: ""
+*it.Ribbon YMCKOKO_Half/YMCKOKO Mezzo Pannello: ""
+
+*it.Ribbon KStandard/Resina Nero Standard: ""
+*it.Ribbon KPremium/Resina Nero Premium: ""
+*it.Ribbon MonoColor/Resina Monocolore: ""
+*it.Ribbon KO/KO - Resina Nero Premium/Overlay: ""
+*it.Ribbon BO/BO - Nero Sublimazione/Overlay: ""
+*it.Ribbon None/Nessuno - Riscrivibile: ""
+
+*it.Translation PrintBothSides/Stampa su Entrambi i Lati: ""
+*it.PrintBothSides true/Si: ""
+*it.PrintBothSides false/No: ""
+
+*it.Translation SplitRibbon/Distribuisci 1 Set di Pannelli su Entrambi i Lati: ""
+*it.SplitRibbon true/Si: ""
+*it.SplitRibbon false/No: ""
+
+*it.Translation PrintBackOnFront/Stampa Retro sul Lato Anteriore Tessera: ""
+*it.PrintBackOnFront true/Si: ""
+*it.PrintBackOnFront false/No: ""
+
+*it.Translation PrintBackOnly/Stampa Solo Retro: ""
+*it.PrintBackOnly true/Si: ""
+*it.PrintBackOnly false/No: ""
+
+*it.Translation RotateImageFront/Ruota Fronte di 180 Gradi: ""
+*it.RotateImageFront true/Si: ""
+*it.RotateImageFront false/No: ""
+
+*it.Translation RotateImageBack/Ruota Retro di 180 Gradi: ""
+*it.RotateImageBack true/Si: ""
+*it.RotateImageBack false/No: ""
+
+*it.Translation DisablePrinting/Disabilita Stampa (Solo Carico Tessera): ""
+*it.DisablePrinting true/Si: ""
+*it.DisablePrinting false/No: ""
+
+*it.Translation WriteOnly/Solo Stampa (Salta Cancel. Riscrivibili): ""
+*it.WriteOnly true/Si: ""
+*it.WriteOnly false/No: ""
+
+*it.Translation EncryptJobEnable/Encrypt processo di data: ""
+*it.EncryptJobEnable true/Si: ""
+*it.EncryptJobEnable false/No: ""
+
+*it.Translation ImageColor/Opzioni Colore Immagine: ""
+
+*it.Translation ColorMatching/Corrispondenza Colore: ""
+*it.ColorMatching None/Nessuna: ""
+*it.ColorMatching System/Gestione Colore di Sistema: ""
+
+*it.Translation ResinDither/Dithering Resina: ""
+*it.ResinDither Graphics/Ottimizzato per Grafica: ""
+*it.ResinDither Photos/Ottimizzato per Foto: ""
+
+*it.Translation DyeSubIntensity/Intensità Sublimazione (YMC): ""
+*it.Translation ResinHeatFront/Intensità Monocromatico, Anteriore (K): ""
+*it.Translation ResinHeatBack/Intensità Monocromatico, Posteriore (K): ""
+*it.Translation OverlayHeat/Calore Overlay Trasparente: ""
+
+*it.Translation EraseIntensity/Intensità di Cancellazione: ""
+*it.Translation SharpnessOffset/Nitidezza: ""
+*it.Translation ContrastOffset/Contrasto: ""
+*it.Translation GammaOffset/Gamma: ""
+*it.Translation YellowBalance/Bilanciamento del Giallo: ""
+*it.Translation MagentaBalance/Bilanciamento del Magenta: ""
+*it.Translation CyanBalance/Bilanciamento del Ciano: ""
+
+*it.Translation ImagePosition/Opzioni Posizione Immagine: ""
+*it.Translation ImageVOffset/Allineamento Verticale: ""
+*it.Translation ImageHOffset/Allineamento Orizzonatale: ""
+
+*it.Translation OverlayOptions/Opzioni di Stampa Overlay Trasparente: ""
+
+*it.Translation PrintAreaFrontOption/Overlay - Area di Stampa Lato Anteriore: ""
+*it.PrintAreaFrontOption fullcard/Tessera Completa: ""
+*it.PrintAreaFrontOption omitMagStripe/Ometti Area Banda Magnetica: ""
+*it.PrintAreaFrontOption omitSmartChip/Ometti Area Chip: ""
+*it.PrintAreaFrontOption omitSignature/Ometti Area Pannello Firma: ""
+
+*it.Translation PrintAreaBackOption/Overlay - Area di Stampa Lato Posteriore: ""
+*it.PrintAreaBackOption fullcard/Tessera Completa: ""
+*it.PrintAreaBackOption omitMagStripe/Ometti Area Banda Magnetica: ""
+*it.PrintAreaBackOption omitSmartChip/Ometti Area Chip: ""
+*it.PrintAreaBackOption omitSignature/Ometti Area Pannello Firma: ""
+
+*it.Translation PrintAreaFrontApply/Area di Applicazione Lato Anteriore: ""
+*it.PrintAreaFrontApply PrintAndOverlay/Stampa e Overlay: ""
+*it.PrintAreaFrontApply OverlayOnly/Solo Overlay: ""
+*it.PrintAreaFrontApply PrintOnly/Solo Stampa (No Overlay): ""
+
+*it.Translation PrintAreaBackapply/Area di Applicazione Lato Posteriore: ""
+*it.PrintAreaBackapply PrintAndOverlay/Stampa e Overlay: ""
+*it.PrintAreaBackapply OverlayOnly/Solo Overlay: ""
+*it.PrintAreaBackapply PrintOnly/Solo Stampa (No Overlay): ""
+
+*it.Translation VisualSecurityArea/Soluzione di Protezione Visiva: ""
+*it.VisualSecurityArea None/Nessuna Protezione Visiva: ""
+*it.VisualSecurityArea UpperLeft/In Alto a Sinistra: ""
+*it.VisualSecurityArea UpperRight/In Alto a Destra: ""
+*it.VisualSecurityArea LowerLeft/In Basso a Sinistra: ""
+*it.VisualSecurityArea LowerRight/In Basso a Destra: ""
+
+*it.Translation VisualSecurityType/Tipo di Sicurezza Visiva: ""
+*it.VisualSecurityType VeriMark/VeriMark: ""
+*it.VisualSecurityType HoloMark/HoloMark: ""
+
+*it.Translation VisualSecurityOrientation/Orientamento Sicurezza Visuale: ""
+*it.VisualSecurityOrientation Landscape/Orizzontale: ""
+*it.VisualSecurityOrientation Portrait/Verticale: ""
+
+*it.Translation KPanelOptions/Opzioni Pannello K Nero: ""
+*it.Translation YMCunderKFront/Stampa YMC sotto il K - Lato Anteriore: ""
+*it.YMCunderKFront true/Si: ""
+*it.YMCunderKFront false/No: ""
+
+*it.Translation YMCunderKBack/Stampa YMC sotto K - Lato Posteriore: ""
+*it.YMCunderKBack true/Si: ""
+*it.YMCunderKBack false/No: ""
+
+*it.Translation KPanelFrontApply/Area Lato Anteriore Pannello K: ""
+*it.KPanelFrontApply none/Nessuna: ""
+*it.KPanelFrontApply fullcard/Tessera Completa: ""
+
+*it.Translation KPanelBackApply/Area Lato Posteriore Pannello K: ""
+*it.KPanelBackApply none/Nessuna: ""
+*it.KPanelBackApply fullcard/Tessera Completa: ""
+
+*it.Translation MagneticEncoding/Opzioni Globali Codifica Magnetica: ""
+*it.Translation Coercivity/Coercività: ""
+*it.Coercivity 4000/Super (4000 Oe): ""
+*it.Coercivity 2750/Alta (2750 Oe): ""
+*it.Coercivity 600/Media (600 Oe): ""
+*it.Coercivity 300/Bassa (300 Oe): ""
+
+*it.Translation ShiftDataLeft/Spostamento Dati a Sinistra: ""
+*it.ShiftDataLeft true/Si: ""
+*it.ShiftDataLeft false/No: ""
+
+*it.Translation MagneticTrackEncoding/Opzioni Tracce Magnetiche: ""
+*it.Translation Mag1TrackMode/Traccia 1 - Codifica: ""
+*it.Mag1TrackMode ISO/ISO: ""
+*it.Mag1TrackMode custom/Custom: ""
+*it.Mag1TrackMode JIS/JISII: ""
+*it.Mag1TrackMode Raw/Raw: ""
+
+*it.Translation Mag1LRCGeneration/Generazione LRC: ""
+*it.Mag1LRCGeneration None/Nessuna: ""
+*it.Mag1LRCGeneration Even/Parità Dispari(Even): ""
+*it.Mag1LRCGeneration Odd/Parità Pari(Odd): ""
+
+*it.Translation Mag1CharSize/Dimensioni Carattere: ""
+*it.Mag1CharSize 4/4 Bits: ""
+*it.Mag1CharSize 5/5 Bits: ""
+*it.Mag1CharSize 7/7 Bits: ""
+*it.Mag1CharSize 8/8 Bits: ""
+
+*it.Translation Mag1Parity/Parità: ""
+*it.Mag1Parity None/Nessuna: ""
+*it.Mag1Parity Even/Parità Dispari(Even): ""
+*it.Mag1Parity Odd/Parità Pari(Odd): ""
+
+*it.Translation Mag1ASCIIOffset/ASCII Offset: ""
+*it.Mag1ASCIIOffset Null/Nullo: ""
+*it.Mag1ASCIIOffset Space/Spazio: ""
+*it.Mag1ASCIIOffset Zero/Zero: ""
+
+*it.Translation Mag1BitDensity/Densità Bit: ""
+*it.Mag1BitDensity 75/75: ""
+*it.Mag1BitDensity 128/128: ""
+*it.Mag1BitDensity 210/210: ""
+
+*it.Translation Mag1ReverseCharBits/Inverti Ordine Bit: ""
+*it.Mag1ReverseCharBits true/Si: ""
+*it.Mag1ReverseCharBits false/No: ""
+
+*it.Translation Mag1AddLeadingZeros/Aggiungi Zeri Iniziali: ""
+*it.Mag1AddLeadingZeros true/Si: ""
+*it.Mag1AddLeadingZeros false/No: ""
+ 
+*it.Translation Mag1ReverseAllBits/Reverse tutti i bit: ""
+*it.Mag1ReverseAllBits true/Si: ""
+*it.Mag1ReverseAllBits false/No: ""
+
+*it.Translation Mag2TrackMode/Traccia 2 - Codifica: ""
+*it.Mag2TrackMode ISO/ISO: ""
+*it.Mag2TrackMode custom/Costume: ""
+*it.Mag2TrackMode JIS/JISII: ""
+*it.Mag2TrackMode Raw/Crudo: ""
+
+*it.Translation Mag2LRCGeneration/Generazione LRC: ""
+*it.Mag2LRCGeneration None/Nessuna: ""
+*it.Mag2LRCGeneration Even/Parità Dispari(Even): ""
+*it.Mag2LRCGeneration Odd/Parità Pari(Odd): ""
+
+*it.Translation Mag2CharSize/Dimensione Carattere: ""
+*it.Mag2CharSize 4/4 Bits: ""
+*it.Mag2CharSize 5/5 Bits: ""
+*it.Mag2CharSize 7/7 Bits: ""
+*it.Mag2CharSize 8/8 Bits: ""
+
+*it.Translation Mag2Parity/Parità: ""
+*it.Mag2Parity None/None: ""
+*it.Mag2Parity Even/Parità Dispari(Even): ""
+*it.Mag2Parity Odd/Parità Pari(Odd): ""
+
+*it.Translation Mag2ASCIIOffset/ASCII Offset: ""
+*it.Mag2ASCIIOffset Null/Nullo: ""
+*it.Mag2ASCIIOffset Space/Spazio: ""
+*it.Mag2ASCIIOffset Zero/Zero: ""
+
+*it.Translation Mag2BitDensity/Densità Bit: ""
+*it.Mag2BitDensity 75/75: ""
+*it.Mag2BitDensity 128/128: ""
+*it.Mag2BitDensity 210/210: ""
+
+*it.Translation Mag2ReverseCharBits/Inverti Ordine Bit: ""
+*it.Mag2ReverseCharBits true/Si: ""
+*it.Mag2ReverseCharBits false/No: ""
+
+*it.Translation Mag2AddLeadingZeros/Aggiungi Zeri Iniziali: ""
+*it.Mag2AddLeadingZeros true/Si: ""
+*it.Mag2AddLeadingZeros false/No: ""
+
+*it.Translation Mag2ReverseAllBits/Reverse tutti i bit: ""
+*it.Mag2ReverseAllBits true/Si: ""
+*it.Mag2ReverseAllBits false/No: ""
+
+*it.Translation Mag3TrackMode/Traccia 2 - Codifica: ""
+*it.Mag3TrackMode ISO/ISO: ""
+*it.Mag3TrackMode custom/Costume: ""
+*it.Mag3TrackMode JIS/JISII: ""
+*it.Mag3TrackMode Raw/Crudo: ""
+
+*it.Translation Mag3LRCGeneration/Generazione LRC: ""
+*it.Mag3LRCGeneration None/Nessuna: ""
+*it.Mag3LRCGeneration Even/Parità Dispari(Even): ""
+*it.Mag3LRCGeneration Odd/Parità Pari(Odd): ""
+
+*it.Translation Mag3CharSize/Dimensione Carattere: ""
+*it.Mag3CharSize 4/4 Bits: ""
+*it.Mag3CharSize 5/5 Bits: ""
+*it.Mag3CharSize 7/7 Bits: ""
+*it.Mag3CharSize 8/8 Bits: ""
+
+*it.Translation Mag3Parity/Parità: ""
+*it.Mag3Parity None/None: ""
+*it.Mag3Parity Even/Parità Dispari(Even): ""
+*it.Mag3Parity Odd/Parità Pari(Odd): ""
+
+*it.Translation Mag3ASCIIOffset/ASCII Offset: ""
+*it.Mag3ASCIIOffset Null/Nullo: ""
+*it.Mag3ASCIIOffset Space/Spazio: ""
+*it.Mag3ASCIIOffset Zero/Zero: ""
+
+*it.Translation Mag3BitDensity/Densità Bit: ""
+*it.Mag3BitDensity 75/75: ""
+*it.Mag3BitDensity 128/128: ""
+*it.Mag3BitDensity 210/210: ""
+
+*it.Translation Mag3ReverseCharBits/Inverti Ordine Bit: ""
+*it.Mag3ReverseCharBits true/Si: ""
+*it.Mag3ReverseCharBits false/No: ""
+
+*it.Translation Mag3AddLeadingZeros/Aggiungi Zeri Iniziali: ""
+*it.Mag3AddLeadingZeros true/Si: ""
+*it.Mag3AddLeadingZeros false/No: ""
+
+*it.Translation Mag3ReverseAllBits/Reverse tutti i bit: ""
+*it.Mag3ReverseAllBits true/Si: ""
+*it.Mag3ReverseAllBits false/No: ""
+
+*% Error Codes
+*% English
+*cupsIPPStatus IDS_STATUS_IDLE/Idle: ""
+*cupsIPPStatus IDS_STATUS_PRINTING/Printing: ""
+*cupsIPPStatus IDS_STATUS_CARD_HOPPER/Card Hopper: ""
+*cupsIPPStatus IDS_STATUS_FEEDING/Feeding: ""
+*cupsIPPStatus IDS_STATUS_FLIPPING/Flipping: ""
+*cupsIPPStatus IDS_STATUS_EJECTING/Ejecting: ""
+*cupsIPPStatus IDS_STATUS_CARD_HANDOFF/Handoff: ""
+*cupsIPPStatus IDS_STATUS_ENCODE_WAIT/Encoding: ""
+*cupsIPPStatus IDS_STATUS_ENCODE_MAG/Encoding: ""
+*cupsIPPStatus IDS_STATUS_ENCODE_CONTACT/Encoding: ""
+*cupsIPPStatus IDS_STATUS_ENCODE_CONTACTLESS/Encoding: ""
+*cupsIPPStatus IDS_STATUS_ENCODE_PROX/Encoding: ""
+*cupsIPPStatus IDS_STATUS_PAUSED/Paused: ""
+*cupsIPPStatus IDS_STATUS_CANCEL/Cancel: ""
+*cupsIPPStatus IDS_STATUS_READY/Ready: ""
+*cupsIPPStatus IDS_STATUS_EXCEPTION/Error: ""
+*cupsIPPStatus IDS_STATUS_WAIT_FOR_EJECT/Waiting: ""
+*cupsIPPStatus IDS_STATUS_XFER_HEATING/Heating: ""
+*cupsIPPStatus IDS_STATUS_XFER_COOLING/Cooling: ""
+*cupsIPPStatus IDS_STATUS_LAM_WAITING/Waiting: ""
+*cupsIPPStatus IDS_STATUS_UNKNOWN/Unknown: ""
+
+*% German
+*de.cupsIPPStatus IDS_STATUS_IDLE/Bereit: ""
+*de.cupsIPPStatus IDS_STATUS_PRINTING/Drucken: ""
+*de.cupsIPPStatus IDS_STATUS_CARD_HOPPER/Karteneinzug: ""
+*de.cupsIPPStatus IDS_STATUS_FEEDING/Einziehen: ""
+*de.cupsIPPStatus IDS_STATUS_FLIPPING/Drehen: ""
+*de.cupsIPPStatus IDS_STATUS_EJECTING/Auswurfen: ""
+*de.cupsIPPStatus IDS_STATUS_CARD_HANDOFF/Ausgabe: ""
+*de.cupsIPPStatus IDS_STATUS_ENCODE_WAIT/Kodieren: ""
+*de.cupsIPPStatus IDS_STATUS_ENCODE_MAG/Kodieren: ""
+*de.cupsIPPStatus IDS_STATUS_ENCODE_CONTACT/Kodieren: ""
+*de.cupsIPPStatus IDS_STATUS_ENCODE_CONTACTLESS/Kodieren: ""
+*de.cupsIPPStatus IDS_STATUS_ENCODE_PROX/Kodieren: ""
+*de.cupsIPPStatus IDS_STATUS_PAUSED/Pause: ""
+*de.cupsIPPStatus IDS_STATUS_CANCEL/Abbrechen: ""
+*de.cupsIPPStatus IDS_STATUS_READY/Bereit: ""
+*de.cupsIPPStatus IDS_STATUS_EXCEPTION/Fehler: ""
+*de.cupsIPPStatus IDS_STATUS_WAIT_FOR_EJECT/Warten: ""
+*de.cupsIPPStatus IDS_STATUS_XFER_HEATING/Aufheizen: ""
+*de.cupsIPPStatus IDS_STATUS_XFER_COOLING/Abkühlen: ""
+*de.cupsIPPStatus IDS_STATUS_LAM_WAITING/Warten: ""
+*de.cupsIPPStatus IDS_STATUS_UNKNOWN/Unbekannt: ""
+
+*% Spanish
+*es.cupsIPPStatus IDS_STATUS_IDLE/Inactivo: ""
+*es.cupsIPPStatus IDS_STATUS_PRINTING/Imprimiendo: ""
+*es.cupsIPPStatus IDS_STATUS_CARD_HOPPER/Alimentador De Tarjetas: ""
+*es.cupsIPPStatus IDS_STATUS_FEEDING/Alimentando: ""
+*es.cupsIPPStatus IDS_STATUS_FLIPPING/Volteando: ""
+*es.cupsIPPStatus IDS_STATUS_EJECTING/Expulsando: ""
+*es.cupsIPPStatus IDS_STATUS_CARD_HANDOFF/Pasando: ""
+*es.cupsIPPStatus IDS_STATUS_ENCODE_WAIT/Codificando: ""
+*es.cupsIPPStatus IDS_STATUS_ENCODE_MAG/Codificando: ""
+*es.cupsIPPStatus IDS_STATUS_ENCODE_CONTACT/Codificando: ""
+*es.cupsIPPStatus IDS_STATUS_ENCODE_CONTACTLESS/Codificando: ""
+*es.cupsIPPStatus IDS_STATUS_ENCODE_PROX/Codificando: ""
+*es.cupsIPPStatus IDS_STATUS_PAUSED/Detenido: ""
+*es.cupsIPPStatus IDS_STATUS_CANCEL/Cancelado: ""
+*es.cupsIPPStatus IDS_STATUS_READY/Listo: ""
+*es.cupsIPPStatus IDS_STATUS_EXCEPTION/Error: ""
+*es.cupsIPPStatus IDS_STATUS_WAIT_FOR_EJECT/Esperando: ""
+*es.cupsIPPStatus IDS_STATUS_XFER_HEATING/Calentando: ""
+*es.cupsIPPStatus IDS_STATUS_XFER_COOLING/Enfriando: ""
+*es.cupsIPPStatus IDS_STATUS_LAM_WAITING/Esperando: ""
+*es.cupsIPPStatus IDS_STATUS_UNKNOWN/Desconocido: ""
+
+*% French
+*fr.cupsIPPStatus IDS_STATUS_IDLE/Ralenti: ""
+*fr.cupsIPPStatus IDS_STATUS_PRINTING/Impression: ""
+*fr.cupsIPPStatus IDS_STATUS_CARD_HOPPER/Carte Hopper: ""
+*fr.cupsIPPStatus IDS_STATUS_FEEDING/Alimentation: ""
+*fr.cupsIPPStatus IDS_STATUS_FLIPPING/Retournement: ""
+*fr.cupsIPPStatus IDS_STATUS_EJECTING/Ejection: ""
+*fr.cupsIPPStatus IDS_STATUS_CARD_HANDOFF/Transfert: ""
+*fr.cupsIPPStatus IDS_STATUS_ENCODE_WAIT/Codant: ""
+*fr.cupsIPPStatus IDS_STATUS_ENCODE_MAG/Codant: ""
+*fr.cupsIPPStatus IDS_STATUS_ENCODE_CONTACT/Codant: ""
+*fr.cupsIPPStatus IDS_STATUS_ENCODE_CONTACTLESS/Codant: ""
+*fr.cupsIPPStatus IDS_STATUS_ENCODE_PROX/Codant: ""
+*fr.cupsIPPStatus IDS_STATUS_PAUSED/Pause: ""
+*fr.cupsIPPStatus IDS_STATUS_CANCEL/Annuler: ""
+*fr.cupsIPPStatus IDS_STATUS_READY/Prêt: ""
+*fr.cupsIPPStatus IDS_STATUS_EXCEPTION/Erreur: ""
+*fr.cupsIPPStatus IDS_STATUS_WAIT_FOR_EJECT/D'attente: ""
+*fr.cupsIPPStatus IDS_STATUS_XFER_HEATING/Chauffage: ""
+*fr.cupsIPPStatus IDS_STATUS_XFER_COOLING/Refroidissement: ""
+*fr.cupsIPPStatus IDS_STATUS_LAM_WAITING/D'attente: ""
+*fr.cupsIPPStatus IDS_STATUS_UNKNOWN/Inconnue: ""
+
+*% Italian
+*it.cupsIPPStatus IDS_STATUS_IDLE/Inattiva: ""
+*it.cupsIPPStatus IDS_STATUS_PRINTING/In Stampa: ""
+*it.cupsIPPStatus IDS_STATUS_CARD_HOPPER/Caricatore Tessere: ""
+*it.cupsIPPStatus IDS_STATUS_FEEDING/Caricamento: ""
+*it.cupsIPPStatus IDS_STATUS_FLIPPING/Rotazione: ""
+*it.cupsIPPStatus IDS_STATUS_EJECTING/Espulsione: ""
+*it.cupsIPPStatus IDS_STATUS_CARD_HANDOFF/Movimentazione: ""
+*it.cupsIPPStatus IDS_STATUS_ENCODE_WAIT/Codifica: ""
+*it.cupsIPPStatus IDS_STATUS_ENCODE_MAG/Codifica: ""
+*it.cupsIPPStatus IDS_STATUS_ENCODE_CONTACT/Codifica: ""
+*it.cupsIPPStatus IDS_STATUS_ENCODE_CONTACTLESS/Codifica: ""
+*it.cupsIPPStatus IDS_STATUS_ENCODE_PROX/Codifica: ""
+*it.cupsIPPStatus IDS_STATUS_PAUSED/In Pausa: ""
+*it.cupsIPPStatus IDS_STATUS_CANCEL/Annullamento: ""
+*it.cupsIPPStatus IDS_STATUS_READY/Pronta: ""
+*it.cupsIPPStatus IDS_STATUS_EXCEPTION/Errore: ""
+*it.cupsIPPStatus IDS_STATUS_WAIT_FOR_EJECT/In Attesa: ""
+*it.cupsIPPStatus IDS_STATUS_XFER_HEATING/Riscaldamento: ""
+*it.cupsIPPStatus IDS_STATUS_XFER_COOLING/Raffreddamento: ""
+*it.cupsIPPStatus IDS_STATUS_LAM_WAITING/In Attesa: ""
+*it.cupsIPPStatus IDS_STATUS_UNKNOWN/Sconosciuto: ""
+
+*% Reason Codes
+*% English
+*cupsIPPReason IDS_ERROR_SUCCESS/Ready: ""
+*cupsIPPReason IDS_ERROR_GENERAL/General Error: ""
+*cupsIPPReason IDS_ERROR_COVER/Cover Open: ""
+*cupsIPPReason IDS_ERROR_HOPPER_EMPTY/Card Hopper Empty: ""
+*cupsIPPReason IDS_ERROR_HOPPER_FULL/Card Output Hopper Full: ""
+*cupsIPPReason IDS_ERROR_CARD_FEED/Unable to Feed Card: ""
+*cupsIPPReason IDS_ERROR_CLEAN_PRINTER/Clean printer: ""
+*cupsIPPReason IDS_ERROR_CARD_JAM/Card Jam: ""
+*cupsIPPReason IDS_ERROR_CARD_JAM_ENC/Card Jam (Encoder): ""
+*cupsIPPReason IDS_ERROR_FLIPPER_JAM/Card Jam (Flipper): ""
+*cupsIPPReason IDS_ERROR_CARD_JAM_LAM/ Card Jam (Laminator): ""
+*cupsIPPReason IDS_ERROR_CARD_JAM_EJECT/Card Eject Error: ""
+*cupsIPPReason IDS_ERROR_HOPPER_EMPTY/Hopper Empty: ""
+*cupsIPPReason IDS_ERROR_CARD_JAM_FLIP/Flipper Jam: ""
+*cupsIPPReason IDS_ERROR_FLIPPER_NONE/No Flipper Module: ""
+*cupsIPPReason IDS_ERROR_RIBBON_RFID/Ribbon RFID Error: ""
+*cupsIPPReason IDS_ERROR_RIBBON_TYPE/Wrong Ribbon Installed: ""
+*cupsIPPReason IDS_ERROR_RIBBON_NONE/No Ribbon Installed: ""
+*cupsIPPReason IDS_ERROR_RIBBON_OUT/Ribbon Out: ""
+*cupsIPPReason IDS_ERROR_RIBBON_BREAK/Ribbon Break/Jam: ""
+*cupsIPPReason IDS_ERROR_RIBBON_SENSOR/Ribbon Sensor Error: ""
+*cupsIPPReason IDS_ERROR_RIBBON_GRADE/Invalid Ribbon: ""
+*cupsIPPReason IDS_ERROR_RIBBON_SECURE/Invalid Ribbon: ""
+*cupsIPPReason IDS_ERROR_RIBBON/Ribbon Error: ""
+*cupsIPPReason IDS_ERROR_MAG_NONE/No Magnetic Encoder Installed: ""
+*cupsIPPReason IDS_ERROR_MAG_VERIFIER/Mag Verify Error: ""
+*cupsIPPReason IDS_ERROR_MAG_NO_DATA/No Mag Strip Present: ""
+*cupsIPPReason IDS_ERROR_SMART_NONE/No Smart Card Encoder: ""
+*cupsIPPReason IDS_ERROR_PROX_NONE/No Prox Card Encoder: ""
+*cupsIPPReason IDS_ERROR_HEADLIFT/Headlift Error: ""
+*cupsIPPReason IDS_ERROR_CARD_LAM/Laminator (General Error): ""
+*cupsIPPReason IDS_ERROR_LAM_POWER/Laminator (Check Power): ""
+*cupsIPPReason IDS_ERROR_LAM_HEAT_OFF/Laminator (Heater Off): ""
+*cupsIPPReason IDS_ERROR_LAM_HEAT_TIMEOUT/Laminator (Heater Timed Out): ""
+*cupsIPPReason IDS_ERROR_LAM_NONE/No Laminator Installed: ""
+*cupsIPPReason IDS_ERROR_CARD_LAM_TYPE/Wrong Laminator Film Installed: ""
+*cupsIPPReason IDS_ERROR_LAM_REMOVE/Remove Laminator Film Cartridge 1 or 2: ""
+*cupsIPPReason IDS_ERROR_LAM_BREAK/Laminator Film Break/Jam: ""
+*cupsIPPReason IDS_ERROR_LAM_SENSOR/Laminator Film Sensor Error: ""
+*cupsIPPReason IDS_ERROR_LAM_OUT/No Laminator Film Installed: ""
+*cupsIPPReason IDS_ERROR_LAM_REMOVE_CAL/Remove Laminator Film Cartridge 1 and 2: ""
+*cupsIPPReason IDS_ERROR_LAM_REMOVE_LAM1/Remove Laminator Film Cartridge 1: ""
+*cupsIPPReason IDS_ERROR_LAM_REMOVE_LAM2/Remove Laminator Film Cartridge 2: ""
+*cupsIPPReason IDS_ERROR_FILM_OUT/Print Film Out: ""
+*cupsIPPReason IDS_ERROR_FILM_SENSOR/Print Film Sensor Error: ""
+*cupsIPPReason IDS_ERROR_FILM_NONE/Print Film is not Installed: ""
+*cupsIPPReason IDS_ERROR_FILM_TYPE/Wrong Print Film Installed: ""
+*cupsIPPReason IDS_ERROR_FILM_SECURE/Invalid Print Film Installed: ""
+*cupsIPPReason IDS_ERROR_FILM/Print Film Error: ""
+
+*% German
+*de.cupsIPPReason IDS_ERROR_SUCCESS/Bereit: ""
+*de.cupsIPPReason IDS_ERROR_GENERAL/Algemeiner Fehler: ""
+*de.cupsIPPReason IDS_ERROR_COVER/Abdeckung offen: ""
+*de.cupsIPPReason IDS_ERROR_HOPPER_EMPTY/Karteneinzug leer: ""
+*de.cupsIPPReason IDS_ERROR_HOPPER_FULL/Kartenauswurf voll: ""
+*de.cupsIPPReason IDS_ERROR_CARD_FEED/Kann Karte nich zuführen: ""
+*de.cupsIPPReason IDS_ERROR_CLEAN_PRINTER/Reinigen drucker: ""
+*de.cupsIPPReason IDS_ERROR_CARD_JAM/Kartenstau: ""
+*de.cupsIPPReason IDS_ERROR_CARD_JAM_ENC/Kartenstau (Kodierer): ""
+*de.cupsIPPReason IDS_ERROR_FLIPPER_JAM/Kartenstau (Flipper): ""
+*de.cupsIPPReason IDS_ERROR_CARD_JAM_LAM/Kartenstau (Laminator): ""
+*de.cupsIPPReason IDS_ERROR_CARD_JAM_EJECT/Fehler beim Kartenauswurf: ""
+*de.cupsIPPReason IDS_ERROR_HOPPER_EMPTY/Karteneinzug leer: ""
+*de.cupsIPPReason IDS_ERROR_CARD_JAM_FLIP/Flipperstau: ""
+*de.cupsIPPReason IDS_ERROR_FLIPPER_NONE/Kein Wendemodul: ""
+*de.cupsIPPReason IDS_ERROR_RIBBON_RFID/Band RFID Fehler: ""
+*de.cupsIPPReason IDS_ERROR_RIBBON_TYPE/Falsches Band installiert: ""
+*de.cupsIPPReason IDS_ERROR_RIBBON_NONE/Kein Band installiert: ""
+*de.cupsIPPReason IDS_ERROR_RIBBON_OUT/Band verbraucht: ""
+*de.cupsIPPReason IDS_ERROR_RIBBON_BREAK/Band gerissen oder verklemmt: ""
+*de.cupsIPPReason IDS_ERROR_RIBBON_SENSOR/Bandsensor Fehler: ""
+*de.cupsIPPReason IDS_ERROR_RIBBON_GRADE/Ungültiges Band: ""
+*de.cupsIPPReason IDS_ERROR_RIBBON_SECURE/Ungültiges Band: ""
+*de.cupsIPPReason IDS_ERROR_RIBBON/Bandfehler: ""
+*de.cupsIPPReason IDS_ERROR_MAG_NONE/Kein Magnetstreifenleser installiert: ""
+*de.cupsIPPReason IDS_ERROR_MAG_VERIFIER/Magnetstreifenverifizierungsfehler: ""
+*de.cupsIPPReason IDS_ERROR_MAG_NO_DATA/Kein Magnetstreifen vorhanden: ""
+*de.cupsIPPReason IDS_ERROR_SMART_NONE/Kein Chipkartenleser: ""
+*de.cupsIPPReason IDS_ERROR_PROX_NONE/Kein Proxkartenleser: ""
+*de.cupsIPPReason IDS_ERROR_HEADLIFT/Fehler beim Kopfheben: ""
+*de.cupsIPPReason IDS_ERROR_CARD_LAM/Laminator (Allgemeiner Fehler): ""
+*de.cupsIPPReason IDS_ERROR_LAM_POWER/Laminator (Stromversorgung überprüfen): ""
+*de.cupsIPPReason IDS_ERROR_LAM_HEAT_OFF/Laminator (Heizung aus): ""
+*de.cupsIPPReason IDS_ERROR_LAM_HEAT_TIMEOUT/Laminator (Zeit für Heizung abgelaufen): ""
+*de.cupsIPPReason IDS_ERROR_LAM_NONE/Kein Laminator installiert: ""
+*de.cupsIPPReason IDS_ERROR_CARD_LAM_TYPE/Falsche Laminierfolie installiert: ""
+*de.cupsIPPReason IDS_ERROR_LAM_REMOVE/Laminierfolie Kartusche 1 oder 2 entfernen: ""
+*de.cupsIPPReason IDS_ERROR_LAM_BREAK/Laminierfolie gerissen oder verklemmt: ""
+*de.cupsIPPReason IDS_ERROR_LAM_SENSOR/Laminierfoliensensorfehler: ""
+*de.cupsIPPReason IDS_ERROR_LAM_OUT/Keine Laminierfolie installiert: ""
+*de.cupsIPPReason IDS_ERROR_LAM_REMOVE_CAL/Laminierfolie Kartusche 1 und 2 entfernen: ""
+*de.cupsIPPReason IDS_ERROR_LAM_REMOVE_LAM1/Laminierfolie Kartusche 1 entfernen: ""
+*de.cupsIPPReason IDS_ERROR_LAM_REMOVE_LAM2/Laminierfolie Kartusche 2 entfernen: ""
+*de.cupsIPPReason IDS_ERROR_FILM_OUT/Druckfolie leer: ""
+*de.cupsIPPReason IDS_ERROR_FILM_SENSOR/Druckfoliensensorfehler: ""
+*de.cupsIPPReason IDS_ERROR_FILM_NONE/Druckfolie nicht installiert: ""
+*de.cupsIPPReason IDS_ERROR_FILM_TYPE/Falsche Druckfolie installiert: ""
+*de.cupsIPPReason IDS_ERROR_FILM_SECURE/Ungültige Druckfolie installiert: ""
+*de.cupsIPPReason IDS_ERROR_FILM/Druckfolienfehler: ""
+
+*% Spanish
+*es.cupsIPPReason IDS_ERROR_SUCCESS/Listo: ""
+*es.cupsIPPReason IDS_ERROR_GENERAL/Error General: ""
+*es.cupsIPPReason IDS_ERROR_COVER/Covertor Abierto: ""
+*es.cupsIPPReason IDS_ERROR_HOPPER_EMPTY/Alimentador de Tarjetas abierto: ""
+*es.cupsIPPReason IDS_ERROR_HOPPER_FULL/Expulsador de Tarjetas Lleno: ""
+*es.cupsIPPReason IDS_ERROR_CARD_FEED/Problemas al alimentar tarjetas: ""
+*es.cupsIPPReason IDS_ERROR_CLEAN_PRINTER/Limpieza impresora: ""
+*es.cupsIPPReason IDS_ERROR_CARD_JAM/Tarjeta Atorada: ""
+*es.cupsIPPReason IDS_ERROR_CARD_JAM_ENC/Tarjeta Atorada en el codificador: ""
+*es.cupsIPPReason IDS_ERROR_FLIPPER_JAM/Tarjeta Atorada en el Volteador: ""
+*es.cupsIPPReason IDS_ERROR_CARD_JAM_LAM/Tarjeta Atorada en el Laminador: ""
+*es.cupsIPPReason IDS_ERROR_CARD_JAM_EJECT/Error al Expulsar la Tarjeta: ""
+*es.cupsIPPReason IDS_ERROR_HOPPER_EMPTY/Alimentador Vacío: ""
+*es.cupsIPPReason IDS_ERROR_CARD_JAM_FLIP/Tarjeta Atorada en el Volteador: ""
+*es.cupsIPPReason IDS_ERROR_FLIPPER_NONE/Volteador no detectado: ""
+*es.cupsIPPReason IDS_ERROR_RIBBON_RFID/Error en la Antena RFID: ""
+*es.cupsIPPReason IDS_ERROR_RIBBON_TYPE/Cinta Incorrecta : ""
+*es.cupsIPPReason IDS_ERROR_RIBBON_NONE/Cinta no detectada: ""
+*es.cupsIPPReason IDS_ERROR_RIBBON_OUT/Cambiar Cinta: ""
+*es.cupsIPPReason IDS_ERROR_RIBBON_BREAK/Cinta Rebentada/Atorada: ""
+*es.cupsIPPReason IDS_ERROR_RIBBON_SENSOR/Error del Sensor de Color: ""
+*es.cupsIPPReason IDS_ERROR_RIBBON_GRADE/Cinta Incorrecta: ""
+*es.cupsIPPReason IDS_ERROR_RIBBON_SECURE/Cinta Incorrecta: ""
+*es.cupsIPPReason IDS_ERROR_RIBBON/Error de Cinta: ""
+*es.cupsIPPReason IDS_ERROR_MAG_NONE/Codificador No Instalado: ""
+*es.cupsIPPReason IDS_ERROR_MAG_VERIFIER/al Verificar la banda magnética: ""
+*es.cupsIPPReason IDS_ERROR_MAG_NO_DATA/Banda Magnética no detectada: ""
+*es.cupsIPPReason IDS_ERROR_SMART_NONE/Codificador Inteligente no detectado: ""
+*es.cupsIPPReason IDS_ERROR_PROX_NONE/Codificador de Proximidad no detectado: ""
+*es.cupsIPPReason IDS_ERROR_HEADLIFT/Error al Levantar el Cabezal: ""
+*es.cupsIPPReason IDS_ERROR_CARD_LAM/Error General en el laminador: ""
+*es.cupsIPPReason IDS_ERROR_LAM_POWER/Verificar conección en el laminador: ""
+*es.cupsIPPReason IDS_ERROR_LAM_HEAT_OFF/Temperatura no detectada en el laminador: ""
+*es.cupsIPPReason IDS_ERROR_LAM_HEAT_TIMEOUT/Problemas de Temperatura: ""
+*es.cupsIPPReason IDS_ERROR_LAM_NONE/Laminador no detectado: ""
+*es.cupsIPPReason IDS_ERROR_CARD_LAM_TYPE/Film de Laminación Incorrecto: ""
+*es.cupsIPPReason IDS_ERROR_LAM_REMOVE/Remover cartucho del film 1 o 2 del laminador: ""
+*es.cupsIPPReason IDS_ERROR_LAM_BREAK/Film de laminación reventado/atorado: ""
+*es.cupsIPPReason IDS_ERROR_LAM_SENSOR/Error en el sensor del film del laminador: ""
+*es.cupsIPPReason IDS_ERROR_LAM_OUT/No film instalado en el laminador: ""
+*es.cupsIPPReason IDS_ERROR_LAM_REMOVE_CAL/Remover cartucho del film 1 y 2 del laminador: ""
+*es.cupsIPPReason IDS_ERROR_LAM_REMOVE_LAM1/Remover cartucho del film l del laminador: ""
+*es.cupsIPPReason IDS_ERROR_LAM_REMOVE_LAM2/Remover cartucho del film 2 del laminador: ""
+*es.cupsIPPReason IDS_ERROR_FILM_OUT/Cambiar Film: ""
+*es.cupsIPPReason IDS_ERROR_FILM_SENSOR/Error en el sensor del Film: ""
+*es.cupsIPPReason IDS_ERROR_FILM_NONE/Film no detectado: ""
+*es.cupsIPPReason IDS_ERROR_FILM_TYPE/Incorrecto Film instalado: ""
+*es.cupsIPPReason IDS_ERROR_FILM_SECURE/Film instalado no es válido: ""
+*es.cupsIPPReason IDS_ERROR_FILM/Error de impresión con el film: ""
+
+*% French
+*fr.cupsIPPReason IDS_ERROR_SUCCESS/Prêt: ""
+*fr.cupsIPPReason IDS_ERROR_GENERAL/Erreur générale: ""
+*fr.cupsIPPReason IDS_ERROR_COVER/Couverture Ouverte: ""
+*fr.cupsIPPReason IDS_ERROR_HOPPER_EMPTY/Trémie de Carte Vide: ""
+*fr.cupsIPPReason IDS_ERROR_HOPPER_FULL/Trémie de Carte remplie: ""
+*fr.cupsIPPReason IDS_ERROR_CARD_FEED/Incapable de nourrir la Carte: ""
+*fr.cupsIPPReason IDS_ERROR_CLEAN_PRINTER/Nettoyer imprimante: ""
+*fr.cupsIPPReason IDS_ERROR_CARD_JAM/Confiture de Carte: ""
+*fr.cupsIPPReason IDS_ERROR_CARD_JAM_ENC/Confiture de Carte (Encoder): ""
+*fr.cupsIPPReason IDS_ERROR_FLIPPER_JAM/Confiture de Carte (Nageoire): ""
+*fr.cupsIPPReason IDS_ERROR_CARD_JAM_LAM/Confiture de Carte( Laminateur): ""
+*fr.cupsIPPReason IDS_ERROR_CARD_JAM_EJECT/Erreur d'ejection de la carte: ""
+*fr.cupsIPPReason IDS_ERROR_HOPPER_EMPTY/Trémie vide: ""
+*fr.cupsIPPReason IDS_ERROR_CARD_JAM_FLIP/Confiture de Nageoire: ""
+*fr.cupsIPPReason IDS_ERROR_FLIPPER_NONE/Aucun Module de Nageoire: ""
+*fr.cupsIPPReason IDS_ERROR_RIBBON_RFID/Erreur du Cordon RFID: ""
+*fr.cupsIPPReason IDS_ERROR_RIBBON_TYPE/Faux Cordon Installé: ""
+*fr.cupsIPPReason IDS_ERROR_RIBBON_NONE/Aucun COrdon Installé: ""
+*fr.cupsIPPReason IDS_ERROR_RIBBON_OUT/Cordon fini: ""
+*fr.cupsIPPReason IDS_ERROR_RIBBON_BREAK/Cordon brise/confiture: ""
+*fr.cupsIPPReason IDS_ERROR_RIBBON_SENSOR/Erreur de Détecteur de Cordon: ""
+*fr.cupsIPPReason IDS_ERROR_RIBBON_GRADE/Cordon Sans fondement: ""
+*fr.cupsIPPReason IDS_ERROR_RIBBON_SECURE/Cordon Sans fondement: ""
+*fr.cupsIPPReason IDS_ERROR_RIBBON/Erreur du Cordon: ""
+*fr.cupsIPPReason IDS_ERROR_MAG_NONE/Aucun Encoder Magnétique Installé: ""
+*fr.cupsIPPReason IDS_ERROR_MAG_VERIFIER/Erreur de Mag Verify: ""
+*fr.cupsIPPReason IDS_ERROR_MAG_NO_DATA/Aucun Mag Strip Présent: ""
+*fr.cupsIPPReason IDS_ERROR_SMART_NONE/Aucune Encodeur Smart Card: ""
+*fr.cupsIPPReason IDS_ERROR_PROX_NONE/Aucune Prox Card Encoder: ""
+*fr.cupsIPPReason IDS_ERROR_HEADLIFT/Erreur Headlift: ""
+*fr.cupsIPPReason IDS_ERROR_CARD_LAM/Laminator (Erreur général): ""
+*fr.cupsIPPReason IDS_ERROR_LAM_POWER/Laminator (Vérifiez le courant): ""
+*fr.cupsIPPReason IDS_ERROR_LAM_HEAT_OFF/Laminator ( Chaffage fini): ""
+*fr.cupsIPPReason IDS_ERROR_LAM_HEAT_TIMEOUT/Laminator (Chauffage Chronométré termine): ""
+*fr.cupsIPPReason IDS_ERROR_LAM_NONE/Aucun Laminator Installé: ""
+*fr.cupsIPPReason IDS_ERROR_CARD_LAM_TYPE/Faux Film de Laminator Installé: ""
+*fr.cupsIPPReason IDS_ERROR_LAM_REMOVE/Enlevez la Cartouche de Film Laminator 1 ou 2: ""
+*fr.cupsIPPReason IDS_ERROR_LAM_BREAK/Laminator brise/confiture: ""
+*fr.cupsIPPReason IDS_ERROR_LAM_SENSOR/Erreur de Détecteur de Film de Laminator: ""
+*fr.cupsIPPReason IDS_ERROR_LAM_OUT/Aucun Film Laminator Installé: ""
+*fr.cupsIPPReason IDS_ERROR_LAM_REMOVE_CAL/Enlevez la Cartouche de Film Laminator 1 et 2: ""
+*fr.cupsIPPReason IDS_ERROR_LAM_REMOVE_LAM1/Enlevez la Cartouche de Film Laminator 1: ""
+*fr.cupsIPPReason IDS_ERROR_LAM_REMOVE_LAM2/Enlevez la Cartouche de Film Laminator 2: ""
+*fr.cupsIPPReason IDS_ERROR_FILM_OUT/Film de l'imprimante fini: ""
+*fr.cupsIPPReason IDS_ERROR_FILM_SENSOR/Erreur de Détecteur de Film de Caractères: ""
+*fr.cupsIPPReason IDS_ERROR_FILM_NONE/Le Film de Caractères n'est pas Installé: ""
+*fr.cupsIPPReason IDS_ERROR_FILM_TYPE/Faux Film de Caractères Installé: ""
+*fr.cupsIPPReason IDS_ERROR_FILM_SECURE/Film d'impression Blancs installés: ""
+*fr.cupsIPPReason IDS_ERROR_FILM/Erreur de Film de Caractères: ""
+
+*% Italian
+*it.cupsIPPReason IDS_ERROR_SUCCESS/Pronta: ""
+*it.cupsIPPReason IDS_ERROR_GENERAL/Errore Generico: ""
+*it.cupsIPPReason IDS_ERROR_COVER/Coperchio Aperto: ""
+*it.cupsIPPReason IDS_ERROR_HOPPER_EMPTY/Cassetto Carico Tessere Vuoto: ""
+*it.cupsIPPReason IDS_ERROR_HOPPER_FULL/Cassetto di Uscita Pieno: ""
+*it.cupsIPPReason IDS_ERROR_CARD_FEED/Impossibile Caricare la Tessera: ""
+*it.cupsIPPReason IDS_ERROR_CLEAN_PRINTER/Pulire la Stampante: ""
+*it.cupsIPPReason IDS_ERROR_CARD_JAM/Inceppamento Tessera: ""
+*it.cupsIPPReason IDS_ERROR_CARD_JAM_ENC/Inceppamento Tessera (Codificatore): ""
+*it.cupsIPPReason IDS_ERROR_FLIPPER_JAM/Inceppamento Tessera (Ribaltatore): ""
+*it.cupsIPPReason IDS_ERROR_CARD_JAM_LAM/Inceppamento Tessera (Laminatore): ""
+*it.cupsIPPReason IDS_ERROR_CARD_JAM_EJECT/Errore Espulsione Tessera: ""
+*it.cupsIPPReason IDS_ERROR_HOPPER_EMPTY/Cassetto Carico Tessere Vuoto: ""
+*it.cupsIPPReason IDS_ERROR_CARD_JAM_FLIP/Inceppamento Ribaltatore: ""
+*it.cupsIPPReason IDS_ERROR_FLIPPER_NONE/Assenza Modulo Ribaltatore: ""
+*it.cupsIPPReason IDS_ERROR_RIBBON_RFID/Errore RFID Nastro: ""
+*it.cupsIPPReason IDS_ERROR_RIBBON_TYPE/Nastro Installato Errato: ""
+*it.cupsIPPReason IDS_ERROR_RIBBON_NONE/Nessun Nastro Installato: ""
+*it.cupsIPPReason IDS_ERROR_RIBBON_OUT/Nastro Esaurito: ""
+*it.cupsIPPReason IDS_ERROR_RIBBON_BREAK/Nastro Rotto/Inceppato: ""
+*it.cupsIPPReason IDS_ERROR_RIBBON_SENSOR/Errore Sensore Nastro: ""
+*it.cupsIPPReason IDS_ERROR_RIBBON_GRADE/Nastro Non Valido: ""
+*it.cupsIPPReason IDS_ERROR_RIBBON_SECURE/Nastro Non Valido: ""
+*it.cupsIPPReason IDS_ERROR_RIBBON/Errore Nastro: ""
+*it.cupsIPPReason IDS_ERROR_MAG_NONE/Assenza Codificatore Magnetico: ""
+*it.cupsIPPReason IDS_ERROR_MAG_VERIFIER/Errore Verifica Cod. Magnetica: ""
+*it.cupsIPPReason IDS_ERROR_MAG_NO_DATA/Nessuna Banda Magnetica Presente: ""
+*it.cupsIPPReason IDS_ERROR_SMART_NONE/Assenza Codificatore Smart Card: ""
+*it.cupsIPPReason IDS_ERROR_PROX_NONE/Assenza Codificatore Tessere di Prossimità: ""
+*it.cupsIPPReason IDS_ERROR_HEADLIFT/Errore Alzo Testina: ""
+*it.cupsIPPReason IDS_ERROR_CARD_LAM/Laminatore (Errore Generico): ""
+*it.cupsIPPReason IDS_ERROR_LAM_POWER/Laminatore (Controllare Alimentazione): ""
+*it.cupsIPPReason IDS_ERROR_LAM_HEAT_OFF/Laminatore (Riscaldamento non attivo): ""
+*it.cupsIPPReason IDS_ERROR_LAM_HEAT_TIMEOUT/Laminatore (Riscaldamento in Timeout): ""
+*it.cupsIPPReason IDS_ERROR_LAM_NONE/Nessun Laminatore Installato: ""
+*it.cupsIPPReason IDS_ERROR_CARD_LAM_TYPE/Errato Film di Laminazione Installato: ""
+*it.cupsIPPReason IDS_ERROR_LAM_REMOVE/Rimuovere Cartuccia del Film di Laminazione 1 o 2: ""
+*it.cupsIPPReason IDS_ERROR_LAM_BREAK/Film Laminazione Rotto/Inceppato: ""
+*it.cupsIPPReason IDS_ERROR_LAM_SENSOR/Errore Sensore Film di Laminazione: ""
+*it.cupsIPPReason IDS_ERROR_LAM_OUT/Nessun Film di Laminazione Installato: ""
+*it.cupsIPPReason IDS_ERROR_LAM_REMOVE_CAL/Rimuovere Cartucce Film di Laminazione 1 e 2: ""
+*it.cupsIPPReason IDS_ERROR_LAM_REMOVE_LAM1/Rimuovere Cartuccia del Film di Laminazione 1: ""
+*it.cupsIPPReason IDS_ERROR_LAM_REMOVE_LAM2/Rimuovere Cartuccia del Film di Laminazione 2: ""
+*it.cupsIPPReason IDS_ERROR_FILM_OUT/Film di Stampa Esaurito: ""
+*it.cupsIPPReason IDS_ERROR_FILM_SENSOR/Errore Sensore Film di Stampa: ""
+*it.cupsIPPReason IDS_ERROR_FILM_NONE/Film di Stampa non Installato: ""
+*it.cupsIPPReason IDS_ERROR_FILM_TYPE/Errato Film di Stampa Installato: ""
+*it.cupsIPPReason IDS_ERROR_FILM_SECURE/Film di Stampa Installato non Valido: ""
+*it.cupsIPPReason IDS_ERROR_FILM/Errore Film di Stampa: ""
+

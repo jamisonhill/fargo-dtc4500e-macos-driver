@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<printer schemaVersion="1.0" xsi:noNamespaceSchemaLocation="PrinterModel.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <model name="DTC4500e Card Printer">
+        <properties>
+            <category name="BlackThreshold">
+                <prop page_property="false" name="Red" enabled="true">
+                    <value type="xs_unsignedInt" default_value="2">2</value>
+                </prop>
+                <prop page_property="false" name="Green" enabled="true">
+                    <value type="xs_unsignedInt" default_value="2">2</value>
+                </prop>
+                <prop page_property="false" name="Blue" enabled="true">
+                    <value type="xs_unsignedInt" default_value="2">2</value>
+                </prop>
+            </category>
+            <category name="WhiteLevel">
+                <prop page_property="false" name="Red" enabled="true">
+                    <value type="xs_unsignedInt" default_value="253">253</value>
+                </prop>
+                <prop page_property="false" name="Green" enabled="true">
+                    <value type="xs_unsignedInt" default_value="253">253</value>
+                </prop>
+                <prop page_property="false" name="Blue" enabled="true">
+                    <value type="xs_unsignedInt" default_value="253">253</value>
+                </prop>
+            </category>
+            <category name="Card">
+                <prop page_property="false" name="Copies" enabled="true">
+                    <value type="xs_unsignedInt" max="99" default_value="1" min="1">1</value>
+                </prop>
+                <prop page_property="false" name="Size" enabled="true">
+                    <value type="xs_string" default_value="CR80">CR80</value>
+                </prop>
+                <prop page_property="false" name="Thickness" enabled="true">
+                    <value type="xs_unsignedInt" default_value="30">30</value>
+                </prop>
+                <prop page_property="false" name="Hopper" enabled="true">
+                    <value type="xs_string" default_value="FirstAvailable">FirstAvailable</value>
+                </prop>
+            </category>
+            <category name="DeviceOptions">
+                <prop name="ResolutionX" enabled="true">
+                    <value type="xs_unsignedInt">300</value>
+                </prop>
+                <prop name="ResolutionY" enabled="true">
+                    <value type="xs_unsignedInt">300</value>
+                </prop>
+                <prop page_property="false" name="ExclusionAreaFront" enabled="true">
+                    <value type="xs_string" default_value="PrintAndOverlay">PrintAndOverlay</value>
+                </prop>
+                <prop page_property="false" name="ExclusionAreaBack" enabled="true">
+                    <value type="xs_string" default_value="PrintAndOverlay">PrintAndOverlay</value>
+                </prop>
+                <!-- scd added, 05/26/14 -->
+                <prop page_property="false" name="TransferFilmType" enabled="false">
+                    <value type="xs_string" default_value="Clear">Clear</value>
+                </prop>
+                <!-- end of scd added -->
+                <prop page_property="false" name="RibbonType" enabled="true">
+                    <value type="xs_string" default_value="YMCKO">YMCKO</value>
+                </prop>
+                <prop page_property="false" name="BackOnFront" enabled="true">
+                    <value type="xs_bool" default_value="false">false</value>
+                </prop>
+                <prop page_property="false" name="BackSideOnly" enabled="true">
+                    <value type="xs_bool" default_value="false">false</value>
+                </prop>
+                <prop page_property="false" name="DisablePrinting" enabled="true">
+                    <value type="xs_bool" default_value="false">false</value>
+                </prop>
+                <prop page_property="false" name="DualPass" enabled="true">
+                    <value type="xs_bool" default_value="false">false</value>
+                </prop>
+                <prop page_property="false" name="DualSided" enabled="true">
+                    <value type="xs_bool" default_value="false">false</value>
+                </prop>
+                <prop page_property="false" name="InvertFPanel" enabled="true">
+                    <value type="xs_bool" default_value="false">false</value>
+                </prop>
+                <prop page_property="false" name="SplitRibbon" enabled="true">
+                    <value type="xs_bool" default_value="false">false</value>
+                </prop>
+                <prop page_property="false" name="WriteOnly" enabled="true">
+                    <value type="xs_bool" default_value="false">false</value>
+                </prop>
+                <prop page_property="false" name="KPanelApplyFront" enabled="true">
+                    <value type="xs_string" default_value="none">none</value>
+                </prop>
+                <prop page_property="false" name="KPanelApplyBack" enabled="true">
+                    <value type="xs_string" default_value="none">none</value>
+                </prop>
+                <prop page_property="false" name="YMCunderKFront" enabled="true">
+                    <value type="xs_bool" default_value="true">true</value>
+                </prop>
+                <prop page_property="false" name="YMCunderKBack" enabled="true">
+                    <value type="xs_bool" default_value="true">true</value>
+                </prop>
+                <!-- scd added 05/26/14 -->
+                <prop page_property="false" name="Printmode" enabled="true">
+                    <value type="xs_string" default_value="Standard">Standard</value>
+                </prop>
+                <!-- added 08/21/14  -->
+                <prop page_property="false" name="EncryptJobData" enabled="false">
+                    <value type="xs_bool" default_value="false">false</value>
+                </prop>
+                <!-- end of scd added -->
+                <!-- Enable Diagonal Heat History Support -->
+                <prop page_property="false" name="ThermalHistoryEnableDiagonals" enabled="false">
+                    <value type="xs_bool" default_value="false">false</value>
+                </prop>
+            </category>
+            <category name="Hidden">
+                <prop name="LuminLevelBlue" enabled="true">
+                    <value type="xs_unsignedInt">28</value>
+                </prop>
+                <prop name="LuminLevelGreen" enabled="true">
+                    <value type="xs_unsignedInt">151</value>
+                </prop>
+                <prop name="LuminLevelRed" enabled="true">
+                    <value type="xs_unsignedInt">77</value>
+                </prop>
+                <prop name="PrintLineEscByteCount" enabled="true">
+                    <value type="xs_unsignedInt">2</value>
+                </prop>
+                <prop name="PrintLineExtraByteCount" enabled="true">
+                    <value type="xs_unsignedInt">1</value>
+                </prop>
+                <prop name="PrintLineRightOverhang" enabled="true">
+                    <value type="xs_unsignedInt">5</value>
+                </prop>
+                <prop name="PrintLineWidthExtension" enabled="true">
+                    <value type="xs_unsignedInt">0</value>
+                </prop>
+                <prop name="PrintLineWidthStandard" enabled="true">
+                    <value type="xs_unsignedInt">768</value>
+                </prop>
+                <prop name="CompressionSupport" enabled="true">
+                    <value type="xs_string">RLE</value>
+                </prop>
+                <prop name="EraseHeatValue" enabled="true">
+                    <value type="xs_unsignedInt">255</value>
+                </prop>
+                <prop name="HeatSealHeatValue" enabled="true">
+                    <value type="xs_unsignedInt">105</value>
+                </prop>
+                <prop name="KOverFPanelPreHeatOff" enabled="true">
+                    <value type="xs_bool">true</value>
+                </prop>
+                <prop name="LinearizationTableSupport" enabled="true">
+                    <value type="xs_bool">false</value>
+                </prop>
+                <prop name="OverlaminateHeatValue" enabled="true">
+                    <value type="xs_unsignedInt">255</value>
+                </prop>
+                <prop name="OverlayHeatValue" enabled="true">
+                    <value type="xs_unsignedInt">128</value>
+                </prop>
+                <prop name="Technology" enabled="true">
+                    <value type="xs_string">DirectToCard</value>
+                </prop>
+                <prop name="TopOfPageMargin" enabled="true">
+                    <value type="xs_unsignedInt">5</value>
+                </prop>
+                <prop name="ThermalHistorySupport" enabled="false">
+                    <value type="xs_bool">false</value>
+                </prop>
+                <!-- scd added 05/26/14 -->
+                <prop name="TestPattern" enabled="true">
+                    <value type="xs_unsignedInt">2039583</value>
+                </prop>
+                <prop name="ThermalHistoryVersion" enabled="false">
+                    <value type="xs_unsignedInt">1</value>
+                </prop>
+                <prop name="TestMode" enabled="false">
+                    <value type="xs_bool">false</value>
+                </prop>
+                <!-- end of scd added -->
+                <prop name="PanelTOFSupport" enabled="true">
+                    <value type="xs_bool">true</value>
+                </prop>
+            </category>
+            <category name="ImageColor">
+                <prop page_property="false" name="ColorMatching" enabled="true">
+                    <value type="xs_string" default_value="None">None</value>
+                </prop>
+                <prop page_property="false" name="ResinDither" enabled="true">
+                    <value type="xs_string" default_value="graphics">graphics</value>
+                </prop>
+                <prop page_property="false" name="DyeSubIntensity" enabled="true">
+                    <value type="xs_int" default_value="0">0</value>
+                </prop>
+                <prop page_property="false" name="HeatFront" enabled="true">
+                    <value type="xs_int" default_value="0">0</value>
+                </prop>
+                <prop page_property="false" name="HeatBack" enabled="true">
+                    <value type="xs_int" default_value="0">0</value>
+                </prop>
+                <prop page_property="false" name="Sharpness" enabled="true">
+                    <value type="xs_int" default_value="0">0</value>
+                </prop>
+                <prop page_property="false" name="Contrast" enabled="true">
+                    <value type="xs_int" default_value="0">0</value>
+                </prop>
+                <prop page_property="false" name="Gamma" enabled="true">
+                    <value type="xs_int" default_value="0">0</value>
+                </prop>
+                <prop page_property="false" name="BalanceYellow" enabled="true">
+                    <value type="xs_int" default_value="0">0</value>
+                </prop>
+                <prop page_property="false" name="BalanceMagenta" enabled="true">
+                    <value type="xs_int" default_value="0">0</value>
+                </prop>
+                <prop page_property="false" name="BalanceCyan" enabled="true">
+                    <value type="xs_int" default_value="0">0</value>
+                </prop>
+                <prop page_property="false" name="OverlayHeatOffset" enabled="true">
+                    <value type="xs_int" default_value="0">0</value>
+                </prop>
+                <prop page_property="false" name="EraseHeatOffset" enabled="true">
+                    <value type="xs_int" default_value="0">0</value>
+                </prop>
+            </category>
+            <category name="ImagePosition">
+                <prop page_property="false" name="Vertical" enabled="true">
+                    <value type="xs_int" default_value="0">0</value>
+                </prop>
+                <prop page_property="false" name="Horizontal" enabled="true">
+                    <value type="xs_int" default_value="0">0</value>
+                </prop>
+            </category>
+            <!-- scd added 05/26/14 -->
+            <category name="ImageTransfer">
+                <prop page_property="false" name="Temperature" enabled="false">
+                    <value type="xs_double" default_value="178">178</value>
+                </prop>
+                <prop page_property="false" name="DwellTime" enabled="false">
+                    <value type="xs_double" default_value="23">23</value>
+                </prop>
+            </category>
+            <!-- end scd added -->
+            <category name="Lamination">
+                <prop page_property="false" name="Position" enabled="true">
+                    <value type="xs_int" default_value="0">0</value>
+                </prop>
+                <prop page_property="false" name="DwellTime" enabled="true">
+                    <value type="xs_double" default_value="2.0">2.0</value>
+                </prop>
+                <prop page_property="false" name="Side" enabled="true">
+                    <value type="xs_string" default_value="None">None</value>
+                </prop>
+            </category>
+            <category name="Lamination1">
+                <prop page_property="false" name="Type" enabled="true">
+                    <value type="xs_string" default_value="ClearFilm">ClearFilm</value>
+                </prop>
+                <prop page_property="false" name="Temperature" enabled="true">
+                    <value type="xs_double" default_value="130.0">130.0</value>
+                </prop>
+            </category>
+            <category name="Lamination2">
+                <prop page_property="false" name="Type" enabled="true">
+                    <value type="xs_string" default_value="ClearFilm">ClearFilm</value>
+                </prop>
+                <prop page_property="false" name="Temperature" enabled="true">
+                    <value type="xs_double" default_value="150.0">150.0</value>
+                </prop>
+            </category>
+            <category name="MagneticEncoding">
+                <prop page_property="false" name="Coercivity" enabled="true">
+                    <value type="xs_unsignedInt" default_value="2750">2750</value>
+                </prop>
+                <prop page_property="false" name="ShiftDataLeft" enabled="true">
+                    <value type="xs_bool" default_value="false">false</value>
+                </prop>
+            </category>
+            <category name="MagneticEncodingTrack1">
+                <prop page_property="false" name="Mode" enabled="true">
+                    <value type="xs_string" default_value="ISO">ISO</value>
+                </prop>
+                <prop page_property="false" name="LRCGeneration" enabled="true">
+                    <value type="xs_string" default_value="Even">Even</value>
+                </prop>
+                <prop page_property="false" name="Size" enabled="true">
+                    <value type="xs_unsignedInt" default_value="7">7</value>
+                </prop>
+                <prop page_property="false" name="Parity" enabled="true">
+                    <value type="xs_string" default_value="Odd">Odd</value>
+                </prop>
+                <prop page_property="false" name="Offset" enabled="true">
+                    <value type="xs_string" default_value="Space">Space</value>
+                </prop>
+                <prop page_property="false" name="Density" enabled="true">
+                    <value type="xs_unsignedInt" default_value="210">210</value>
+                </prop>
+                <prop page_property="false" name="ReverseBitOrder" enabled="true">
+                    <value type="xs_bool" default_value="true">true</value>
+                </prop>
+                <prop page_property="false" name="AddLeadingZeros" enabled="true">
+                    <value type="xs_bool" default_value="false">false</value>
+                </prop>
+                <prop page_property="false" name="ReverseAllBits" enabled="true">
+                    <value type="xs_bool" default_value="false">false</value>
+                </prop>
+            </category>
+            <category name="MagneticEncodingTrack2">
+                <prop page_property="false" name="Mode" enabled="true">
+                    <value type="xs_string" default_value="ISO">ISO</value>
+                </prop>
+                <prop page_property="false" name="LRCGeneration" enabled="true">
+                    <value type="xs_string" default_value="Even">Even</value>
+                </prop>
+                <prop page_property="false" name="Size" enabled="true">
+                    <value type="xs_unsignedInt" default_value="5">5</value>
+                </prop>
+                <prop page_property="false" name="Parity" enabled="true">
+                    <value type="xs_string" default_value="Odd">Odd</value>
+                </prop>
+                <prop page_property="false" name="Offset" enabled="true">
+                    <value type="xs_string" default_value="Zero">Zero</value>
+                </prop>
+                <prop page_property="false" name="Density" enabled="true">
+                    <value type="xs_unsignedInt" default_value="75">75</value>
+                </prop>
+                <prop page_property="false" name="ReverseBitOrder" enabled="true">
+                    <value type="xs_bool" default_value="true">true</value>
+                </prop>
+                <prop page_property="false" name="AddLeadingZeros" enabled="true">
+                    <value type="xs_bool" default_value="false">false</value>
+                </prop>
+                <prop page_property="false" name="ReverseAllBits" enabled="true">
+                    <value type="xs_bool" default_value="false">false`</value>
+                </prop>
+            </category>
+            <category name="MagneticEncodingTrack3">
+                <prop page_property="false" name="Mode" enabled="true">
+                    <value type="xs_string" default_value="ISO">ISO</value>
+                </prop>
+                <prop page_property="false" name="LRCGeneration" enabled="true">
+                    <value type="xs_string" default_value="Even">Even</value>
+                </prop>
+                <prop page_property="false" name="Size" enabled="true">
+                    <value type="xs_unsignedInt" default_value="5">5</value>
+                </prop>
+                <prop page_property="false" name="Parity" enabled="true">
+                    <value type="xs_string" default_value="Odd">Odd</value>
+                </prop>
+                <prop page_property="false" name="Offset" enabled="true">
+                    <value type="xs_string" default_value="Zero">Zero</value>
+                </prop>
+                <prop page_property="false" name="Density" enabled="true">
+                    <value type="xs_unsignedInt" default_value="210">210</value>
+                </prop>
+                <prop page_property="false" name="ReverseBitOrder" enabled="true">
+                    <value type="xs_bool" default_value="true">true</value>
+                </prop>
+                <prop page_property="false" name="AddLeadingZeros" enabled="true">
+                    <value type="xs_bool" default_value="false">false</value>
+                </prop>
+                <prop page_property="false" name="ReverseAllBits" enabled="true">
+                    <value type="xs_bool" default_value="false">false`</value>
+                </prop>
+            </category>
+            <!-- scd added 05/26/14 -->
+            <category name="WrinkleCompensation">
+                <prop page_property="false" name="WrinkleCompAverageLineBurn" enabled="true">
+                    <value type="xs_bool" default_value="true">true</value>
+                </prop>
+                <prop page_property="false" name="WrinkleCompAverageLineBurnPixelCount" enabled="true">
+                    <value type="xs_unsignedInt" default_value="96">96</value>
+                </prop>
+                <prop page_property="false" name="WrinkleCompLeftOffset" enabled="true">
+                    <value type="xs_unsignedInt" default_value="0">0</value>
+                </prop>
+                <prop page_property="false" name="WrinkleCompLevel" enabled="true">
+                    <value type="xs_unsignedInt" default_value="200">200</value>
+                </prop>
+                <prop page_property="false" name="WrinkleCompSupport" enabled="true">
+                    <value type="xs_bool" default_value="false">false</value>
+                </prop>
+            </category>
+            <!-- end of scd added -->
+        </properties>
+        <media>
+            <ribbon_types>
+                <ribbon grade="professional" device_id="7" name="YMCKO" part_number="" oem_part_number="">
+                    <panel composition="DyeSub" device_id="1" color="Yellow"/>
+                    <panel composition="DyeSub" device_id="2" color="Magenta"/>
+                    <panel composition="DyeSub" device_id="3" color="Cyan"/>
+                    <panel composition="Resin" device_id="4" color="Black">
+                        <option>Split</option>
+                    </panel>
+                    <panel composition="Overlay" device_id="7" color="None"/>
+                </ribbon>
+                <ribbon grade="professional" device_id="13" name="YMCKO_Half" part_number="" oem_part_number="">
+                    <panel composition="DyeSub" device_id="1" color="Yellow" length="1.34">
+                        <option>Half</option>
+                    </panel>
+                    <panel composition="DyeSub" device_id="2" color="Magenta" length="1.34">
+                        <option>Half</option>
+                    </panel>
+                    <panel composition="DyeSub" device_id="3" color="Cyan" length="1.34">
+                        <option>Half</option>
+                    </panel>
+                    <panel composition="Resin" device_id="4" color="Black">
+                        <option>Split</option>
+                    </panel>
+                    <panel composition="Overlay" device_id="7" color="None"/>
+                </ribbon>
+                <ribbon grade="professional" device_id="8" name="YMCKOK" part_number="" oem_part_number="">
+                    <panel composition="DyeSub" device_id="1" color="Yellow"/>
+                    <panel composition="DyeSub" device_id="2" color="Magenta"/>
+                    <panel composition="DyeSub" device_id="3" color="Cyan"/>
+                    <panel composition="Resin" device_id="4" color="Black"/>
+                    <panel composition="Overlay" device_id="7" color="None"/>
+                    <panel composition="Resin" device_id="4" color="Black">
+                        <option>Split</option>
+                    </panel>
+                </ribbon>
+                <ribbon grade="professional" device_id="6" name="YMCKK" part_number="" oem_part_number="">
+                    <panel composition="DyeSub" device_id="1" color="Yellow"/>
+                    <panel composition="DyeSub" device_id="2" color="Magenta"/>
+                    <panel composition="DyeSub" device_id="3" color="Cyan"/>
+                    <panel composition="Resin" device_id="4" color="Black"/>
+                    <panel composition="Resin" device_id="4" color="Black">
+                        <option>Split</option>
+                    </panel>
+                </ribbon>
+                <ribbon grade="professional" device_id="19" name="YMCFKO" part_number="" oem_part_number="">
+                    <panel composition="DyeSub" device_id="1" color="Yellow"/>
+                    <panel composition="DyeSub" device_id="2" color="Magenta"/>
+                    <panel composition="DyeSub" device_id="3" color="Cyan"/>
+                    <panel composition="Resin" device_id="9" color="Fluorescent"/>
+                    <panel composition="Resin" device_id="4" color="Black">
+                        <option>Split</option>
+                    </panel>
+                    <panel composition="Overlay" device_id="7" color="None"/>
+                </ribbon>
+                <ribbon grade="professional" device_id="20" name="YMCFKOK" part_number="" oem_part_number="">
+                    <panel composition="DyeSub" device_id="1" color="Yellow"/>
+                    <panel composition="DyeSub" device_id="2" color="Magenta"/>
+                    <panel composition="DyeSub" device_id="3" color="Cyan"/>
+                    <panel composition="Resin" device_id="9" color="Fluorescent"/>
+                    <panel composition="Resin" device_id="4" color="Black"/>
+                    <panel composition="Overlay" device_id="7" color="None"/>
+                    <panel composition="Resin" device_id="4" color="Black">
+                        <option>Split</option>
+                    </panel>
+                </ribbon>
+                <ribbon grade="professional" device_id="1" name="KStandard" part_number="" oem_part_number="">
+                    <panel composition="Resin" device_id="4" color="Black"/>
+                </ribbon>
+                <ribbon grade="professional" device_id="2" name="KPremium" part_number="" oem_part_number="">
+                    <panel composition="Resin" device_id="4" color="Black"/>
+                </ribbon>
+                <ribbon grade="professional" device_id="3" name="MonoColor" part_number="" oem_part_number="">
+                    <panel composition="Resin" device_id="4" color="Color"/>
+                </ribbon>
+                <ribbon grade="professional" device_id="4" name="Metalic" part_number="" oem_part_number="">
+                    <panel composition="Resin" device_id="4" color="Color"/>
+                </ribbon>
+                <ribbon grade="professional" device_id="5" name="KO" part_number="" oem_part_number="">
+                    <panel composition="Resin" device_id="4" color="Black"/>
+                    <panel composition="Overlay" device_id="7" color="None"/>
+                </ribbon>
+                <ribbon grade="professional" device_id="9" name="BO" part_number="" oem_part_number="">
+                    <panel composition="DyeSub" device_id="5" color="Black"/>
+                    <panel composition="Overlay" device_id="7" color="None"/>
+                </ribbon>
+                <ribbon grade="professional" device_id="0" name="None" part_number="" oem_part_number="">
+                    <panel composition="ReWritable" device_id="11" color="None"/>
+                    <panel composition="ReWritable" device_id="12" color="Black"/>
+                </ribbon>
+            </ribbon_types>
+            <card_types>
+                <card_size size="CR80">
+                    <page_area length="85725" width="53975"/>
+                    <imageable_area left="138" right="53838" top="163" bottom="85563"/>
+                </card_size>
+                <card_size size="CR79">
+                    <page_area length="84138" width="52388"/>
+                    <imageable_area left="144" right="52244" top="119" bottom="84019"/>
+                </card_size>
+            </card_types>
+            <laminate_types>
+                <laminate name="None" device_id="-1" part_number="000000"/>
+                <laminate name="ClearFilm" device_id="0" part_number="082615" oem_part_number=""/>
+                <laminate name="PolyGuard_06" device_id="3" part_number="082600" oem_part_number=""/>
+                <laminate name="PolyGuard_10" device_id="4" part_number="082601" oem_part_number=""/>
+                <laminate name="PolyGuardAltPatch" device_id="5" part_number="082626" oem_part_number=""/>
+                <laminate name="RegisteredFilm" device_id="6" part_number="082618" oem_part_number=""/>
+                <laminate name="HolographicFilm" device_id="7" part_number="082616" oem_part_number=""/>
+                <laminate name="Unknown" device_id="8" part_number="000000" oem_part_number=""/>
+            </laminate_types>
+        </media>
+        <color>
+            <algebraic>
+                <coefficient ribbonType="Default">
+                    <principal cyan="128" yellow="128" magenta="128" black="0"/>
+                    <gamma cyan="0" yellow="0" magenta="0" black="0"/>
+                    <gray cyan="0" yellow="0" magenta="0" black="0"/>
+                </coefficient>
+                <curveTable>
+00000000000000000000000000000000000000000000000000000000000000000101010101010101010101010101010202020202020202030303030303030404040404050505050606060606070707080808080909090a0a0a0b0b0c0c0c0d0d0e0e0e0f0f1010111112121313141415161617171819191a1b1b1c1d1d1e1f202021222323242526272828292a2b2c2d2e2f303132333435363738393a3c3d3e3f40414344454648494a4c4d4e505152545557585a5b5d5e606163656668696b6d6f7072747677797b7d7f81838486888a8c8e90939597999b9d9fa2a4a6a8abadafb2b4b6b9bbbec0c3c5c8cacdcfd2d5d7dadddfe2e5e8ebedf0f3f6f9fcff
+                </curveTable>
+            </algebraic>
+        </color>
+    </model>
+</printer>

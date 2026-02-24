@@ -1,0 +1,242 @@
+*PPD-Adobe: "4.3"
+*FormatVersion: "4.3"
+*%
+*% Fargo DTC4500e Card Printer PPD for macOS ARM64 CUPS driver.
+*%
+*% Based on the original HID Global PPD (v1.3.2.7).
+*% Updated for the native open-source rastertofargo-macos filter.
+*%
+*% Copyright 2008 - 2014 HID Global, Inc. Original PPD.
+*% Copyright 2024-2026 Open Source Contributors. macOS ARM64 adaptation.
+*%
+*FileVersion: "2.0.0.0"
+*PCFileName: "DTC4500e-macos.ppd"
+*Product: "(Card Printer)"
+*LanguageVersion: English
+*LanguageEncoding: ISOLatin1
+*Manufacturer: "HID"
+*ModelName: "DTC4500e"
+*ShortNickName: "DTC4500e (macOS)"
+*NickName: "DTC4500e Card Printer (macOS ARM64)"
+*PSVersion: "(3010.000) 550"
+*LanguageLevel: "2"
+*ColorDevice: True
+*DefaultColorSpace: RGB
+*FileSystem: False
+*Throughput: "3"
+*LandscapeOrientation: Minus90
+*TTRasterizer: Type42
+*cupsModelNumber: "1"
+*cupsVersion: 1.4
+*cupsManualCopies: False
+*cupsFilter: "application/vnd.cups-raster 50 rastertofargo-macos"
+*cupsLanguages: "en"
+
+*% Color profiles -- updated paths for macOS install location
+*SystemColorProfile: "/Library/Printers/HIDGlobal/fargo/DTC4500e/sRGB.icm"
+*ColorProfileFilename: "/Library/Printers/HIDGlobal/fargo/DTC4500e/DTC4500eCLR.icm"
+*ColorProfileRGBIntent: 0
+*ColorProfileCLRIntent: 0
+
+*% XML printer descriptor (used by status monitor and protocol code)
+*XmlFilename: "/Library/Printers/HIDGlobal/fargo/DTC4500e/DTC4500e.xml"
+
+*% Changeable only through the command line or by application interfaces.
+*Copies: 1
+*VariablePaperSize: False
+
+*%--------------------------- Constraints Start --------------------------------
+
+*% SplitRibbon is only valid with multi-panel colour ribbons
+*UIConstraints: "*SplitRibbon *Ribbon KStandard"
+*UIConstraints: "*SplitRibbon *Ribbon MonoColor"
+*UIConstraints: "*SplitRibbon *Ribbon KO"
+*UIConstraints: "*SplitRibbon *Ribbon BO"
+*UIConstraints: "*SplitRibbon *Ribbon None"
+*UIConstraints: "*SplitRibbon *Ribbon KPremium"
+*UIConstraints: "*SplitRibbon *DisablePrinting true"
+*UIConstraints: "*SplitRibbon *PrintBackOnFront true"
+
+*% PrintBothSides
+*UIConstraints: "*PrintBothSides *DisablePrinting true"
+
+*% PrintBackOnFront
+*UIConstraints: "*PrintBackOnFront *PrintBothSides false"
+*UIConstraints: "*PrintBackOnFront *DisablePrinting true"
+*UIConstraints: "*PrintBackOnFront *SplitRibbon true"
+
+*% PrintBackOnly
+*UIConstraints: "*PrintBackOnly *PrintBothSides true"
+*UIConstraints: "*PrintBackOnly *DisablePrinting true"
+
+*% RotateImageFront / RotateImageBack
+*UIConstraints: "*RotateImageFront *DisablePrinting true"
+*UIConstraints: "*RotateImageBack *DisablePrinting true"
+
+*% WriteOnly only valid with None (ReWritable) ribbon
+*UIConstraints: "*WriteOnly *Ribbon YMCKO"
+*UIConstraints: "*WriteOnly *Ribbon YMCKO_Half"
+*UIConstraints: "*WriteOnly *Ribbon YMCKOK"
+*UIConstraints: "*WriteOnly *Ribbon YMCKK"
+*UIConstraints: "*WriteOnly *Ribbon YMCFKO"
+*UIConstraints: "*WriteOnly *Ribbon YMCFKOK"
+*UIConstraints: "*WriteOnly *Ribbon KStandard"
+*UIConstraints: "*WriteOnly *Ribbon KPremium"
+*UIConstraints: "*WriteOnly *Ribbon MonoColor"
+*UIConstraints: "*WriteOnly *Ribbon KO"
+*UIConstraints: "*WriteOnly *Ribbon BO"
+*UIConstraints: "*WriteOnly *DisablePrinting true"
+
+*%--------------------------- Constraints End ----------------------------------
+
+*OpenGroup: CardOptions/Card
+
+*OpenUI *PageSize/Card Size: PickOne
+*OrderDependency: 10 AnySetup *PageSize
+*DefaultPageSize: CR80
+*PageSize CR80/CR80: "<</PageSize[152 242]/ImagingBBox null>>setpagedevice"
+*PageSize CR79/CR79: "<</PageSize[148 238]/ImagingBBox null>>setpagedevice"
+*CloseUI: *PageSize
+
+*OpenUI *CardThickness/Card Thickness: PickOne
+*OrderDependency: 10 AnySetup *CardThickness
+*DefaultCardThickness: 30
+*CardThickness 10/10: "setpagedevice"
+*CardThickness 20/20: "setpagedevice"
+*CardThickness 30/30: "setpagedevice"
+*CardThickness 40/40: "setpagedevice"
+*CloseUI: *CardThickness
+
+*OpenUI *PageRegion: PickOne
+*OrderDependency: 10 AnySetup *PageRegion
+*DefaultPageRegion: CR80
+*PageRegion CR80/CR80: "<</PageSize[152 242]/ImagingBBox null >>setpagedevice"
+*PageRegion CR79/CR79: "<</PageSize[148 238]/ImagingBBox null >>setpagedevice"
+*CloseUI: *PageRegion
+
+*DefaultImageableArea: CR80
+*ImageableArea CR80/CR80: "0 0 152 242"
+*ImageableArea CR79/CR79: "0 0 148 238"
+*DefaultPaperDimension: CR80
+*PaperDimension CR80/CR80: "152 242"
+*PaperDimension CR79/CR79: "148 238"
+*RequiresPageRegion All: true
+
+*OpenUI *CardHopper/Card Hopper Selection: PickOne
+*OrderDependency: 10 AnySetup *CardHopper
+*DefaultCardHopper: FirstAvailable
+*CardHopper FirstAvailable/First Available: "setpagedevice"
+*CardHopper Hopper1/Top: "setpagedevice"
+*CardHopper Hopper2/Bottom: "setpagedevice"
+*CloseUI: *CardHopper
+
+*CloseGroup: CardOptions
+
+*%==========================================================
+
+*OpenGroup: General/Print Options
+
+*OpenUI *RibbonAutoDetect/Auto Detect Ribbon: Boolean
+*OrderDependency: 10 AnySetup *RibbonAutoDetect
+*DefaultRibbonAutoDetect: true
+*RibbonAutoDetect true/Yes: "setpagedevice"
+*RibbonAutoDetect false/No: "setpagedevice"
+*CloseUI: *RibbonAutoDetect
+
+*OpenUI *Ribbon/Ribbon Type: PickOne
+*OrderDependency: 10 AnySetup *Ribbon
+*DefaultRibbon: YMCKO
+*Ribbon YMCKO/YMCKO: "setpagedevice"
+*Ribbon YMCKO_Half/YMCKO Half Panel: "setpagedevice"
+*Ribbon YMCKOK/YMCKOK: "setpagedevice"
+*Ribbon YMCKK/YMCKK: "setpagedevice"
+*Ribbon YMCFKO/YMCFKO: "setpagedevice"
+*Ribbon YMCFKOK/YMCFKOK: "setpagedevice"
+*Ribbon KStandard/Standard Resin: "setpagedevice"
+*Ribbon KPremium/Premium Resin: "setpagedevice"
+*Ribbon MonoColor/Color Resin: "setpagedevice"
+*Ribbon KO/KO - Premium Resin/Overlay: "setpagedevice"
+*Ribbon BO/BO - Dye-Sub Black/Overlay: "setpagedevice"
+*Ribbon None/None - Re-Writable: "setpagedevice"
+*CloseUI: *Ribbon
+
+*OpenUI *PrintBothSides/Print Both Sides: Boolean
+*OrderDependency: 10 AnySetup *PrintBothSides
+*DefaultPrintBothSides: false
+*PrintBothSides true/Yes: "setpagedevice"
+*PrintBothSides false/No: "setpagedevice"
+*CloseUI: *PrintBothSides
+
+*OpenUI *SplitRibbon/Split 1 Set of Ribbon Panels: Boolean
+*OrderDependency: 10 AnySetup *SplitRibbon
+*DefaultSplitRibbon: false
+*SplitRibbon true/Yes: "setpagedevice"
+*SplitRibbon false/No: "setpagedevice"
+*CloseUI: *SplitRibbon
+
+*OpenUI *PrintBackOnFront/Print Back Image on Front of Card: Boolean
+*OrderDependency: 10 AnySetup *PrintBackOnFront
+*DefaultPrintBackOnFront: false
+*PrintBackOnFront true/Yes: "setpagedevice"
+*PrintBackOnFront false/No: "setpagedevice"
+*CloseUI: *PrintBackOnFront
+
+*OpenUI *PrintBackOnly/Print Back Side Only: Boolean
+*OrderDependency: 10 AnySetup *PrintBackOnly
+*DefaultPrintBackOnly: false
+*PrintBackOnly true/Yes: "setpagedevice"
+*PrintBackOnly false/No: "setpagedevice"
+*CloseUI: *PrintBackOnly
+
+*OpenUI *RotateImageFront/Rotate Front 180 Degrees: Boolean
+*OrderDependency: 10 AnySetup *RotateImageFront
+*DefaultRotateImageFront: false
+*RotateImageFront true/Yes: "setpagedevice"
+*RotateImageFront false/No: "setpagedevice"
+*CloseUI: *RotateImageFront
+
+*OpenUI *RotateImageBack/Rotate Back 180 Degrees: Boolean
+*OrderDependency: 10 AnySetup *RotateImageBack
+*DefaultRotateImageBack: false
+*RotateImageBack true/Yes: "setpagedevice"
+*RotateImageBack false/No: "setpagedevice"
+*CloseUI: *RotateImageBack
+
+*OpenUI *DisablePrinting/Disable Printing (Feed Card Only): Boolean
+*OrderDependency: 10 AnySetup *DisablePrinting
+*DefaultDisablePrinting: false
+*DisablePrinting true/Yes: "setpagedevice"
+*DisablePrinting false/No: "setpagedevice"
+*CloseUI: *DisablePrinting
+
+*OpenUI *WriteOnly/Write Only (No erase pass): Boolean
+*OrderDependency: 10 AnySetup *WriteOnly
+*DefaultWriteOnly: false
+*WriteOnly true/Yes: "setpagedevice"
+*WriteOnly false/No: "setpagedevice"
+*CloseUI: *WriteOnly
+
+*CloseGroup: General
+
+*%==========================================================
+
+*OpenGroup: ImageColor/Image Color Options
+
+*OpenUI *ColorMatching/Color Matching: PickOne
+*OrderDependency: 10 AnySetup *ColorMatching
+*DefaultColorMatching: System
+*ColorMatching System/System Color Profile: "setpagedevice"
+*ColorMatching Printer/Printer Color Profile: "setpagedevice"
+*ColorMatching None/None: "setpagedevice"
+*CloseUI: *ColorMatching
+
+*OpenUI *ResinDither/Resin Dither: PickOne
+*OrderDependency: 10 AnySetup *ResinDither
+*DefaultResinDither: Dither
+*ResinDither Dither/Halftone: "setpagedevice"
+*ResinDither Threshold/Threshold: "setpagedevice"
+*CloseUI: *ResinDither
+
+*CloseGroup: ImageColor
+
+*% End of DTC4500e-macos.ppd
