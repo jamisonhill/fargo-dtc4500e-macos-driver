@@ -180,20 +180,11 @@ static int ppd_duplex(ppd_file_t *ppd)
  * ---------------------------------------------------------------------------
  * Returns 1 if the ribbon type produces a multi-panel colour job,
  * 0 for monochrome (K-only) or ReWritable jobs.
+ * Any ribbon with more than 1 panel is multi-panel (including BO, KO, NONE).
  */
 static int is_color_ribbon(fargo_ribbon_type_t r)
 {
-    switch (r) {
-        case FARGO_RIBBON_YMCKO:
-        case FARGO_RIBBON_YMCKO_HALF:
-        case FARGO_RIBBON_YMCKOK:
-        case FARGO_RIBBON_YMCKK:
-        case FARGO_RIBBON_YMCFKO:
-        case FARGO_RIBBON_YMCFKOK:
-            return 1;
-        default:
-            return 0;
-    }
+    return fargo_ribbon_panel_count(r) > 1;
 }
 
 /* ---------------------------------------------------------------------------

@@ -181,23 +181,28 @@ int fargo_build_fs_init(uint8_t *buf, size_t bufsize)
  */
 int fargo_build_fg_config(uint8_t *buf, size_t bufsize, const fargo_job_t *job)
 {
-    size_t needed = FARGO_WIRE_FG_CONFIG; /* 56 bytes */
-    if (bufsize < needed) {
-        fprintf(stderr, "ERROR: fargo_build_fg_config: buffer too small "
-                "(%zu < %zu)\n", bufsize, needed);
-        return -1;
-    }
     if (!job) {
         fprintf(stderr, "ERROR: fargo_build_fg_config: NULL job pointer\n");
         return -1;
     }
 
-    int pos = 0;
-    pos += write_pkt_hdr_print(buf + pos, FARGO_MAGIC_FG, FARGO_PKT_FG_CONFIG_LEN);
+    /* Determine if this is a dual-sided ribbon config (50 bytes) or standard (48 bytes) */
+    int is_dual = fargo_ribbon_is_dual_config(job->ribbon);
+    size_t payload_len = is_dual ? FARGO_PKT_FG_CONFIG_DUAL_LEN : FARGO_PKT_FG_CONFIG_LEN;
+    size_t needed = FARGO_PKT_HDR_SIZE + payload_len + FARGO_PKT_EP_SIZE;
 
-    /* Build the 48-byte payload in a zero-initialised buffer.
+    if (bufsize < needed) {
+        fprintf(stderr, "ERROR: fargo_build_fg_config: buffer too small "
+                "(%zu < %zu)\n", bufsize, needed);
+        return -1;
+    }
+
+    int pos = 0;
+    pos += write_pkt_hdr_print(buf + pos, FARGO_MAGIC_FG, (uint16_t)payload_len);
+
+    /* Build the payload in a zero-initialised buffer.
      * This guarantees all unknown/reserved fields default to zero. */
-    uint8_t payload[FARGO_PKT_FG_CONFIG_LEN];
+    uint8_t payload[FARGO_PKT_FG_CONFIG_DUAL_LEN]; /* Use max size */
     memset(payload, 0x00, sizeof(payload));
 
     /* [0-3] Number of copies -- uint32 LE */
@@ -238,14 +243,21 @@ int fargo_build_fg_config(uint8_t *buf, size_t bufsize, const fargo_job_t *job)
     if (thickness == 0) thickness = FARGO_CARD_THICKNESS_DEFAULT;
     write_le32(payload + CFG_OFF_THICKNESS, (uint32_t)thickness);
 
-    /* [44-47] Reserved -- already zero */
+    /* [44-47] Reserved -- already zero
+     * For dual-sided YMCKOK/YMCKK ribbons, add 2 extra bytes at [48-49] */
+    if (is_dual) {
+        /* Extra 2 bytes for dual-sided config -- values TBD from capture.
+         * Setting to 0x00 for now. */
+        payload[48] = 0x00;
+        payload[49] = 0x00;
+    }
 
-    memcpy(buf + pos, payload, sizeof(payload));
-    pos += sizeof(payload);
+    memcpy(buf + pos, payload, payload_len);
+    pos += payload_len;
 
     pos += write_ep_marker(buf + pos);
 
-    return pos; /* 56 */
+    return pos;
 }
 
 /* ---------------------------------------------------------------------------
