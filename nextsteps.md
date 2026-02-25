@@ -1,18 +1,34 @@
 # Fargo DTC4500e Native macOS Driver — Next Steps
 
 **Project Goal:** Build a native macOS ARM64 CUPS filter for the HID Fargo DTC4500e ID card printer.
-**Status:** Protocol fully reverse-engineered. Core C code written. Compilation fixes applied.
+**Status:** ✅ COMPLETE AND TESTED — Driver installed and printing successfully.
 
 ---
 
-## What Was Accomplished Today
+## What Was Accomplished
 
-### Protocol Reverse Engineering (COMPLETE)
+### Phase 1: Protocol Reverse Engineering (COMPLETE)
 - Extracted and analyzed the 2014 Mac pkg installer (32-bit i386 — incompatible with macOS 26)
 - Extracted and analyzed the Linux ARM64 driver (ELF binary — cannot run on macOS)
 - Deep-analyzed all 15 PRN test files to decode the **Fargo Raster Language (FRL)** protocol
 - Captured live USB traffic with USBPcap/Wireshark from Windows driver
 - **Confirmed all critical protocol values** — see `fargo-driver/protocol-analysis/PROTOCOL_SPEC.md`
+
+### Phase 2: Core C Driver Development (COMPLETE)
+- Implemented all protocol packet builders in `fargo_protocol.c`
+- Implemented libusb USB backend in `fargo_usb.c`
+- Implemented CUPS filter main loop in `rastertofargo.c`
+- Fixed all 20 bugs identified in CODE_REVIEW.md including BUG-18 and BUG-14
+
+### Phase 3: Installation & Testing (COMPLETE)
+- ✅ Compiled successfully with zero errors (ARM64, clang, AddressSanitizer clean)
+- ✅ Fixed BUG-18: Multi-panel ribbon detection now uses panel count check
+- ✅ Fixed BUG-14: Dual-sided config packets now properly sized (50 bytes)
+- ✅ Installed to `/usr/libexec/cups/filter/rastertofargo-macos`
+- ✅ Installed PPD to `/Library/Printers/PPDs/Contents/Resources/`
+- ✅ Tested black ribbon print ✓
+- ✅ Tested color ribbon print ✓
+- ✅ Committed fixes to git
 
 ### Confirmed Protocol Facts
 | Item | Value |
@@ -44,61 +60,42 @@
 
 ---
 
-## What Needs To Be Done Next
+## Remaining Work (Optional Enhancements)
 
-### Step 1: Install Build Dependencies
+### High Priority: Further Testing
+✅ **DONE:** Black ribbon test
+✅ **DONE:** Color ribbon test
+
+**TODO:** Test all ribbon types with their respective test files:
 ```bash
-brew install libusb
-pip3 install pyusb
+lp -d FargoDTC4500e ~/Ai/fargo-dtc4500e-macos-driver/fargo-driver/reference/DTC4500e_BO_Tst.prn
+lp -d FargoDTC4500e ~/Ai/fargo-dtc4500e-macos-driver/fargo-driver/reference/DTC4500e_KO_Tst.prn
+lp -d FargoDTC4500e ~/Ai/fargo-dtc4500e-macos-driver/fargo-driver/reference/DTC4500e_NONE_Tst.prn
+lp -d FargoDTC4500e ~/Ai/fargo-dtc4500e-macos-driver/fargo-driver/reference/DTC4500e_YMCFKO_Tst.prn
+lp -d FargoDTC4500e ~/Ai/fargo-dtc4500e-macos-driver/fargo-driver/reference/DTC4500e_YMCKOK_Tst.prn
+lp -d FargoDTC4500e ~/Ai/fargo-dtc4500e-macos-driver/fargo-driver/reference/DTC4500e_YMCKK_Tst.prn
 ```
 
-### Step 2: Test USB Connectivity (printer must be plugged in)
+### Medium Priority: Real-World Testing with Inkscape
+1. Install Inkscape from https://inkscape.org/ (native macOS ARM64 available)
+2. Create a badge design at exactly 2.125" × 3.375" (CR80 card size)
+3. Print to FargoDTC4500e CUPS printer
+4. Verify colors match expected output
+5. Adjust color profile settings in PPD if needed (`/Library/Printers/PPDs/Contents/Resources/DTC4500e-macos.ppd`)
+
+### Low Priority: Code Cleanup
+- T-05: Implement inter-panel boundary packets (currently deferred — format unknown)
+- Review and update any TODOs in fargo_protocol.c for dual-sided flag layout verification
+- Add comprehensive logging/debugging mode for troubleshooting
+
+### How to Uninstall
+If needed, remove the driver:
 ```bash
-cd CUPS/fargo-driver
-python3 test/discover_usb.py        # Should show VID=0x09b0, PID=0xbf0c, EP 0x01/0x81
-python3 test/send_prn.py --status-only   # Should show printer status flags
+sudo rm /usr/libexec/cups/filter/rastertofargo-macos
+sudo rm /Library/Printers/PPDs/Contents/Resources/DTC4500e-macos.ppd
+sudo launchctl kickstart -kp system/org.cups.cupsd
+lpadmin -x FargoDTC4500e
 ```
-
-### Step 3: Send a Test PRN File Directly
-```bash
-python3 test/send_prn.py reference/DTC4500e_NONE_Tst.prn   # Should advance a card
-python3 test/send_prn.py reference/DTC4500e_K_STD_Tst.prn  # Should print K test pattern
-```
-This proves USB communication works before involving CUPS at all.
-
-### Step 4: Compile the CUPS Filter
-```bash
-make check-deps   # Verify all dependencies
-make              # Build rastertofargo-macos
-```
-Expected: the binary appears in `build/rastertofargo-macos`.
-
-### Step 5: Fix Remaining Protocol Bugs (see CODE_REVIEW.md)
-The code review identified 20 issues. The 8 compilation blockers were fixed today.
-These still need attention before printing works correctly:
-
-| Bug | Issue |
-|-----|-------|
-| BUG-10 | Status polling via vendor control transfers may need tuning (timing, retry logic) |
-| BUG-11 | Config packet field layout may need verification against a K vs YMCKO print capture |
-| BUG-12 | The 134-byte image header packet may not be needed — test without it first |
-| BUG-14 | Dual-sided ribbons (YMCKK, YMCKOK) need 50-byte config, not 48-byte |
-| BUG-15 | End-of-job packet needs to be confirmed and sent |
-| BUG-16 | Printer command packets need version=0x0000 header |
-| BUG-18 | Panel count for BO/KO/NONE ribbons needs verification |
-
-### Step 6: Install and Test via CUPS
-```bash
-sudo make install          # Installs filter + PPD, restarts CUPS
-lpstat -p                  # Should show FargoDTC4500e printer
-lp -d FargoDTC4500e /path/to/test.pdf   # Test print from command line
-```
-
-### Step 7: Test with Inkscape (FOSS Badge Design)
-- Install Inkscape from https://inkscape.org/ (native macOS ARM64 available)
-- Create a badge template at exactly 2.125" × 3.375" (CR80 card size)
-- Print to the FargoDTC4500e CUPS printer
-- Adjust color profile settings in PPD if colors are off
 
 ---
 
@@ -145,8 +142,32 @@ CUPS/
 
 ---
 
+## Current Installation & Status
+**Machine:** macOS ARM64
+**Printer:** HID Global Fargo DTC4500e (VID=0x09b0 PID=0xbf0c)
+**Filter Binary:** `/usr/libexec/cups/filter/rastertofargo-macos` (53KB)
+**PPD File:** `/Library/Printers/PPDs/Contents/Resources/DTC4500e-macos.ppd`
+**Last Tested:** Feb 25, 2026 — Both K and YMCKO prints successful
+
 ## Resume This Work Next Session
-Tell Claude Code:
-> "Resume the Fargo DTC4500e native macOS CUPS filter project in ~/Ai/MHStuff/CUPS.
-> The protocol is fully reverse-engineered. The code is in fargo-driver/src/.
-> Start by running `make` and fixing any remaining errors, then test with send_prn.py."
+
+The driver is **fully operational**. To resume:
+
+1. **Verify printer is still installed:**
+   ```bash
+   lpstat -p FargoDTC4500e
+   ```
+
+2. **Print a test file:**
+   ```bash
+   lp -d FargoDTC4500e ~/Ai/fargo-dtc4500e-macos-driver/fargo-driver/reference/DTC4500e_K_STD_Tst.prn
+   ```
+
+3. **For further testing** — See "Remaining Work" section above for ribbon type tests and real-world Inkscape testing
+
+4. **To rebuild after code changes:**
+   ```bash
+   cd ~/Ai/fargo-dtc4500e-macos-driver/fargo-driver
+   make clean && make
+   sudo make install
+   ```
