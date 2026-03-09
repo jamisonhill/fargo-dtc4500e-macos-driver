@@ -685,12 +685,16 @@ int main(int argc, char *argv[])
         /* ---- Step 4: Send entire job as one bulk write ---- */
         fprintf(stderr, "INFO: rastertofargo: sending job (%zu bytes)\n", jb.used);
 
-        if (fargo_usb_send_job(dev, jb.data, jb.used) < 0) {
+        if (jb.used == 0) {
+            fprintf(stderr, "WARNING: rastertofargo: job size is 0, skipping send\n");
+        } else if (fargo_usb_send_job(dev, jb.data, jb.used) < 0) {
             fprintf(stderr, "ERROR: rastertofargo: send_job failed on page %d\n",
                     page_count);
             free(jb.data);
             filter_rc = 1;
             break;
+        } else {
+            fprintf(stderr, "INFO: rastertofargo: job sent successfully\n");
         }
 
         free(jb.data);

@@ -70,23 +70,27 @@ LIBUSB_CFLAGS := $(shell \
         pkg-config --cflags libusb-1.0 2>/dev/null; \
     fi)
 LIBUSB_LIBS := $(shell \
-    if [ -f /opt/homebrew/lib/libusb-1.0.dylib ]; then \
-        echo -L/opt/homebrew/lib -lusb-1.0; \
-    elif [ -f /usr/local/lib/libusb-1.0.dylib ]; then \
-        echo -L/usr/local/lib -lusb-1.0; \
+    if [ -f /opt/homebrew/lib/libusb-1.0.a ]; then \
+        echo /opt/homebrew/lib/libusb-1.0.a; \
+    elif [ -f /usr/local/lib/libusb-1.0.a ]; then \
+        echo /usr/local/lib/libusb-1.0.a; \
     else \
-        pkg-config --libs libusb-1.0 2>/dev/null; \
+        pkg-config --static --libs libusb-1.0 2>/dev/null; \
     fi)
 
 # Base flags: optimize, warn aggressively, target arm64
 CFLAGS := -O2 -Wall -Wextra $(ARCH) $(CUPS_CFLAGS) $(LIBUSB_CFLAGS)
-LDFLAGS := $(ARCH) $(CUPS_LIBS) $(LIBUSB_LIBS)
+
+# Frameworks needed for static libusb linking
+FRAMEWORKS := -framework IOKit -framework CoreFoundation -framework Security
+
+LDFLAGS := $(ARCH) $(CUPS_LIBS) $(LIBUSB_LIBS) $(FRAMEWORKS)
 
 # --- Debug build mode --------------------------------------------------------
 # Usage: DEBUG=1 make
 ifdef DEBUG
     CFLAGS  := -DDEBUG -DFARGO_USB_DEBUG -g -fsanitize=address -O0 -Wall -Wextra $(ARCH) $(CUPS_CFLAGS) $(LIBUSB_CFLAGS)
-    LDFLAGS := -fsanitize=address $(ARCH) $(CUPS_LIBS) $(LIBUSB_LIBS)
+    LDFLAGS := -fsanitize=address $(ARCH) $(CUPS_LIBS) $(LIBUSB_LIBS) $(FRAMEWORKS)
     $(info Building in DEBUG mode with AddressSanitizer)
 endif
 

@@ -200,17 +200,14 @@ fargo_device_t *fargo_usb_open(void)
     /* Step 6: Claim interface 0 */
     rc = libusb_claim_interface(dev->handle, FARGO_USB_INTERFACE);
     if (rc < 0) {
-        fprintf(stderr, "ERROR: fargo_usb_open: libusb_claim_interface(%d) failed: %s\n",
+        fprintf(stderr, "WARNING: fargo_usb_open: libusb_claim_interface(%d) failed: %s\n",
                 FARGO_USB_INTERFACE, libusb_strerror((enum libusb_error)rc));
-        if (dev->kernel_detached) {
-            libusb_attach_kernel_driver(dev->handle, FARGO_USB_INTERFACE);
-        }
-        libusb_close(dev->handle);
-        libusb_exit(dev->ctx);
-        free(dev);
-        return NULL;
+        fprintf(stderr, "WARNING: fargo_usb_open: Proceeding anyway (interface may already be in use)\n");
+        /* Don't abort - try to send anyway. On macOS, the device may already be
+         * accessible even if we can't explicitly claim the interface. */
+    } else {
+        dev->interface_claimed = 1;
     }
-    dev->interface_claimed = 1;
 
     fprintf(stderr, "DEBUG: fargo_usb_open: printer opened and interface claimed\n");
     return dev;
