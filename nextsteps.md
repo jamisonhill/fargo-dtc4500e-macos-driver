@@ -1,38 +1,48 @@
 # Fargo DTC4500e Native macOS Driver — Next Steps
 
 **Project Goal:** Build a native macOS ARM64 CUPS filter for the HID Fargo DTC4500e ID card printer.
-**Status:** CUPS driver installed. Direct USB Python printing (`fargo-print-pdf.py`) has 4 bugs to fix.
+**Status:** All 4 structural bugs fixed in `fargo-print-pdf.py`. Error 106 persists — printer appears to validate image data content. Ribbon damaged; need replacement before testing.
 
 ---
 
-## Current Focus: Fix fargo-print-pdf.py (Direct USB Printing)
+## BLOCKER: Ribbon Damaged
 
-The CUPS driver is installed but the Python direct-USB script (`fargo-print-pdf.py`) is the active workstream. The printer gives "job data error #106" because of 4 bugs found by deep analysis of the known-good K_STD PRN file.
+The K_STD ribbon is too damaged from repeated test prints and ribbon jams/breaks. Even the known-good PRN now produces bad prints (negative image, ribbon sticking to card). **Install a fresh ribbon before resuming.**
 
-### 4 Bugs to Fix (in priority order)
+---
 
-**BUG 1: Missing panel descriptor in first data strip** (ROOT CAUSE)
-- `build_panel_data()` sends pure RLE in all 512-byte strips
-- Printer expects first 40 bytes of first strip to be a panel descriptor
-- Fix: Build 40-byte descriptor and prepend to first strip
+## Current Focus: Diagnose Error 106 Content Validation
 
-**BUG 2: Wrong line format**
-- Current: `\x00\x00` + 768 pixels + `\x00` = 771 bytes/line
-- Correct: 768 raw pixels per line (no escape prefix, no trailer suffix)
-- Fix: Remove escape/trailer from `build_panel_data()`
+The 4 structural bugs are fixed. The packet structure of `fargo-print-pdf.py` output now matches the known-good PRN. But error 106 still occurs because the printer validates actual image data content.
 
-**BUG 3: Wrong height**
-- Current: `CARD_HEIGHT = 1011`
-- Correct: `CARD_HEIGHT = 1009` (matches known-good PRN)
+### Critical Evidence
 
-**BUG 4: Last RLE chunk handling**
-- Current: Last chunk zero-padded to 512 bytes
-- Correct: Send remainder as Fg(actual_length) — a non-512 Fg packet
-- The "82-byte panel footer" we hardcoded IS the last RLE data chunk
-- Fix: Don't pad; remove `build_fg_panel_footer_k()` entirely
+| Test | Result |
+|------|--------|
+| Unmodified known-good PRN (266,432 bytes) via pyusb | PRINTS OK |
+| Known-good with 1 byte changed in padding (offset 130000) | PRINTS OK |
+| Known-good with ALL RLE replaced by 0xFF (same exact size) | ERROR 106 |
+| Our all-black PRN (correct structure, different image) | ERROR 106 |
+| Truncated known-good (12 strips of original data) | "Waiting for data..." (accepted) |
+| Known-good via CUPS raw mode | PRINTS OK (ribbon damaged) |
+| C-driver format PRN via CUPS | ERROR 106 |
 
-### Analysis Script
-`fargo-driver/test/analyze_prn_final.py` — Parses and decodes the known-good PRN; use to verify fixes.
+### What This Means
+
+The printer doesn't just check packet structure — it validates the RLE image data itself. Possible explanations:
+1. **Hidden checksum**: The printer computes a checksum over the RLE stream and compares to something in the config/descriptor
+2. **RLE decode validation**: Invalid RLE sequences (like runs that exceed line/image boundaries) trigger error 106
+3. **Content reasonableness check**: The firmware rejects data that decodes to implausible patterns
+
+### Resume Checklist (when new ribbon is installed)
+
+1. **Confirm baseline**: Send unmodified known-good via `send_prn.py`
+2. **1-byte active region test**: Modify ONE byte in active RLE (offset ~128, strip 1) of known-good
+   - If WORKS → printer doesn't checksum individual bytes → problem is in our RLE generation
+   - If FAILS → printer checksums RLE data → need to reverse-engineer the checksum
+3. **Test C driver via CUPS**: `lp -d HID_Global_DTC4500e_2 <pdf>` — never verified if C driver actually works
+4. **Capture & compare**: If C driver works, compare its output byte-for-byte with our Python output
+5. **USB capture**: Use Wireshark to capture successful vs failed USB traffic
 
 ---
 
@@ -54,16 +64,41 @@ The CUPS driver is installed but the Python direct-USB script (`fargo-print-pdf.
 - Compiled ARM64, installed to CUPS
 - Black and color ribbon prints tested via CUPS
 
-### Phase 4: Direct USB Python Printing (IN PROGRESS)
+### Phase 4: Direct USB Python Printing (IN PROGRESS — BLOCKED)
 - `fargo-print-pdf.py` converts PDF -> grayscale -> FRL -> USB
-- Config packet (48 bytes) matches known-good byte-for-byte
-- Preamble (Fs start + Fs init) matches known-good
-- RLE compression algorithm confirmed correct
-- 4 bugs identified, ready to fix
+- All 4 structural bugs fixed:
+  - BUG 1: Added 40-byte panel descriptor to first data strip
+  - BUG 2: Changed to 768 raw pixels per line (removed escape/trailer)
+  - BUG 3: Fixed CARD_HEIGHT from 1011 to 1009
+  - BUG 4: Kept 82-byte footer and 512-byte zero-padding (BUG 4 fix was reverted — testing showed footer IS required and strips MUST be padded)
+- Error 106 persists due to content validation (see above)
+- Ribbon damaged — cannot test further until replaced
+
+---
+
+## CUPS Backend Discovery
+
+Two CUPS printers are configured:
+- `HID_Global_DTC4500e` → backend is `///dev/null` (**BROKEN** — sends nothing to printer)
+- `HID_Global_DTC4500e_2` → backend is `usb://HID%20Global/DTC4500e?serial=C1331076` (**REAL**)
+- Raw mode confirmed working: `lp -d HID_Global_DTC4500e_2 -o raw <file.prn>`
+
+---
+
+## C Driver vs Known-Good Structure
+
+The C driver (`rastertofargo.c`) builds a SIMPLER job than the known-good Windows driver PRN:
+```
+C driver:     Fs(0) + Fs(8) + Fg(48) + Fg(512)×N + Fg(14-EOJ)
+Known-good:   Fs(0) + Fs(8) + Fg(48) + Fg(512)×512 + Fg(82-footer) + Fg(14-EOJ)
+                                        ^descriptor     ^panel footer
+```
+The C driver has NO panel descriptor and NO 82-byte footer. It was never verified to actually work.
 
 ---
 
 ## Confirmed Protocol Facts
+
 | Item | Value |
 |------|-------|
 | USB Vendor ID | 0x09b0 (FARGO Electronics) |
@@ -73,23 +108,23 @@ The CUPS driver is installed but the Python direct-USB script (`fargo-print-pdf.
 | Line format | 768 raw pixels (NO escape bytes, NO trailer) |
 | RLE scheme | Byte-pair (count-1, value) → repeat value (count) times |
 | First data strip | 40-byte panel descriptor + 472 bytes RLE |
-| Subsequent strips | 512 bytes pure RLE |
-| Last strip | Fg(remainder) — NOT padded to 512 |
+| Subsequent strips | 512 bytes pure RLE (zero-padded) |
+| Last strip | 82-byte Fg packet (final RLE data, NOT padded to 512) |
 | Panel descriptor | type=15, sub_type=22, block_type=16, panel_id, height=1009 |
 
 ---
 
 ## Key Files
 ```
-fargo-print-pdf.py              ← Direct USB print script (FIX THIS)
+fargo-print-pdf.py              ← Direct USB print script (STRUCTURAL BUGS FIXED)
 fargo-print-wrapper.sh          ← Shell wrapper for the Python script
 fargo-driver/
 ├── src/
-│   ├── rastertofargo.c         ← CUPS filter (working)
+│   ├── rastertofargo.c         ← CUPS filter (untested with current ribbon)
 │   ├── fargo_protocol.c/h      ← C protocol implementation
 │   └── fargo_usb.c/h           ← C USB layer
 ├── test/
-│   ├── send_prn.py             ← Send raw PRN via USB (WORKS)
+│   ├── send_prn.py             ← Send raw PRN via USB (CONFIRMED WORKING)
 │   ├── analyze_prn_final.py    ← PRN analysis tool
 │   └── discover_usb.py         ← USB device discovery
 ├── reference/

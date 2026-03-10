@@ -29,10 +29,7 @@ import tempfile
 
 # Card geometry (CR80 at 300 DPI)
 PRINTHEAD_WIDTH = 768       # pixels per line (fixed by hardware)
-CARD_HEIGHT = 1011          # standard print lines
-LINE_HEADER_SIZE = 2        # escape bytes per line
-LINE_TRAILER_SIZE = 1       # trailer byte per line
-LINE_TOTAL = LINE_HEADER_SIZE + PRINTHEAD_WIDTH + LINE_TRAILER_SIZE  # 771
+CARD_HEIGHT = 1009          # lines per panel (confirmed from known-good PRN)
 
 # FRL packet constants
 FRL_DATA_PAYLOAD = 512      # each data strip is 512 bytes of RLE data
@@ -127,12 +124,10 @@ def build_fg_config(ribbon_id: int, thickness: int = 30) -> bytes:
 def build_fg_data(compressed_chunk: bytes) -> bytes:
     """Fg data strip packet (always 512-byte payload) + eP terminator.
 
-    All RLE data strips MUST be exactly 512 bytes. The printer treats
-    non-512 Fg packets as panel control structures, not as RLE data.
-    The last strip is zero-padded; the printer stops decoding RLE after
-    the expected number of decoded bytes (lines * 771).
+    All RLE data strips MUST be exactly 512 bytes. The last strip is
+    zero-padded to 512. The printer stops decoding RLE after the expected
+    number of decoded bytes (height * 768).
     """
-    # Pad to exactly 512 bytes
     if len(compressed_chunk) < FRL_DATA_PAYLOAD:
         compressed_chunk = compressed_chunk + b"\x00" * (FRL_DATA_PAYLOAD - len(compressed_chunk))
     elif len(compressed_chunk) > FRL_DATA_PAYLOAD:
@@ -143,11 +138,10 @@ def build_fg_data(compressed_chunk: bytes) -> bytes:
 def build_fg_panel_footer_k() -> bytes:
     """Fg panel footer for K (black resin) panels — 82-byte payload + eP.
 
-    This is a fixed structure CONFIRMED identical across all K-ribbon PRN files
-    (K_STD, K_PRM, K_CLR). It contains panel heat settings and must be sent
-    after the last RLE data strip and before the EOJ packet.
+    This fixed-size packet is REQUIRED after all RLE data strips and before
+    the EOJ. The printer uses the non-512 size (82 bytes) to distinguish it
+    from data strips. Content is identical across all K-ribbon PRN files.
     """
-    # CONFIRMED: identical in K_STD, K_PRM, K_CLR test PRN files
     payload = bytes.fromhex(
         "020080ff020080ff020080ff020080ff020080ff"
         "270080ff270012ff06001000000000000000"
@@ -322,16 +316,50 @@ def pdf_to_color_planes(pdf_path: str, width: int, height: int):
 # FRL Job Builder
 # ---------------------------------------------------------------------------
 
-def build_panel_data(pixel_data: bytes, width: int, height: int) -> bytes:
+def build_panel_descriptor(panel_id: int, panel_seq: int, height: int) -> bytes:
+    """Build the 40-byte panel descriptor that starts the first data strip.
+
+    Fields confirmed from known-good PRN analysis:
+      [0-3]   uint32 LE  type = 15 (0x0f)
+      [4-7]   uint32 LE  sub_type = 22 (0x16)
+      [8-11]  uint32 LE  block_type = 16 (0x10)
+      [12-13] uint16 LE  panel sequence number (1-based)
+      [14-15] uint16 LE  panel type (4=K, 1=Y, 2=M, 3=C, 7=O)
+      [16-19] zeros
+      [20-21] uint16 LE  height in lines (1009)
+      [22-23] uint16 LE  0x1034 (unknown constant)
+      [24-27] uint32 LE  4 (unknown)
+      [28-31] uint32 LE  0x00100000 (unknown)
+      [32-35] zeros
+      [36-39] uint32 LE  0x00120000 (unknown)
+    """
+    desc = bytearray(40)
+    struct.pack_into("<I", desc, 0, 15)           # type
+    struct.pack_into("<I", desc, 4, 22)           # sub_type
+    struct.pack_into("<I", desc, 8, 16)           # block_type
+    struct.pack_into("<H", desc, 12, panel_seq)   # panel sequence (1-based)
+    struct.pack_into("<H", desc, 14, panel_id)    # panel type
+    struct.pack_into("<H", desc, 20, height)      # height in lines
+    struct.pack_into("<H", desc, 22, 0x1034)      # unknown constant
+    struct.pack_into("<I", desc, 24, 4)           # unknown
+    struct.pack_into("<I", desc, 28, 0x00100000)  # unknown
+    struct.pack_into("<I", desc, 36, 0x00120000)  # unknown
+    return bytes(desc)
+
+
+def build_panel_data(pixel_data: bytes, width: int, height: int,
+                     panel_id: int, panel_seq: int) -> bytes:
     """Convert a single panel's pixel data into RLE-compressed FRL data strips.
 
     pixel_data: width*height bytes, one byte per pixel.
+    The first 512-byte strip contains a 40-byte panel descriptor + 472 bytes RLE.
+    Subsequent strips are 512 bytes of pure RLE.
+    The final strip uses its actual length (no zero-padding).
     Returns concatenated Fg data strip packets.
     """
     output = bytearray()
 
-    # Build raw line data (with 2-byte header + pixels + 1-byte trailer per line)
-    # Then RLE compress the whole thing and split into 512-byte strips
+    # Build raw line data — 768 raw pixels per line, no escape/trailer bytes
     raw_lines = bytearray()
     for y in range(height):
         row_start = y * width
@@ -343,15 +371,21 @@ def build_panel_data(pixel_data: bytes, width: int, height: int) -> bytes:
         else:
             row_pixels = row_pixels[:PRINTHEAD_WIDTH]
 
-        # Build line: 2 escape bytes + 768 pixels + 1 trailer
-        line = b"\x00\x00" + row_pixels + b"\x00"
-        raw_lines.extend(line)
+        raw_lines.extend(row_pixels)
 
     # RLE compress the entire panel
     compressed = rle_compress(bytes(raw_lines))
 
-    # Split into 512-byte chunks and wrap in Fg data packets
-    offset = 0
+    # Build the 40-byte panel descriptor for the first strip
+    descriptor = build_panel_descriptor(panel_id, panel_seq, height)
+
+    # First strip: 40 bytes descriptor + up to 472 bytes RLE = 512 total
+    first_rle_size = FRL_DATA_PAYLOAD - len(descriptor)  # 472
+    first_chunk = descriptor + compressed[:first_rle_size]
+    output.extend(build_fg_data(first_chunk))
+
+    # Remaining strips: 512 bytes each, last strip uses actual length
+    offset = first_rle_size
     while offset < len(compressed):
         chunk = compressed[offset:offset + FRL_DATA_PAYLOAD]
         output.extend(build_fg_data(chunk))
@@ -369,7 +403,7 @@ def build_frl_job(pdf_path: str, ribbon: str = "K_STD") -> bytes:
     panels = PANEL_SEQUENCES.get(ribbon, [4])  # default to K
 
     width = PRINTHEAD_WIDTH  # 768 pixels wide
-    height = CARD_HEIGHT     # 1011 lines tall
+    height = CARD_HEIGHT     # 1009 lines tall
 
     print(f"  Ribbon: {ribbon} (id={ribbon_id})")
     print(f"  Panels: {len(panels)}")
@@ -400,22 +434,21 @@ def build_frl_job(pdf_path: str, ribbon: str = "K_STD") -> bytes:
     job.extend(build_fg_config(ribbon_id))
 
     # Image data: one panel at a time
-    for panel_id in panels:
+    for panel_seq, panel_id in enumerate(panels, start=1):
         pdata = panel_data.get(panel_id)
         if pdata is None:
             # Skip panels we don't have data for
             print(f"  WARNING: No data for panel {panel_id}, sending blank")
             pdata = b"\x00" * (width * height)
 
-        print(f"  Encoding panel {panel_id}...", end=" ", flush=True)
-        panel_bytes = build_panel_data(pdata, width, height)
+        print(f"  Encoding panel {panel_id} (seq={panel_seq})...", end=" ", flush=True)
+        panel_bytes = build_panel_data(pdata, width, height, panel_id, panel_seq)
         strip_count = panel_bytes.count(b"Fg")
         print(f"{strip_count} strips, {len(panel_bytes)} bytes")
         job.extend(panel_bytes)
 
-    # Panel footer (heat settings) — required after image data
-    # Currently only K panel footer is implemented
-    print("  Adding panel footer...")
+    # Panel footer (required for K panels — signals end of image data)
+    # TODO: Add footers for other panel types (YMCKO) when needed
     job.extend(build_fg_panel_footer_k())
 
     # End of job

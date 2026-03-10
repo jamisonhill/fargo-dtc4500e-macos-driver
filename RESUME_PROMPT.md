@@ -4,16 +4,24 @@ Copy and paste this into Claude Code to resume:
 
 ---
 
-I'm working on `fargo-print-pdf.py` which converts PDFs to Fargo Raster Language (FRL) and sends them to a Fargo DTC4500e ID card printer via direct USB. The printer currently rejects our generated data with "job data error #106".
+I'm working on `fargo-print-pdf.py` which converts PDFs to Fargo Raster Language (FRL) and sends them to a Fargo DTC4500e ID card printer via direct USB. Read `nextsteps.md` and the memory file at `~/.claude/projects/-Users-jamisonhill-Ai-fargo-dtc4500e-macos-driver/memory/debugging-session.md` for full context.
 
-Deep analysis of the known-good `fargo-driver/reference/DTC4500e_K_STD_Tst.prn` file found **4 bugs** in our script. Read `nextsteps.md` for the full context, then fix all 4 bugs in `fargo-print-pdf.py`:
+**STATUS:** The 4 structural bugs are FIXED. Error 106 persists. The K_STD ribbon is damaged and must be replaced before testing resumes.
 
-**BUG 1: Missing panel descriptor.** The first 512-byte data strip must start with a 40-byte panel descriptor (type=15, sub_type=22, block_type=16, panel_id, height=1009), followed by 472 bytes of RLE data. Currently we send pure RLE in all strips.
+**KEY FINDING:** Replacing ALL RLE content with 0xFF in an otherwise byte-for-byte identical known-good PRN (same 266,432 bytes, same 512 strips) causes error 106. Changing 1 byte in the padding region works fine. This means the printer validates actual image data content — not just packet structure.
 
-**BUG 2: Wrong line format.** Each line should be 768 raw pixel bytes. Remove the `\x00\x00` prefix and `\x00` suffix — no escape bytes, no trailer.
+**BLOCKER:** Ribbon is too damaged for reliable prints. Install a fresh K_STD ribbon first.
 
-**BUG 3: Wrong height.** Change `CARD_HEIGHT` from 1011 to 1009.
+**RESUME CHECKLIST (when new ribbon is installed):**
+1. Send unmodified known-good PRN via `send_prn.py` to confirm ribbon+printer work
+2. Modify ONE byte in the ACTIVE RLE region (offset ~128, strip 1) of known-good via pyusb
+   - If WORKS: printer doesn't checksum RLE data → problem is elsewhere in our generation
+   - If FAILS: printer checksums/validates RLE → need to find the checksum algorithm
+3. Try the C driver through CUPS: `lp -d HID_Global_DTC4500e_2 <pdf>` to see if C driver works
+4. If C driver works, capture its CUPS output and compare byte-for-byte with our Python output
+5. Consider Wireshark USB capture of a successful print vs our failed print
 
-**BUG 4: Last chunk handling.** The final RLE chunk should be sent as `Fg(remainder_length)`, NOT zero-padded to 512. The "82-byte panel footer" (`build_fg_panel_footer_k()`) is actually just the last RLE data chunk from the test pattern — remove it entirely.
-
-After fixing, generate a test PRN with `--dry-run --save-prn test_output.prn` using any PDF, then use the analysis script at `fargo-driver/test/analyze_prn_final.py` to verify our output matches the known-good structure. Then I'll send it to the printer.
+**CUPS DISCOVERY:** Two CUPS printers exist:
+- `HID_Global_DTC4500e` → backend is `///dev/null` (BROKEN — sends nothing)
+- `HID_Global_DTC4500e_2` → backend is `usb://HID%20Global/DTC4500e?serial=C1331076` (REAL)
+- Raw mode works: `lp -d HID_Global_DTC4500e_2 -o raw <file.prn>`

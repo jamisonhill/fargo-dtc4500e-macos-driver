@@ -1,20 +1,18 @@
-# macOS
+
+__pycache__/
+._*
 .DS_Store
 .DS_Store?
-._*
 .Spotlight-V100
 .Trashes
-
-# Build output
-fargo-driver/build/
-
-# Python
-__pycache__/
+*.pcapng
 *.pyc
 *.pyo
-
+# Build output
 # Large binary vendor drivers (don't commit to git)
-vendor-drivers/
-
+# macOS
+# Python
 # USB capture file (large binary, keep locally)
-*.pcapng
+fargo-driver/build/
+test_*.prn
+vendor-drivers/
